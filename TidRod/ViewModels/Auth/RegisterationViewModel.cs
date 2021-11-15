@@ -5,14 +5,14 @@ using TidRod.Views;
 using TidRod.Views.Auth;
 using Xamarin.Forms;
 
-namespace TidRod.ViewModels
+namespace TidRod.ViewModels.Auth
 {
-    public class LoginViewModel : BaseViewModel
+    public class RegisterationViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }
         public Command RegisterPage { get; }
 
-        public LoginViewModel()
+        public RegisterationViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
             RegisterPage = new Command(OnRegisterClicked);
@@ -21,7 +21,7 @@ namespace TidRod.ViewModels
         private async void OnLoginClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(SearchPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}/{nameof(LoginPage)}");
         }
 
         private async void OnRegisterClicked(object obj)

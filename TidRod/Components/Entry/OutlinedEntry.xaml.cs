@@ -78,7 +78,7 @@ namespace TidRod.Components.Entry
             null,
             (bindable, oldValue, newValue) =>
             {
-                var view = (OutlinedEntry)bindable;
+                OutlinedEntry view = (OutlinedEntry)bindable;
 
                 view.errorText.Text = (string)newValue;
             }
@@ -93,7 +93,7 @@ namespace TidRod.Components.Entry
             null,
             (bindable, oldValue, newValue) =>
             {
-                var view = (OutlinedEntry)bindable;
+                OutlinedEntry view = (OutlinedEntry)bindable;
 
                 view.leadingIcon.Source = (ImageSource)newValue;
 
@@ -110,7 +110,7 @@ namespace TidRod.Components.Entry
             null,
             (bindable, oldValue, newValue) =>
             {
-                var view = (OutlinedEntry)bindable;
+                OutlinedEntry view = (OutlinedEntry)bindable;
 
                 view.trailingIcon.Source = (ImageSource)newValue;
 
@@ -159,7 +159,7 @@ namespace TidRod.Components.Entry
             null,
             (bindable, oldValue, newValue) =>
             {
-                var view = (OutlinedEntry)bindable;
+                OutlinedEntry view = (OutlinedEntry)bindable;
 
                 view.customEntry.IsPassword = (bool)newValue;
 
@@ -248,15 +248,9 @@ namespace TidRod.Components.Entry
 
         public int MaxLength
         {
-            get
-            {
-                return (int)GetValue(MaxLengthProperty);
-            }
+            get => (int)GetValue(MaxLengthProperty);
 
-            set
-            {
-                SetValue(MaxLengthProperty, value);
-            }
+            set => SetValue(MaxLengthProperty, value);
         }
 
         public Color BorderColor
@@ -272,10 +266,7 @@ namespace TidRod.Components.Entry
 
         public ReturnType ReturnType
         {
-            set
-            {
-                customEntry.ReturnType = value;
-            }
+            set => customEntry.ReturnType = value;
         }
 
         public ICommand ReturnCommand
@@ -293,7 +284,7 @@ namespace TidRod.Components.Entry
             null,
             (bindable, oldValue, newValue) =>
             {
-                var view = (OutlinedEntry)bindable;
+                OutlinedEntry view = (OutlinedEntry)bindable;
 
                 view.customEntry.ReturnCommand = (ICommand)newValue;
             }

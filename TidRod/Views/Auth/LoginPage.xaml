@@ -3,51 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewmodels="clr-namespace:TidRod.ViewModels" x:DataType="viewmodels:LoginViewModel"
-             xmlns:components="clr-namespace:TidRod.Components.Entry"
              mc:Ignorable="d"
+             xmlns:viewmodels="clr-namespace:TidRod.ViewModels.Auth" x:DataType="viewmodels:LoginViewModel"
+             xmlns:components="clr-namespace:TidRod.Components.Entry"
              x:Class="TidRod.Views.Auth.LoginPage"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="True">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
-            <Color x:Key="LightTextColor">#999999</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             Shell.NavBarIsVisible="True"
+             Shell.TitleColor="Black"
+             Shell.ForegroundColor="Black"
+             Title="Log in">
 
     <ContentPage.Content>
 
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <StackLayout Spacing="5">
+        <StackLayout Padding="20,0,20,30" VerticalOptions="EndAndExpand">
+
+            <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
                 <components:OutlinedEntry
-                    PlaceholderText="E-mail"
-                    Keyboard="Email"
-                />
+                    PlaceholderText="Email Address"
+                    Keyboard="Email" />
                 <components:OutlinedEntry
                     PlaceholderText="Password"
                     Keyboard="Text"
                     ReturnType="Next"
-                    IsPassword="True"
-                />
+                    IsPassword="True" />
             </StackLayout>
 
-            <StackLayout VerticalOptions="EndAndExpand" Spacing="20">
-                
+            <StackLayout  VerticalOptions="EndAndExpand" Spacing="20">
 
                 <Button
                     VerticalOptions="Center"
                     Text="Log in"
                     FontAttributes="Bold"
                     TextTransform="None"
-                    Command="{Binding LoginCommand}" />
+                    CornerRadius="5"
+                    Command="{Binding LoginCommand}">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="#648FFF" Offset="0.1" />
+                            <GradientStop Color="#1A73E9" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
                 <Label HorizontalOptions="Center">
 
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Doesn't have an account?, " FontAttributes="Bold" />
-                            <Span Text=" Create one!" TextColor="#1A73E9" FontAttributes="Bold" />
+                            <Span
+                                TextColor="Black"
+                                Text="Doesn't have an account?, "
+                                FontAttributes="Bold" />
+                            <Span
+                                Text=" Create one!"
+                                TextColor="#1A73E9"
+                                FontAttributes="Bold" />
                         </FormattedString>
                     </Label.FormattedText>
                     <Label.GestureRecognizers>

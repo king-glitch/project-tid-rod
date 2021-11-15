@@ -4,6 +4,7 @@
        xmlns:local="clr-namespace:TidRod.Views"
        xmlns:local_auth="clr-namespace:TidRod.Views.Auth"
        Title="TidRod"
+       BackgroundColor="White"
        x:Class="TidRod.AppShell">
 
     <!--
@@ -16,14 +17,14 @@
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="#FFFFFFFF" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="#FFFFFFFF" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarTitleColor" Value="White" />
+                <Setter Property="Shell.TabBarTitleColor" Value="#FFFFFFFF" />
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -33,18 +34,20 @@
     <Shell.Items>
         <ShellContent
             FlyoutItemIsVisible="False"
-            Title="Main"
             Icon="icon_about.png"
             Route="MainPage"
             ContentTemplate="{DataTemplate local:MainPage}" />
-        <ShellContent 
+        <ShellContent
+            Title="Sign In"
             Route="LoginPage"
             ContentTemplate="{DataTemplate local_auth:LoginPage}" />
-        <ShellContent 
-            Route="RegisterationPage" 
+        <ShellContent
+            Title="Sign Up"
+            
+            Route="RegisterationPage"
             ContentTemplate="{DataTemplate local_auth:RegisterationPage}" />
     </Shell.Items>
-    
+
     <TabBar>
         <ShellContent Title="Search" Icon="icon_about.png" Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
         <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
