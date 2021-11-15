@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:TidRod.ViewModels" x:DataType="viewmodels:LoginViewModel"
+             xmlns:components="clr-namespace:TidRod.Components.Entry"
+             mc:Ignorable="d"
+             x:Class="TidRod.Views.Auth.LoginPage"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="LightTextColor">#999999</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <StackLayout Spacing="5">
+                <components:OutlinedEntry
+                    PlaceholderText="E-mail"
+                    Keyboard="Email"
+                />
+                <components:OutlinedEntry
+                    PlaceholderText="Password"
+                    Keyboard="Text"
+                    ReturnType="Next"
+                    IsPassword="True"
+                />
+            </StackLayout>
+
+            <StackLayout VerticalOptions="EndAndExpand" Spacing="20">
+                
+
+                <Button
+                    VerticalOptions="Center"
+                    Text="Log in"
+                    FontAttributes="Bold"
+                    TextTransform="None"
+                    Command="{Binding LoginCommand}" />
+                <Label HorizontalOptions="Center">
+
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Doesn't have an account?, " FontAttributes="Bold" />
+                            <Span Text=" Create one!" TextColor="#1A73E9" FontAttributes="Bold" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding RegisterPage}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
