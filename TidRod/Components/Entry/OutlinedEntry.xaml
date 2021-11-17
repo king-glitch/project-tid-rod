@@ -20,7 +20,7 @@
         Grid.ColumnSpan="2"
         x:Name="containerFrame"
         BackgroundColor="White"
-        BorderColor="#CCCCCC"
+        BorderColor="#333333"
         CornerRadius="5"
         HasShadow="False"
         Padding="{OnPlatform Android='1.5'}">

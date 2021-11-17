@@ -21,7 +21,7 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="#FFFFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarTitleColor" Value="#FFFFFFFF" />
@@ -50,7 +50,8 @@
 
     <TabBar>
         <ShellContent Title="Search" Icon="icon_about.png" Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
-        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Host" Icon="icon_about.png" Route="HostPage" ContentTemplate="{DataTemplate local:SearchPage}" />
+        <ShellContent Title="Profile" Icon="icon_feed.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </TabBar>
 
     <!--
