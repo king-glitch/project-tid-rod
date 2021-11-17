@@ -10,5 +10,9 @@ namespace TidRod.Models
         public Position Position { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+
+        public string Icon { get; set; }
+
+        public string Images { get; set; }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using TidRod.Models;
-using TidRod.Services.DataStore;
+﻿using TidRod.Models;
+using TidRod.Services.DataStore.Firebase;
+using TidRod.Services.DataStore.Mock;
 using TidRod.Services.Interface;
-using TidRod.Views;
 using Xamarin.Forms;
 
 // registering fonts
@@ -27,10 +25,11 @@ namespace TidRod
         public App()
         {
             InitializeComponent();
-            //DependencyService.Register<MockDataStore>();
-            DependencyService.Register<IDataStore<Car>, FirebaseCarDataStore>();
-            DependencyService.Register<IDataStore<User>, FirebaseUserDataStore>();
+            DependencyService.Register<MockUserDataStore>();
+            DependencyService.Register<MockCarDataStore>();
 
+            // DependencyService.Register<ICarDataStore<Car>, FirebaseCarDataStore>();
+            // DependencyService.Register<IUserDataStore<User>, FirebaseUserDataStore>();
             MainPage = new AppShell();
         }
 

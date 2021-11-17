@@ -16,6 +16,6 @@ namespace TidRod.Models
         public int Obometer { get; set; }
         public CarTransmission Gear { get; set; }
         public string PinLocation { get; set; }
-        public int UserID { get; set; }
+        public int UserId { get; set; }
     }
 }

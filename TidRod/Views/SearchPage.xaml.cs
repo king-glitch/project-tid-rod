@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
+using TidRod.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -13,23 +15,38 @@ namespace TidRod.Views
     {
         private CancellationTokenSource cts;
 
+        readonly SearchViewModel _viewModel;
+
         public SearchPage()
         {
             InitializeComponent();
+            BindingContext = _viewModel = new SearchViewModel();
             InitializeMap();
         }
 
         private async void InitializeMap()
         {
             List<PinInfo> pins = new List<PinInfo>();
+            await this._viewModel.GetCarsAroundUserCommand();
+            var cars = _viewModel?.Cars;
 
-            pins
-                .Add(new PinInfo {
-                    Address = "Bangkok University",
-                    Position =
-                        new Position(14.065700580211209, 100.6099274604641),
-                    Name = "Yang Noey"
-                });
+            foreach (var car in cars)
+            {
+                Geocoder geoCoder = new Geocoder();
+                var pos = car.PinLocation.Split(',');
+                Position position =
+                    new Position(float.Parse(pos[0]), float.Parse(pos[1]));
+                IEnumerable<string> possibleAddresses =
+                    await geoCoder.GetAddressesForPositionAsync(position);
+                string address = possibleAddresses.FirstOrDefault();
+                pins
+                    .Add(new PinInfo {
+                        Address = address,
+                        Position = position,
+                        Name = car.Name,
+                        Icon = ""
+                    });
+            }
 
             // get the location
             var location = await GetCurrentLocation();
@@ -43,8 +60,6 @@ namespace TidRod.Views
 
             // Update Map pins
             MainMap.ItemsSource = pins;
-
-            //MainMap.ItemsSource = new List<>
         }
 
         private async Task<Location> GetCurrentLocation()

@@ -22,8 +22,8 @@ namespace TidRod.ViewModels
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !string.IsNullOrWhiteSpace(text)
+                && !string.IsNullOrWhiteSpace(description);
         }
 
         public string Text
@@ -49,17 +49,17 @@ namespace TidRod.ViewModels
 
         private async void OnSave()
         {
-            Item newItem = new Item()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Text = Text,
-                Description = Description
-            };
+            // // Car newCar = new Car()
+            // // {
+            // //     Id = Guid.NewGuid().ToString(),
+            // //     Text = Text,
+            // //     Description = Description
+            // // };
 
-            await DataStore.AddItemAsync(newItem);
+            // await DataStore.AddCarAsync(newCar);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            // // This will pop the current page off the navigation stack
+            // await Shell.Current.GoToAsync("..");
         }
     }
 }

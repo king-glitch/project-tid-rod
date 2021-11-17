@@ -10,35 +10,35 @@ namespace TidRod.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Item _selectedItem;
+        private Car _selectedCar;
 
-        public ObservableCollection<Item> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
+        public ObservableCollection<Car> Cars { get; }
+        public Command LoadCarsCommand { get; }
+        public Command AddCarCommand { get; }
+        public Command<Car> CarTapped { get; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Cars = new ObservableCollection<Car>();
+            LoadCarsCommand = new Command(async () => await ExecuteLoadCarsCommand());
 
-            ItemTapped = new Command<Item>(OnItemSelected);
+            CarTapped = new Command<Car>(OnCarSelected);
 
-            AddItemCommand = new Command(OnAddItem);
+            AddCarCommand = new Command(OnAddCar);
         }
 
-        async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadCarsCommand()
         {
             IsBusy = true;
 
             try
             {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                Cars.Clear();
+                var items = await DataStore.GetCarsAsync(true);
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    Cars.Add(item);
                 }
             }
             catch (Exception ex)
@@ -54,31 +54,31 @@ namespace TidRod.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
+            SelectedCar = null;
         }
 
-        public Item SelectedItem
+        public Car SelectedCar
         {
-            get => _selectedItem;
+            get => _selectedCar;
             set
             {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
+                SetProperty(ref _selectedCar, value);
+                OnCarSelected(value);
             }
         }
 
-        private async void OnAddItem(object obj)
+        private async void OnAddCar(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 
-        async void OnItemSelected(Item item)
+        async void OnCarSelected(Car item)
         {
             if (item == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            // This will push the CarDetailPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.CarId)}={item.Id}");
         }
     }
 }

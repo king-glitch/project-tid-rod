@@ -1,10 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TidRod.Views.SearchPage"
-             xmlns:vm="clr-namespace:TidRod.ViewModels" 
-             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             Title="{Binding Title}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:local="clr-namespace:TidRod.ViewModels" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="TidRod.Views.SearchPage" 
+    xmlns:vm="clr-namespace:TidRod.ViewModels" xmlns:map="clr-namespace:TidRod.Components.Map"
+    Title="{Binding Title}">
 
     <ContentPage.BindingContext>
         <vm:SearchViewModel />
@@ -17,16 +18,18 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <map:Map x:Name="MainMap">
-            <map:Map.ItemTemplate>
+        <map:CustomMap x:Name="MainMap">
+            <map:CustomMap.ItemTemplate>
                 <DataTemplate>
-                    <map:Pin 
-                        Position="{Binding Position}"
-                        Address="{Binding Address}"
-                        Label="{Binding Name}"
-                    />
+                    <map:CustomPin
+                        x:Name="MapPin"
+                        Type="Place"
+                        Position="{Binding Position}" 
+                        Address="{Binding Address}" 
+                        Label="{Binding Name}" />
                 </DataTemplate>
-            </map:Map.ItemTemplate>
-        </map:Map>
+            </map:CustomMap.ItemTemplate>
+        </map:CustomMap>
+
     </StackLayout>
 </ContentPage>

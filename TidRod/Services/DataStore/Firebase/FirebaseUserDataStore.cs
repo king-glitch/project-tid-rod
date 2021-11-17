@@ -6,33 +6,38 @@ using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Interface;
 
-namespace TidRod.Services.DataStore
+namespace TidRod.Services.DataStore.Firebase
 {
-    public class FirebaseUserDataStore : IDataStore<User>
+    public class FirebaseUserDataStore : IUserDataStore<User>
     {
         private readonly FirebaseClient firebase = new FirebaseClient("https://tidrod-7aa6f-default-rtdb.asia-southeast1.firebasedatabase.app/");
         private readonly string DatabaseTableName = "Users";
 
-        public async Task<bool> AddItemAsync(User user)
+        public async Task<bool> AddUserAsync(User user)
         {
             _ = await firebase.Child(DatabaseTableName).PostAsync(user);
             return true;
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteUserAsync(string id)
         {
             FirebaseObject<User> toDeletePerson = (await firebase.Child(DatabaseTableName).OnceAsync<User>()).FirstOrDefault(a => a.Object.Id == id);
             await firebase.Child(DatabaseTableName).Child(toDeletePerson.Key).DeleteAsync();
             return true;
         }
 
-        public async Task<User> GetItemAsync(string id)
+        public async Task<User> GetUserAsync(string id)
         {
-            IEnumerable<User> item = await GetItemsAsync();
+            IEnumerable<User> item = await GetUsersAsync();
             return item.FirstOrDefault(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<User>> GetItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<User>> GetUserCarsAsync(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<IEnumerable<User>> GetUsersAsync(bool forceRefresh = false)
         {
             throw new System.NotImplementedException();
             //return (await firebase
@@ -47,7 +52,7 @@ namespace TidRod.Services.DataStore
             //  }).ToList();
         }
 
-        public async Task<bool> UpdateItemAsync(User user)
+        public async Task<bool> UpdateUserAsync(User user)
         {
             FirebaseObject<User> toUpdatePerson = (await firebase.Child(DatabaseTableName).OnceAsync<User>()).FirstOrDefault(a => a.Object.Id == user.Id);
 

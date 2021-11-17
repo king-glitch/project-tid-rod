@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace TidRod.ViewModels
 {
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    [QueryProperty(nameof(CarId), nameof(CarId))]
     public class ItemDetailViewModel : BaseViewModel
     {
         private string itemId;
@@ -26,7 +26,7 @@ namespace TidRod.ViewModels
             set => SetProperty(ref description, value);
         }
 
-        public string ItemId
+        public string CarId
         {
             get
             {
@@ -35,23 +35,23 @@ namespace TidRod.ViewModels
             set
             {
                 itemId = value;
-                LoadItemId(value);
+                LoadCarId(value);
             }
         }
 
-        public async void LoadItemId(string itemId)
+        public async void LoadCarId(string itemId)
         {
-            try
-            {
-                var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
-                Text = item.Text;
-                Description = item.Description;
-            }
-            catch (Exception)
-            {
-                Debug.WriteLine("Failed to Load Item");
-            }
+            // try
+            // {
+            //     var item = await DataStore.GetCarAsync(itemId);
+            //     Id = item.Id;
+            //     Text = item.Text;
+            //     Description = item.Description;
+            // }
+            // catch (Exception)
+            // {
+            //     Debug.WriteLine("Failed to Load Car");
+            // }
         }
     }
 }

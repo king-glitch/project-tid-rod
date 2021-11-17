@@ -11,7 +11,7 @@ namespace TidRod.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public ICarDataStore<Car> DataStore => DependencyService.Get<ICarDataStore<Car>>();
 
         private bool isBusy = false;
 
