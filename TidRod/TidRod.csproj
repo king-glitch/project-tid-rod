@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.7" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.14" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />  
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2244" />
@@ -45,6 +46,9 @@
   <ItemGroup>
     <Compile Update="Components\Entry\OutlinedEntry.xaml.cs">
       <DependentUpon>OutlinedEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Components\Popup\CarInfoPopup.xaml.cs">
+      <DependentUpon>CarInfoPopup.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Auth\RegisterationPage.xaml.cs">
       <DependentUpon>RegisterationPage.xaml</DependentUpon>
@@ -59,6 +63,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Components\Entry\OutlinedEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Components\Popup\CarInfoPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Auth\RegisterationPage.xaml">

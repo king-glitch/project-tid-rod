@@ -22,8 +22,10 @@
             <map:CustomMap.ItemTemplate>
                 <DataTemplate>
                     <map:CustomPin
+                        Clicked="MapPinClicked"
                         x:Name="MapPin"
                         Type="Place"
+                        ClassId="{Binding ClassId}"
                         Position="{Binding Position}" 
                         Address="{Binding Address}" 
                         Label="{Binding Name}" />
@@ -32,4 +34,5 @@
         </map:CustomMap>
 
     </StackLayout>
+
 </ContentPage>

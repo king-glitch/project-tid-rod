@@ -57,6 +57,9 @@
     <PackageReference Include="FirebaseDatabase.net">
       <Version>4.0.7</Version>
     </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>2.0.0.14</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms.Maps">
@@ -109,12 +112,24 @@
     <AndroidResource Include="Resources\drawable\car_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\xamarin.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Components\Map\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\home_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cloud_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\user_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionTidRodAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionTidRodAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionTidRodAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionTidRodAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

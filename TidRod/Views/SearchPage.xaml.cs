@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TidRod.Components.Map;
+using TidRod.Components.Popup;
 using TidRod.Models;
 using TidRod.ViewModels;
 using Xamarin.Essentials;
@@ -26,25 +30,50 @@ namespace TidRod.Views
 
         private async void InitializeMap()
         {
-            List<PinInfo> pins = new List<PinInfo>();
+            // initialize
+
+            List<CustomPin> pins = new List<CustomPin>();
             await this._viewModel.GetCarsAroundUserCommand();
             var cars = _viewModel?.Cars;
 
+
+            // check if null
+            if (cars == null)
+            {
+                cars = new ObservableCollection<Car>();
+            }
+
+            // pin all locations
             foreach (var car in cars)
             {
+
+                // call geo code
                 Geocoder geoCoder = new Geocoder();
+
+                //split lan, long
                 var pos = car.PinLocation.Split(',');
+
+                // get position
                 Position position =
                     new Position(float.Parse(pos[0]), float.Parse(pos[1]));
+
+                // get possible addresses
                 IEnumerable<string> possibleAddresses =
                     await geoCoder.GetAddressesForPositionAsync(position);
+
+                // get first address
                 string address = possibleAddresses.FirstOrDefault();
+
+
+                // add to the pin
                 pins
-                    .Add(new PinInfo {
+                    .Add(new CustomPin
+                    {
+                        ClassId = car.Id,
                         Address = address,
                         Position = position,
                         Name = car.Name,
-                        Icon = ""
+                        Type = PinType.Place
                     });
             }
 
@@ -87,6 +116,18 @@ namespace TidRod.Views
                 await DisplayAlert("Faild", ex.Message, "OK");
             }
             return null;
+        }
+
+        private async void MapPinClicked(object sender, EventArgs e)
+        {
+            var pin = (CustomPin)sender;
+
+            var id = pin.ClassId.ToString();
+            var car = await _viewModel.DataStore.GetCarAsync(id);
+            await Navigation.PushPopupAsync(new CarInfoPopup
+            {
+                BindingContext = car
+            });
         }
     }
 }

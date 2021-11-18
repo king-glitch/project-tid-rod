@@ -23,8 +23,8 @@ namespace TidRod.Services.DataStore.Mock
                         Images =
                             new List<string>()
                             {
-                                "http://placehold.appspot.com/123123",
-                                "http://placehold.appspot.com/123123"
+                                "https://s.isanook.com/au/0/ui/15/76216/2021-ford-mustang-mach-1_1593506745.jpg",
+                                "https://revistacarro.com.br/wp-content/uploads/2021/04/Mustang-Mach-1_5.jpg"
                             },
                         Price = 150,
                         Obometer = 100000,
@@ -39,8 +39,8 @@ namespace TidRod.Services.DataStore.Mock
                         Images =
                             new List<string>()
                             {
-                                "http://placehold.appspot.com/123123",
-                                "http://placehold.appspot.com/123123"
+                                "https://s.isanook.com/au/0/ui/15/76216/2021-ford-mustang-mach-1_1593506745.jpg",
+                                "https://revistacarro.com.br/wp-content/uploads/2021/04/Mustang-Mach-1_5.jpg"
                             },
                         Price = 150,
                         Obometer = 100000,
@@ -55,8 +55,8 @@ namespace TidRod.Services.DataStore.Mock
                         Images =
                             new List<string>()
                             {
-                                "http://placehold.appspot.com/123123",
-                                "http://placehold.appspot.com/123123"
+                                "https://s.isanook.com/au/0/ui/15/76216/2021-ford-mustang-mach-1_1593506745.jpg",
+                                "https://revistacarro.com.br/wp-content/uploads/2021/04/Mustang-Mach-1_5.jpg"
                             },
                         Price = 150,
                         Obometer = 100000,
@@ -71,8 +71,8 @@ namespace TidRod.Services.DataStore.Mock
                         Images =
                             new List<string>()
                             {
-                                "http://placehold.appspot.com/123123",
-                                "http://placehold.appspot.com/123123"
+                                "https://s.isanook.com/au/0/ui/15/76216/2021-ford-mustang-mach-1_1593506745.jpg",
+                                "https://revistacarro.com.br/wp-content/uploads/2021/04/Mustang-Mach-1_5.jpg"
                             },
                         Price = 150,
                         Obometer = 100000,

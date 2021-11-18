@@ -81,23 +81,5 @@ namespace TidRod.ViewModels
             }
         }
 
-        private Command loadItemsCommand;
-
-        public ICommand LoadItemsCommand
-        {
-            get
-            {
-                if (loadItemsCommand == null)
-                {
-                    loadItemsCommand = new Command(LoadItems);
-                }
-
-                return loadItemsCommand;
-            }
-        }
-
-        private void LoadItems()
-        {
-        }
     }
 }
