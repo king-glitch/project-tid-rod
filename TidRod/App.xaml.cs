@@ -5,18 +5,22 @@ using TidRod.Services.Interface;
 using Xamarin.Forms;
 
 // registering fonts
-[assembly: ExportFont("Fonts/Roboto/Roboto-Black.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-BlackItalic.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-Bold.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-BoldItalic.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-Italic.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-Light.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-LightItalic.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-Medium.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-MediumItalic.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-Regular.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-Thin.ttf", Alias = "Roboto")]
-[assembly: ExportFont("Fonts/Roboto/Roboto-ThinItalic.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Material.MaterialIconsRegular.ttf", Alias = "Material")]
+
+
+[assembly: ExportFont("Roboto.RobotoBlack.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoBlackItalic.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoBold.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoBoldItalic.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoItalic.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoLight.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoLightItalic.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoMedium.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoMediumItalic.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoRegular.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoThin.ttf", Alias = "Roboto")]
+[assembly: ExportFont("Roboto.RobotoThinItalic.ttf", Alias = "Roboto")]
+
 
 namespace TidRod
 {

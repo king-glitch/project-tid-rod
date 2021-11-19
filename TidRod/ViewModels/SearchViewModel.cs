@@ -47,13 +47,13 @@ namespace TidRod.ViewModels
             }
         }
 
-        async void OnCarSelected(Car item)
+        async void OnCarSelected(Car car)
         {
-            if (item == null)
+            if (car == null)
                 return;
 
             // This will push the CarDetailPage onto the navigation stack
-            // await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.CarId)}={item.Id}");
+            // await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.CarId)}={car.Id}");
         }
 
         public ICommand OpenWebCommand { get; }
@@ -65,10 +65,10 @@ namespace TidRod.ViewModels
             try
             {
                 Cars.Clear();
-                var items = await DataStore.GetCarsAsync(true);
-                foreach (var item in items)
+                var cars = await CarDataStore.GetCarsAsync(true);
+                foreach (var car in cars)
                 {
-                    Cars.Add(item);
+                    Cars.Add(car);
                 }
             }
             catch (Exception ex)

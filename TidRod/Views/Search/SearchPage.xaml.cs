@@ -13,7 +13,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
-namespace TidRod.Views
+namespace TidRod.Views.Search
 {
     public partial class SearchPage : ContentPage
     {
@@ -123,7 +123,7 @@ namespace TidRod.Views
             var pin = (CustomPin)sender;
 
             var id = pin.ClassId.ToString();
-            var car = await _viewModel.DataStore.GetCarAsync(id);
+            var car = await _viewModel.CarDataStore.GetCarAsync(id);
             await Navigation.PushPopupAsync(new CarInfoPopup
             {
                 BindingContext = car

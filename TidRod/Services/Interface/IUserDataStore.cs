@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TidRod.Models;
 
 namespace TidRod.Services.Interface
 {
@@ -14,8 +15,8 @@ namespace TidRod.Services.Interface
 
         Task<T> GetUserAsync(string id);
 
-        Task<IEnumerable<T>> GetUserCarsAsync(string id);
+        Task<IEnumerable<Car>> GetUserCarsAsync(string id);
 
-        Task<IEnumerable<T>> GetUsersAsync(bool forceRefresh = false);
+        Task<IEnumerable<User>> GetUsersAsync(bool forceRefresh = false);
     }
 }

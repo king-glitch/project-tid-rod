@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using TidRod.Views;
 using TidRod.Views.Auth;
+using TidRod.Views.General;
+using TidRod.Views.Search;
 using Xamarin.Forms;
 
 namespace TidRod.ViewModels.Auth

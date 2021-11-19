@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:TidRod.Views"
-       xmlns:local_auth="clr-namespace:TidRod.Views.Auth"
+       xmlns:general="clr-namespace:TidRod.Views.General"
+       xmlns:search="clr-namespace:TidRod.Views.Search"
+       xmlns:auth="clr-namespace:TidRod.Views.Auth"
+       xmlns:profile="clr-namespace:TidRod.Views.Profile"
        Title="TidRod"
        BackgroundColor="White"
        x:Class="TidRod.AppShell">
@@ -16,9 +18,9 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="#FFFFFFFF" />
-                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.BackgroundColor" Value="#FFFFFF" />
+                <Setter Property="Shell.ForegroundColor" Value="#000000" />
+                <Setter Property="Shell.TitleColor" Value="#000000" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
@@ -36,22 +38,22 @@
             FlyoutItemIsVisible="False"
             Icon="icon_about.png"
             Route="MainPage"
-            ContentTemplate="{DataTemplate local:MainPage}" />
+            ContentTemplate="{DataTemplate general:MainPage}" />
         <ShellContent
             Title="Sign In"
             Route="LoginPage"
-            ContentTemplate="{DataTemplate local_auth:LoginPage}" />
+            ContentTemplate="{DataTemplate auth:LoginPage}" />
         <ShellContent
             Title="Sign Up"
             
             Route="RegisterationPage"
-            ContentTemplate="{DataTemplate local_auth:RegisterationPage}" />
+            ContentTemplate="{DataTemplate auth:RegisterationPage}" />
     </Shell.Items>
 
     <TabBar>
-        <ShellContent Title="Search" Icon="home_icon.png" Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
-        <ShellContent Title="Host" Icon="cloud_icon.png" Route="HostPage" ContentTemplate="{DataTemplate local:SearchPage}" />
-        <ShellContent Title="Profile" Icon="user_icon.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Search" Icon="home_icon.png" Route="SearchPage" ContentTemplate="{DataTemplate search:SearchPage}" />
+        <ShellContent Title="Host" Icon="cloud_icon.png" Route="HostPage" ContentTemplate="{DataTemplate search:SearchPage}" />
+        <ShellContent Title="Profile" Icon="user_icon.png" Route="ProfilePage" ContentTemplate="{DataTemplate profile:UserProfilePage}" />
     </TabBar>
 
     <!--

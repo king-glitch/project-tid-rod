@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage Shell.TabBarIsVisible="False" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.Profile.HostProfilePage">
+    <ContentPage.Content>
+        <StackLayout Padding="0,20">
+
+            <Frame CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image HeightRequest="150" WidthRequest="150" Source="https://www.pngmart.com/files/13/Midoriya-PNG-File.png" />
+            </Frame>
+
+            <StackLayout Margin="0,0,0,50" Spacing="1">
+                <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding Host.FirstName}" />
+                            <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text=" " />
+                            <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding Host.LastName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontSize="12" FontAttributes="Bold" TextColor="Black" Text="{Binding UserCarList.Count}" />
+                            <Span FontSize="12" TextColor="Black" Text=" Cars Hosting" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <StackLayout Spacing="10" HorizontalOptions="Center">
+                <StackLayout Spacing="15" Orientation="Horizontal" HorizontalOptions="Start">
+                    <AbsoluteLayout>
+                        <Frame WidthRequest="-5" HeightRequest="-5" HasShadow="False" BorderColor="#E1E1E1" CornerRadius="100" IsClippedToBounds="True" />
+                        <Label Text="&#xe0b0;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="12,12" />
+                    </AbsoluteLayout>
+
+                    <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="+66 " />
+                                <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding Host.Phone}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="&#xe89e;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout Spacing="15" Orientation="Horizontal" HorizontalOptions="Start">
+                    <AbsoluteLayout>
+                        <Frame WidthRequest="-5" HeightRequest="-5" HasShadow="False" BorderColor="#E1E1E1" CornerRadius="100" IsClippedToBounds="True" />
+                        <Label Text="&#xe0be;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="12,12" />
+                    </AbsoluteLayout>
+
+                    <Label FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding Host.Email}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                    <Label Text="&#xe89e;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

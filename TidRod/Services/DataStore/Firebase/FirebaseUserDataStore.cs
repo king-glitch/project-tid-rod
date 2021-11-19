@@ -32,7 +32,7 @@ namespace TidRod.Services.DataStore.Firebase
             return item.FirstOrDefault(a => a.Id == id);
         }
 
-        public Task<IEnumerable<User>> GetUserCarsAsync(string id)
+        public Task<IEnumerable<Car>> GetUserCarsAsync(string id)
         {
             throw new System.NotImplementedException();
         }

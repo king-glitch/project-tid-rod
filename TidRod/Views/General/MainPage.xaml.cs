@@ -1,10 +1,11 @@
 ﻿using System;
 using TidRod.ViewModels;
+using TidRod.ViewModels.General;
 using TidRod.Views.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TidRod.Views
+namespace TidRod.Views.General
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage

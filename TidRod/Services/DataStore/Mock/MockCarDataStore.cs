@@ -30,7 +30,7 @@ namespace TidRod.Services.DataStore.Mock
                         Obometer = 100000,
                         Gear = CarTransmission.Automatic,
                         PinLocation = "14.040314020853788, 100.61680784777563",
-                        UserId = 1
+                        UserId = "abcd-abcd"
                     },
                     new Car()
                     {
@@ -46,7 +46,7 @@ namespace TidRod.Services.DataStore.Mock
                         Obometer = 100000,
                         Gear = CarTransmission.Automatic,
                         PinLocation = "14.041818308915616, 100.61637795373697",
-                        UserId = 1
+                        UserId = "abcd-abcd"
                     },
                     new Car()
                     {
@@ -62,7 +62,7 @@ namespace TidRod.Services.DataStore.Mock
                         Obometer = 100000,
                         Gear = CarTransmission.Automatic,
                         PinLocation = "14.060302608449451, 100.61200058878445",
-                        UserId = 1
+                        UserId = "abcd-abcd"
                     },
                     new Car()
                     {
@@ -78,7 +78,7 @@ namespace TidRod.Services.DataStore.Mock
                         Obometer = 100000,
                         Gear = CarTransmission.Automatic,
                         PinLocation = "14.061634752546121, 100.62071240334684",
-                        UserId = 1
+                        UserId = "abcd-abcd"
                     },
 
                 };

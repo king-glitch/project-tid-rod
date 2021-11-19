@@ -6,33 +6,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Fonts\Roboto\Roboto-Black.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-BlackItalic.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-Bold.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-BoldItalic.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-Italic.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-Light.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-LightItalic.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-Medium.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-MediumItalic.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-Regular.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-Thin.ttf" />
-    <None Remove="Resources\Fonts\Roboto\Roboto-ThinItalic.ttf" />
+    <None Remove="Fonts\Material\MaterialIconsRegular.ttf" />
+    <None Remove="Fonts\Roboto\RobotoBlack.ttf" />
+    <None Remove="Fonts\Roboto\RobotoBlackItalic.ttf" />
+    <None Remove="Fonts\Roboto\RobotoBold.ttf" />
+    <None Remove="Fonts\Roboto\RobotoBoldItalic.ttf" />
+    <None Remove="Fonts\Roboto\RobotoItalic.ttf" />
+    <None Remove="Fonts\Roboto\RobotoLight.ttf" />
+    <None Remove="Fonts\Roboto\RobotoLightItalic.ttf" />
+    <None Remove="Fonts\Roboto\RobotoMedium.ttf" />
+    <None Remove="Fonts\Roboto\RobotoMediumItalic.ttf" />
+    <None Remove="Fonts\Roboto\RobotoRegular.ttf" />
+    <None Remove="Fonts\Roboto\RobotoThin.ttf" />
+    <None Remove="Fonts\Roboto\RobotoThinItalic.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Black.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-BlackItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Bold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-BoldItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Italic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Light.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-LightItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Medium.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-MediumItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Regular.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-Thin.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\Roboto\Roboto-ThinItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Material\MaterialIconsRegular.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoBlack.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoBlackItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoBold.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoBoldItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoLight.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoLightItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoMedium.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoMediumItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoRegular.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoThin.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto\RobotoThinItalic.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,10 +55,25 @@
     <Compile Update="Views\Auth\RegisterationPage.xaml.cs">
       <DependentUpon>RegisterationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainPage.xaml.cs">
+    <Compile Update="Views\Host\HostCarAddPage.xaml.cs">
+      <DependentUpon>HostCarAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Host\HostCarUpdatePage.xaml.cs">
+      <DependentUpon>HostCarUpdatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\General\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SearchPage.xaml.cs">
+    <Compile Update="Views\Profile\HostProfilePage.xaml.cs">
+      <DependentUpon>HostProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Profile\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Profile\UserProfileSettingsPage.xaml.cs">
+      <DependentUpon>UserProfileSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Search\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -71,12 +88,35 @@
     <EmbeddedResource Update="Views\Auth\RegisterationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MainPage.xaml">
+    <EmbeddedResource Update="Views\General\SplashScreenPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Host\HostCarAddPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Host\HostCarsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Host\HostCarUpdatePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\General\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Profile\HostProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Profile\UserProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Profile\UserProfileSettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="Services\Helper\" />
+    <Folder Include="ViewModels\Host\" />
   </ItemGroup>
 </Project>

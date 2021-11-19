@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TidRod.Models;
-using TidRod.Services;
 using TidRod.Services.Interface;
 using Xamarin.Forms;
 
@@ -11,7 +10,8 @@ namespace TidRod.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public ICarDataStore<Car> DataStore => DependencyService.Get<ICarDataStore<Car>>();
+        public ICarDataStore<Car> CarDataStore => DependencyService.Get<ICarDataStore<Car>>();
+        public IUserDataStore<User> UserDataStore => DependencyService.Get<IUserDataStore<User>>();
 
         private bool isBusy = false;
 

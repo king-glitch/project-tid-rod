@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Interface;
+using Xamarin.Forms;
 
 namespace TidRod.Services.DataStore.Mock
 {
@@ -16,11 +17,14 @@ namespace TidRod.Services.DataStore.Mock
             items =
                 new List<User>()
                 {
-                    // new User {
-                    //     Id = Guid.NewGuid().ToString(),
-                    //     Text = "First item",
-                    //     Description = "This is an item description."
-                    // },
+                     new User {
+                         Id = "abcd-abcd",
+                         FirstName = "Deku",
+                         LastName = "Academia",
+                         Email = "deku@academia.ua",
+                         Phone = "0990990990",
+                         Password = "Password"
+                     },
                     // new User {
                     //     Id = Guid.NewGuid().ToString(),
                     //     Text = "Second item",
@@ -51,7 +55,7 @@ namespace TidRod.Services.DataStore.Mock
 
         public async Task<bool> AddUserAsync(User item)
         {
-            items.Add (item);
+            items.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -60,8 +64,8 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldUser =
                 items.Where((User arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove (oldUser);
-            items.Add (item);
+            items.Remove(oldUser);
+            items.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -70,7 +74,7 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldUser =
                 items.Where((User arg) => arg.Id == id).FirstOrDefault();
-            items.Remove (oldUser);
+            items.Remove(oldUser);
 
             return await Task.FromResult(true);
         }
@@ -86,9 +90,11 @@ namespace TidRod.Services.DataStore.Mock
             return await Task.FromResult(items);
         }
 
-        public Task<IEnumerable<User>> GetUserCarsAsync(string id)
+        public async Task<IEnumerable<Car>> GetUserCarsAsync(string id)
         {
-            throw new NotImplementedException();
+            ICarDataStore<Car> CarDataStore = DependencyService.Get<ICarDataStore<Car>>();
+            var cars = await CarDataStore.GetCarsAsync();
+            return await Task.FromResult(cars.Where(car => car.UserId == id).ToList<Car>());
         }
     }
 }
