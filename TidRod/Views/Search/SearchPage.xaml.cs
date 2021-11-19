@@ -129,5 +129,10 @@ namespace TidRod.Views.Search
                 BindingContext = car
             });
         }
+
+        private async void ToolbarFilterCarsClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushPopupAsync(new CarsFilterPopup());
+        }
     }
 }

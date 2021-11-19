@@ -20,11 +20,15 @@
             <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
                 <components:OutlinedEntry
                     PlaceholderText="Email Address"
-                    Keyboard="Email" />
+                    Keyboard="Email"
+                    TextChanged="EmailEntryTextChanged"
+                    x:Name="EmailEntry"/>
                 <components:OutlinedEntry
                     PlaceholderText="Password"
                     Keyboard="Text"
                     ReturnType="Next"
+                    TextChanged="PasswordEntryTextChanged"
+                    x:Name="PasswordEntry"
                     IsPassword="True" />
             </StackLayout>
 

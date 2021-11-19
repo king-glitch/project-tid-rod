@@ -21,7 +21,5 @@ namespace TidRod.Views.Profile
             Title = "Profile";
             BackgroundColor = Color.White;
         }
-
-
     }
 }

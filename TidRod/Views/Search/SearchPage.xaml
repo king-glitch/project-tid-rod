@@ -7,6 +7,16 @@
     xmlns:vm="clr-namespace:TidRod.ViewModels" xmlns:map="clr-namespace:TidRod.Components.Map"
     Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarFilterCarsClicked" 
+                     >
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="Material"
+                Glyph="&#xef4f;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.BindingContext>
         <vm:SearchViewModel />
     </ContentPage.BindingContext>
