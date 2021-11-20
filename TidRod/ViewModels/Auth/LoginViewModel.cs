@@ -17,59 +17,104 @@ namespace TidRod.ViewModels.Auth
         public Command LoginCommand { get; }
         public Command RegisterPage { get; }
 
-        public string Email { get; set; }
-        public string Password { get; set; }
+        private string _email;
+        private string _password;
+
+        private string _emailError;
+        private string _passwordError;
+        public string EmailError
+        {
+            get => _emailError;
+            set => SetProperty(ref _emailError, value);
+        }
+        public string PasswordError
+        {
+            get => _passwordError;
+            set => SetProperty(ref _passwordError, value);
+        }
 
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
             RegisterPage = new Command(OnRegisterClicked);
+
+            this.PropertyChanged += (_, __) => LoginCommand.ChangeCanExecute();
         }
 
-        private async Task<bool> Login(string email, string password)
+        public string Email
         {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
 
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+
+        private void ResetForms()
+        {
+            PasswordError = "";
+            EmailError = "";
+        }
+
+        private async Task<bool> LoginValidations(string email, string password)
+        {
+            this.ResetForms();
             List<User> users = (await this.UserDataStore.GetUsersAsync(true)).ToList();
 
             if (string.IsNullOrEmpty(email))
             {
-                Console.WriteLine("no email");
-                return false;
+                EmailError = MainLanguage.AUTHENTICATION_EMAIL_EMPTY;
             }
 
             if (string.IsNullOrEmpty(password))
             {
-                Console.WriteLine("no password");
+                PasswordError = MainLanguage.AUTHENTICATION_PASSWORD_EMPTY;
+            }
+
+            if (!string.IsNullOrWhiteSpace(EmailError) || !string.IsNullOrEmpty(PasswordError))
+            {
                 return false;
             }
 
             try
             {
+
                 var user = users.Find(u => u?.Email?.ToLower() == email?.ToLower());
-                
+
                 if (user == null)
                 {
+                    EmailError = MainLanguage.AUTHENTICATION_EMAIL_INCORRECTED;
                     return false;
                 }
 
 
                 if (user.Password == password)
                 {
+                    App.CurrentSesstion = user.Id;
+
                     return true;
                 }
+
+                PasswordError = MainLanguage.AUTHENTICATION_PASSWORD_INCORRECTED;
+                return false;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
-            }
 
+            }
+            await Application.Current.MainPage.DisplayAlert(MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE, MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC, "Fuck");
             return false;
         }
 
-        private async void OnLoginClicked(object obj)
+        private async void OnLoginClicked()
         {
-            bool logged = await this.Login(Email, Password);
+            IsBusy = true;
+            bool logged = await this.LoginValidations(Email, Password);
+            IsBusy = false;
 
             if (logged)
             {

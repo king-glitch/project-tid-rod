@@ -65,7 +65,7 @@ namespace TidRod.Components.Entry
 
                 view.helperText.Text = (string)newValue;
 
-                view.helperText.IsVisible = view.errorText.IsVisible ? false : !string.IsNullOrEmpty(view.helperText.Text);
+                view.helperText.IsVisible = !view.errorText.IsVisible && !string.IsNullOrEmpty(view.helperText.Text);
             }
         );
 
@@ -79,7 +79,7 @@ namespace TidRod.Components.Entry
             (bindable, oldValue, newValue) =>
             {
                 OutlinedEntry view = (OutlinedEntry)bindable;
-
+                view.containerFrame.BorderColor = !string.IsNullOrWhiteSpace((string)newValue) ? Color.Red : Color.FromHex("#555555");
                 view.errorText.Text = (string)newValue;
             }
         );

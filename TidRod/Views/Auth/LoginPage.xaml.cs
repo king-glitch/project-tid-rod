@@ -21,14 +21,7 @@ namespace TidRod.Views.Auth
             BindingContext = _baseView = new LoginViewModel();
         }
 
-        private void EmailEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            _baseView.Email = EmailEntry.Text;
-        }
 
-        private void PasswordEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            _baseView.Password = PasswordEntry.Text;
-        }
+
     }
 }

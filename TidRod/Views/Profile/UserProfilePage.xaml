@@ -1,12 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:profile="clr-namespace:TidRod.ViewModels.Profile"  x:DataType="profile:UserProfileViewModel"
              x:Class="TidRod.Views.Profile.UserProfilePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarSettingClicked" 
+                     >
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="Material"
+                Glyph="&#xe8b8;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
+
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <StackLayout Padding="0,20">
+
+                <Frame Margin="0,0,0,20" CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding CurrentSessionUser.Image}" />
+                </Frame>
+
+                <StackLayout Margin="0,0,0,50" Spacing="1">
+                    <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.FirstName}" />
+                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text=" " />
+                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.LastName}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </StackLayout>
+
+                <StackLayout Spacing="10" HorizontalOptions="Center">
+                    <StackLayout Spacing="15" Orientation="Horizontal" HorizontalOptions="Start">
+                        <AbsoluteLayout>
+                            <Frame WidthRequest="-5" HeightRequest="-5" HasShadow="False" BorderColor="#E1E1E1" CornerRadius="100" IsClippedToBounds="True" />
+                            <Label Text="&#xe0b0;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="12,12" />
+                        </AbsoluteLayout>
+
+                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="+66 " />
+                                    <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.Phone}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="&#xe89e;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </StackLayout>
+                    <StackLayout Spacing="15" Orientation="Horizontal" HorizontalOptions="Start">
+                        <AbsoluteLayout>
+                            <Frame WidthRequest="-5" HeightRequest="-5" HasShadow="False" BorderColor="#E1E1E1" CornerRadius="100" IsClippedToBounds="True" />
+                            <Label Text="&#xe0be;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="12,12" />
+                        </AbsoluteLayout>
+
+                        <Label FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.Email}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="&#xe89e;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage Shell.TabBarIsVisible="False" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.Profile.HostProfilePage">
+<ContentPage Shell.TabBarIsVisible="False" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:profile="clr-namespace:TidRod.ViewModels.Profile" x:DataType="profile:HostProfileViewModel" x:Class="TidRod.Views.Profile.HostProfilePage">
     <ContentPage.Content>
         <StackLayout Padding="0,20">
 
             <Frame Margin="0,0,0,20" CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
-                <Image HeightRequest="150" WidthRequest="150" Scale="1.5" Source="https://api5.iloveimg.com/v1/download/hxAw4nnn13mn2Af253f7znhycff9r7nwkA524bb429p6n3c0g50bttqt89qh303yd5q0tgsnlzbs210c30vxwjg9qrzbnfspcjlznrd43rrr5zsmmfrgrq00s87z0935rmq4vy0pA68xgp28mhjzrwkn74q93gp6t22kAhykv3A0qfdbknvq" />
+                <Image HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding Host.Image}" />
             </Frame>
 
             <StackLayout Margin="0,0,0,50" Spacing="1">

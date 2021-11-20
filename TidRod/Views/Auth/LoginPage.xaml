@@ -21,15 +21,19 @@
                 <components:OutlinedEntry
                     PlaceholderText="Email Address"
                     Keyboard="Email"
-                    TextChanged="EmailEntryTextChanged"
-                    x:Name="EmailEntry"/>
+                    x:Name="EmailEntry"
+                    Text="{Binding Email, Mode=TwoWay}"
+                    ErrorText="{Binding EmailError}"
+                />
                 <components:OutlinedEntry
                     PlaceholderText="Password"
                     Keyboard="Text"
                     ReturnType="Next"
-                    TextChanged="PasswordEntryTextChanged"
                     x:Name="PasswordEntry"
+                    Text="{Binding Password, Mode=TwoWay}"
+                    ErrorText="{Binding PasswordError}"
                     IsPassword="True" />
+
             </StackLayout>
 
             <StackLayout  VerticalOptions="EndAndExpand" Spacing="20">

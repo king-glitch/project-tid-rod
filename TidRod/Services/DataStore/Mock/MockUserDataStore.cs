@@ -19,37 +19,13 @@ namespace TidRod.Services.DataStore.Mock
                 {
                      new User {
                          Id = "abcd-abcd",
+                         Image = null,
                          FirstName = "Deku",
                          LastName = "Academia",
                          Email = "deku@academia.ua",
                          Phone = "0990990990",
                          Password = "Password"
                      },
-                    // new User {
-                    //     Id = Guid.NewGuid().ToString(),
-                    //     Text = "Second item",
-                    //     Description = "This is an item description."
-                    // },
-                    // new User {
-                    //     Id = Guid.NewGuid().ToString(),
-                    //     Text = "Third item",
-                    //     Description = "This is an item description."
-                    // },
-                    // new User {
-                    //     Id = Guid.NewGuid().ToString(),
-                    //     Text = "Fourth item",
-                    //     Description = "This is an item description."
-                    // },
-                    // new User {
-                    //     Id = Guid.NewGuid().ToString(),
-                    //     Text = "Fifth item",
-                    //     Description = "This is an item description."
-                    // },
-                    // new User {
-                    //     Id = Guid.NewGuid().ToString(),
-                    //     Text = "Sixth item",
-                    //     Description = "This is an item description."
-                    // }
                 };
         }
 

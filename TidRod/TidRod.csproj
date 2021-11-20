@@ -118,7 +118,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Helper\" />
     <Folder Include="ViewModels\Host\" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using TidRod.Models;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace TidRod.ViewModels.Profile
 {
@@ -16,7 +17,7 @@ namespace TidRod.ViewModels.Profile
         private CarTransmission _gear;
         private List<string> _images;
         private User _host;
-        private IEnumerable<Car> _userCarsList;
+        private List<Car> _userCarsList;
 
         public string Name
         {
@@ -48,7 +49,7 @@ namespace TidRod.ViewModels.Profile
             set => SetProperty(ref _host, value);
         }
 
-        public IEnumerable<Car> UserCarList
+        public List<Car> UserCarList
         {
             get => _userCarsList;
             set => SetProperty(ref _userCarsList, value);
@@ -74,12 +75,17 @@ namespace TidRod.ViewModels.Profile
 
                 // get car data
                 Car car = await CarDataStore.GetCarAsync(carId);
-
+                if (car == null)
+                {
+                    Console.WriteLine("No car");
+                    return;
+                }
                 // get user data
                 User user = await UserDataStore.GetUserAsync(car.UserId);
 
-                if (car == null || user == null)
+                if (user == null)
                 {
+                    Console.WriteLine("NO user ");
                     return;
                 }
 
@@ -88,12 +94,16 @@ namespace TidRod.ViewModels.Profile
                 Obometer = car.Obometer;
                 Gear = car.Gear;
                 Images = car.Images;
+                user.Image = string.IsNullOrEmpty(user.Image) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image;
                 user.Phone = string.Format("{0:### ### ###}", Convert.ToInt64(user.Phone));
                 Host = user;
-                UserCarList = await UserDataStore.GetUserCarsAsync(user.Id);
+                UserCarList = (await UserDataStore.GetUserCarsAsync(user.Id)).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex.StackTrace);
+                Debug.WriteLine(ex.Message);
+
                 Debug.WriteLine("Failed to Load Car");
             }
         }
