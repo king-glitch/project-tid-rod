@@ -1,12 +1,42 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TidRod.Views.Profile.UserProfileSettingsPage">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:components="clr-namespace:TidRod.Components.Entry" x:Class="TidRod.Views.Profile.UserProfileSettingsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Padding="20,0,20,30" VerticalOptions="EndAndExpand">
+
+                <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
+                    <components:OutlinedEntry PlaceholderText="Email Address" Keyboard="Email" />
+                    <components:OutlinedEntry PlaceholderText="First Name" Keyboard="Text" />
+                    <components:OutlinedEntry PlaceholderText="Last Name" Keyboard="Text" />
+                    <components:OutlinedEntry PlaceholderText="Phone" Keyboard="Telephone" />
+                    <components:OutlinedEntry PlaceholderText="Password" Keyboard="Text" ReturnType="Next" IsPassword="True" />
+                    <components:OutlinedEntry PlaceholderText="Confirm Password" Keyboard="Text" ReturnType="Next" IsPassword="True" />
+                </StackLayout>
+
+                <StackLayout VerticalOptions="EndAndExpand" Spacing="20">
+
+                    <Button VerticalOptions="Center" Text="Log in" FontAttributes="Bold" TextTransform="None" CornerRadius="5" Command="{Binding RegisterPage}">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#648FFF" Offset="0.1" />
+                                <GradientStop Color="#1A73E9" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Label HorizontalOptions="Center">
+
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span TextColor="Black" Text="already have an account?, " FontAttributes="Bold" />
+                                <Span Text=" Sign in!" TextColor="#1A73E9" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoginCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
