@@ -295,21 +295,25 @@ namespace TidRod.Components.Entry
             if (string.IsNullOrEmpty(customEntry.Text) || customEntry.Text.Length > 0)
             {
                 customEntry.Focus();
-
-                containerFrame.BorderColor = HasError ? Color.Red : BorderColor;
-                placeholderText.TextColor = HasError ? Color.Red : BorderColor;
-
-                int y = DeviceInfo.Platform == DevicePlatform.UWP ? -25 : -20;
-
-                _ = await placeholderContainer.TranslateTo(0, y, 100, Easing.Linear);
-
-                placeholderContainer.HorizontalOptions = LayoutOptions.Start;
-                placeholderText.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
+                this.SendPlaceHolderOnTop();
             }
             else
             {
                 await ControlUnfocused();
             }
+        }
+
+        private async void SendPlaceHolderOnTop()
+        {
+            containerFrame.BorderColor = HasError ? Color.Red : BorderColor;
+            placeholderText.TextColor = HasError ? Color.Red : BorderColor;
+
+            int y = DeviceInfo.Platform == DevicePlatform.UWP ? -25 : -20;
+
+            _ = await placeholderContainer.TranslateTo(0, y, 100, Easing.Linear);
+
+            placeholderContainer.HorizontalOptions = LayoutOptions.Start;
+            placeholderText.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
         }
 
         private async Task ControlUnfocused()
@@ -356,6 +360,11 @@ namespace TidRod.Components.Entry
 
         private void OnCustomEntryTextChanged(object sender, TextChangedEventArgs e)
         {
+            if (string.IsNullOrEmpty(customEntry.Text) || customEntry.Text.Length > 0)
+            {
+                this.SendPlaceHolderOnTop();
+            }
+
             Text = e.NewTextValue;
 
             if (charCounterText.IsVisible)

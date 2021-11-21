@@ -62,8 +62,6 @@ namespace TidRod.ViewModels.Profile
 
                 var profileImage = string.IsNullOrEmpty(user.Image) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image;
 
-                Console.WriteLine(profileImage);
-
                 try
                 {
                     user.Image = profileImage;

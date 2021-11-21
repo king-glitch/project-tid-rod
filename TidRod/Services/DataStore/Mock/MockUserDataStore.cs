@@ -19,7 +19,7 @@ namespace TidRod.Services.DataStore.Mock
                 {
                      new User {
                          Id = "abcd-abcd",
-                         Image = null,
+                         Image = "https://api5.iloveimg.com/v1/download/fn17s3thq3fvcsl53yqAkm93czy2dfsd419nhm1c2zbrrh9ml1s6kpw5v2b0y7zkkwnz5w5w86rg30bpsfy88v1yndvw87tvv14nAyjr98456y0m8sbny3A4yscjcmq9t6smd5nj2w9j3sr6tA1y5gdh51rrtwfrnycfdmtp7r0lwptt7Ag1",
                          FirstName = "Deku",
                          LastName = "Academia",
                          Email = "deku@academia.ua",
