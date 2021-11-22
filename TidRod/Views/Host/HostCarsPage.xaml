@@ -1,12 +1,58 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TidRod.Views.Host.HostCarsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:TidRod.ViewModels.Host" xmlns:model="clr-namespace:TidRod.Models" x:DataType="local:HostCarsViewModel" x:Class="TidRod.Views.Host.HostCarsPage" Shell.TitleColor="Black" Title="Hosts">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCarCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="Material" Glyph="&#xe145;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <RefreshView x:DataType="local:HostCarsViewModel" Command="{Binding LoadCarsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Cars}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView x:Name="SwipeItem" SwipeStarted="SwipeItemSwipeStarted" SwipeEnded="SwipeItemSwipeEnded">
+
+                        <SwipeView.RightItems>
+                            <SwipeItems SwipeBehaviorOnInvoked="Close" Mode="Reveal">
+                                <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteTapped}" CommandParameter="{Binding Source={x:RelativeSource AncestorType={x:Type model:Car}}}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource FontFamily="Material" Size="30" Glyph="&#xe872;" Color="Red" />
+                                    </SwipeItem.IconImageSource>
+                                </SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Frame HasShadow="True" Padding="0" Margin="0,0,0,5">
+                            <StackLayout HeightRequest="80" Padding="10" x:DataType="model:Car">
+                                <StackLayout Spacing="10" Orientation="Horizontal">
+                                    <Frame WidthRequest="50" HeightRequest="50" IsClippedToBounds="True" CornerRadius="5">
+                                        <Image HeightRequest="100" WidthRequest="100" Margin="-70" Source="{Binding Images[0]}" />
+                                    </Frame>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Vertical" Spacing="0">
+                                            <Label Text="{Binding Name}" LineBreakMode="NoWrap" FontAttributes="Bold" TextColor="Black" Style="{DynamicResource Key=ListItemDetailTextStyle}" FontSize="16" />
+                                            <Label LineBreakMode="NoWrap" Style="{DynamicResource Key=ListItemDetailTextStyle}" FontSize="13">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Price}" />
+                                                        <Span Text=" THB." />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <Label VerticalOptions="EndAndExpand" Text="{Binding Gear}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={RelativeSource AncestorType={x:Type local:HostCarsViewModel}}, Path=CarTapped}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>

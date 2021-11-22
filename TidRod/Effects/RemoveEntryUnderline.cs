@@ -4,8 +4,8 @@ namespace TidRod.Effects
 {
     public class RemoveEntryUnderline : RoutingEffect
     {
-        public RemoveEntryUnderline()
-            : base("TidRod.RemoveEntryUnderline")
+        public RemoveEntryUnderline() :
+            base("TidRod.RemoveEntryUnderline")
         {
         }
     }

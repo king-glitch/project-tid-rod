@@ -36,8 +36,8 @@
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
-                <StackLayout Padding="10"  VerticalOptions="Center" Orientation="Horizontal">
-                    <Label VerticalOptions="Center" VerticalTextAlignment="Center" >
+                <StackLayout Padding="10" VerticalOptions="Center" Orientation="Horizontal">
+                    <Label VerticalOptions="Center" VerticalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span TextColor="Black" FontSize="20" FontAttributes="Bold" FontFamily="Roboto" Text="{Binding Price}" />
@@ -45,14 +45,7 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Button HorizontalOptions="EndAndExpand" BackgroundColor="Transparent"
-                            BorderColor="#1A73E9"
-                            TextColor="#1A73E9"
-                            Text="Contact" 
-                            CornerRadius="10"
-                            BorderWidth="1"
-                            Padding="5"
-                            Clicked="ButtonClicked" />
+                    <Button HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" BorderColor="#1A73E9" TextColor="#1A73E9" Text="Contact" CornerRadius="10" BorderWidth="1" Padding="5" Clicked="ButtonClicked" />
                 </StackLayout>
             </StackLayout>
         </Frame>

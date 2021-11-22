@@ -4,8 +4,8 @@ namespace TidRod.Effects
 {
     public class RemoveEntryBordersEffect : RoutingEffect
     {
-        public RemoveEntryBordersEffect()
-            : base("TidRod.RemoveEntryBordersEffect")
+        public RemoveEntryBordersEffect() :
+            base("TidRod.RemoveEntryBordersEffect")
         {
         }
     }

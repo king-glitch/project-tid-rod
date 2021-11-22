@@ -6,8 +6,6 @@ using Xamarin.Forms;
 
 // registering fonts
 [assembly: ExportFont("Material.MaterialIconsRegular.ttf", Alias = "Material")]
-
-
 [assembly: ExportFont("Roboto.RobotoBlack.ttf", Alias = "Roboto")]
 [assembly: ExportFont("Roboto.RobotoBlackItalic.ttf", Alias = "Roboto")]
 [assembly: ExportFont("Roboto.RobotoBold.ttf", Alias = "Roboto")]
@@ -21,13 +19,14 @@ using Xamarin.Forms;
 [assembly: ExportFont("Roboto.RobotoThin.ttf", Alias = "Roboto")]
 [assembly: ExportFont("Roboto.RobotoThinItalic.ttf", Alias = "Roboto")]
 
-
 namespace TidRod
 {
     public partial class App : Application
     {
         public static bool IsAuthenticated = false;
+
         public static string CurrentSession = null;
+
         public App()
         {
             InitializeComponent();

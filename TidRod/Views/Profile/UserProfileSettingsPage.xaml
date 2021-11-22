@@ -7,9 +7,9 @@
                 <StackLayout Padding="0,20">
                     <AbsoluteLayout HorizontalOptions="Center">
                         <Frame Margin="0,0,0,20" CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Image  x:Name="UserImagePreview" HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding Image.FileURL}" />
+                            <Image x:Name="UserImagePreview" HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding Image.FileURL}" />
                         </Frame>
-                        <AbsoluteLayout >
+                        <AbsoluteLayout>
                             <AbsoluteLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ChangeUserImage}" CommandParameter="{Binding Source={x:Reference UserImagePreview}}" />
                             </AbsoluteLayout.GestureRecognizers>
@@ -25,32 +25,14 @@
                         </AbsoluteLayout>
                     </AbsoluteLayout>
                     <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
-                        <components:OutlinedEntry
-                            PlaceholderText="Email"
-                            Text="{Binding Email, Mode=TwoWay}"
-                            ErrorText="{Binding EmailError}"
-                            Keyboard="Email" />
-                        <components:OutlinedEntry
-                            PlaceholderText="First Name"
-                            Text="{Binding FirstName, Mode=TwoWay}"
-                            ErrorText="{Binding FirstNameError}"
-                            Keyboard="Text" />
-                        <components:OutlinedEntry
-                            PlaceholderText="Last Name"
-                            Text="{Binding LastName, Mode=TwoWay}"
-                            ErrorText="{Binding LastNameError}"
-                            Keyboard="Text" />
+                        <components:OutlinedEntry PlaceholderText="Email" Text="{Binding Email, Mode=TwoWay}" ErrorText="{Binding EmailError}" Keyboard="Email" />
+                        <components:OutlinedEntry PlaceholderText="First Name" Text="{Binding FirstName, Mode=TwoWay}" ErrorText="{Binding FirstNameError}" Keyboard="Text" />
+                        <components:OutlinedEntry PlaceholderText="Last Name" Text="{Binding LastName, Mode=TwoWay}" ErrorText="{Binding LastNameError}" Keyboard="Text" />
                     </StackLayout>
 
                     <StackLayout VerticalOptions="EndAndExpand" Spacing="20">
 
-                        <Button
-                        VerticalOptions="Center"
-                        Text="UPDATE" 
-                        FontAttributes="Bold" 
-                        TextTransform="None" 
-                        CornerRadius="5"
-                        Command="{Binding UpdateUserProfile}">
+                        <Button VerticalOptions="Center" Text="UPDATE" FontAttributes="Bold" TextTransform="None" CornerRadius="5" Command="{Binding UpdateUserProfile}">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="1,0">
                                     <GradientStop Color="#648FFF" Offset="0.1" />

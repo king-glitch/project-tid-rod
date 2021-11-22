@@ -21,7 +21,7 @@ namespace TidRod.Animations
         {
             base.Preparing(content, page);
 
-            HidePage(page);
+            HidePage (page);
 
             if (content == null) return;
 
@@ -32,14 +32,14 @@ namespace TidRod.Animations
         {
             base.Disposing(content, page);
 
-            ShowPage(page);
+            ShowPage (page);
 
             if (content == null) return;
 
             content.TranslationY = _defaultTranslationY;
         }
 
-        public async override Task Appearing(View content, PopupPage page)
+        public override async Task Appearing(View content, PopupPage page)
         {
             var taskList = new List<Task>();
 
@@ -50,15 +50,21 @@ namespace TidRod.Animations
                 var topOffset = GetTopOffset(content, page);
                 content.TranslationY = topOffset;
 
-                taskList.Add(content.TranslateTo(content.TranslationX, _defaultTranslationY, DurationIn, EasingIn));
-            };
+                taskList
+                    .Add(content
+                        .TranslateTo(content.TranslationX,
+                        _defaultTranslationY,
+                        DurationIn,
+                        EasingIn));
+            }
 
-            ShowPage(page);
+
+            ShowPage (page);
 
             await Task.WhenAll(taskList);
         }
 
-        public async override Task Disappearing(View content, PopupPage page)
+        public override async Task Disappearing(View content, PopupPage page)
         {
             var taskList = new List<Task>();
 
@@ -70,8 +76,14 @@ namespace TidRod.Animations
 
                 var topOffset = GetTopOffset(content, page);
 
-                taskList.Add(content.TranslateTo(content.TranslationX, topOffset, DurationOut, EasingOut));
-            };
+                taskList
+                    .Add(content
+                        .TranslateTo(content.TranslationX,
+                        topOffset,
+                        DurationOut,
+                        EasingOut));
+            }
+
 
             await Task.WhenAll(taskList);
         }

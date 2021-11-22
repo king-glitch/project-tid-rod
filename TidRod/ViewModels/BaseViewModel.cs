@@ -10,51 +10,73 @@ namespace TidRod.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public ICarDataStore<Car> CarDataStore => DependencyService.Get<ICarDataStore<Car>>();
-        public IUserDataStore<User> UserDataStore => DependencyService.Get<IUserDataStore<User>>();
+        public ICarDataStore<Car> CarDataStore =>
+            DependencyService.Get<ICarDataStore<Car>>();
+
+        public IUserDataStore<User> UserDataStore =>
+            DependencyService.Get<IUserDataStore<User>>();
 
         private bool isBusy = false;
 
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                SetProperty(ref isBusy, value);
+            }
         }
 
         private string title = string.Empty;
 
         public string Title
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get
+            {
+                return title;
+            }
+            set
+            {
+                SetProperty(ref title, value);
+            }
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
+        protected bool
+        SetProperty<T>(
+            ref T backingStore,
+            T value,
             [CallerMemberName] string propertyName = "",
-            Action onChanged = null)
+            Action onChanged = null
+        )
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
 
             backingStore = value;
             onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
+            OnPropertyChanged (propertyName);
             return true;
         }
 
-        #region INotifyPropertyChanged
+
+#region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void OnPropertyChanged(
+            [CallerMemberName] string propertyName = ""
+        )
         {
             var changed = PropertyChanged;
-            if (changed == null)
-                return;
+            if (changed == null) return;
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #endregion INotifyPropertyChanged
+
+#endregion INotifyPropertyChanged
     }
 }

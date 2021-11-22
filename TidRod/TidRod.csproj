@@ -117,8 +117,4 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\Host\" />
-  </ItemGroup>
 </Project>

@@ -79,14 +79,13 @@ namespace TidRod.Services.DataStore.Mock
                         Gear = CarTransmission.Automatic,
                         PinLocation = "14.061634752546121, 100.62071240334684",
                         UserId = "abcd-abcd"
-                    },
-
+                    }
                 };
         }
 
         public async Task<bool> AddCarAsync(Car car)
         {
-            cars.Add(car);
+            cars.Add (car);
 
             return await Task.FromResult(true);
         }
@@ -95,8 +94,8 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldCar =
                 cars.Where((Car arg) => arg.Id == car.Id).FirstOrDefault();
-            cars.Remove(oldCar);
-            cars.Add(car);
+            cars.Remove (oldCar);
+            cars.Add (car);
 
             return await Task.FromResult(true);
         }
@@ -104,7 +103,7 @@ namespace TidRod.Services.DataStore.Mock
         public async Task<bool> DeleteCarAsync(string id)
         {
             var oldCar = cars.Where((Car arg) => arg.Id == id).FirstOrDefault();
-            cars.Remove(oldCar);
+            cars.Remove (oldCar);
 
             return await Task.FromResult(true);
         }

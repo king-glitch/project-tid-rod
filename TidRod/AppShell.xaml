@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:general="clr-namespace:TidRod.Views.General"
-       xmlns:search="clr-namespace:TidRod.Views.Search"
-       xmlns:auth="clr-namespace:TidRod.Views.Auth"
-       xmlns:profile="clr-namespace:TidRod.Views.Profile"
-       Title="TidRod"
-       BackgroundColor="White"
-       x:Class="TidRod.AppShell">
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:general="clr-namespace:TidRod.Views.General" xmlns:search="clr-namespace:TidRod.Views.Search" xmlns:auth="clr-namespace:TidRod.Views.Auth" xmlns:host="clr-namespace:TidRod.Views.Host" xmlns:profile="clr-namespace:TidRod.Views.Profile" Title="TidRod" BackgroundColor="White" x:Class="TidRod.AppShell">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -34,25 +26,14 @@
     </Shell.Resources>
 
     <Shell.Items>
-        <ShellContent
-            FlyoutItemIsVisible="False"
-            Icon="icon_about.png"
-            Route="MainPage"
-            ContentTemplate="{DataTemplate general:MainPage}" />
-        <ShellContent
-            Title="Sign In"
-            Route="LoginPage"
-            ContentTemplate="{DataTemplate auth:LoginPage}" />
-        <ShellContent
-            Title="Sign Up"
-            
-            Route="RegisterationPage"
-            ContentTemplate="{DataTemplate auth:RegisterationPage}" />
+        <ShellContent FlyoutItemIsVisible="False" Icon="icon_about.png" Route="MainPage" ContentTemplate="{DataTemplate general:MainPage}" />
+        <ShellContent Title="Sign In" Route="LoginPage" ContentTemplate="{DataTemplate auth:LoginPage}" />
+        <ShellContent Title="Sign Up" Route="RegisterationPage" ContentTemplate="{DataTemplate auth:RegisterationPage}" />
     </Shell.Items>
 
     <TabBar>
         <ShellContent Title="Search" Icon="home_icon.png" Route="SearchPage" ContentTemplate="{DataTemplate search:SearchPage}" />
-        <ShellContent Title="Host" Icon="cloud_icon.png" Route="HostPage" ContentTemplate="{DataTemplate search:SearchPage}" />
+        <ShellContent Title="Host" Icon="cloud_icon.png" Route="HostPage" ContentTemplate="{DataTemplate host:HostCarsPage}" />
         <ShellContent Title="Profile" Icon="user_icon.png" Route="ProfilePage" ContentTemplate="{DataTemplate profile:UserProfilePage}" />
     </TabBar>
 

@@ -13,6 +13,7 @@ namespace TidRod.Views.Profile
     public partial class HostProfilePage : ContentPage
     {
         private HostProfileViewModel _viewModel;
+
         public HostProfilePage()
         {
             InitializeComponent();

@@ -1,10 +1,10 @@
-﻿using Rg.Plugins.Popup.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Rg.Plugins.Popup.Extensions;
 using TidRod.Components.Map;
 using TidRod.Components.Popup;
 using TidRod.Models;
@@ -31,11 +31,9 @@ namespace TidRod.Views.Search
         private async void InitializeMap()
         {
             // initialize
-
             List<CustomPin> pins = new List<CustomPin>();
             await this._viewModel.GetCarsAroundUserCommand();
             var cars = _viewModel?.Cars;
-
 
             // check if null
             if (cars == null)
@@ -46,7 +44,6 @@ namespace TidRod.Views.Search
             // pin all locations
             foreach (var car in cars)
             {
-
                 // call geo code
                 Geocoder geoCoder = new Geocoder();
 
@@ -64,11 +61,9 @@ namespace TidRod.Views.Search
                 // get first address
                 string address = possibleAddresses.FirstOrDefault();
 
-
                 // add to the pin
                 pins
-                    .Add(new CustomPin
-                    {
+                    .Add(new CustomPin {
                         ClassId = car.Id,
                         Address = address,
                         Position = position,
@@ -120,14 +115,12 @@ namespace TidRod.Views.Search
 
         private async void MapPinClicked(object sender, EventArgs e)
         {
-            var pin = (CustomPin)sender;
+            var pin = (CustomPin) sender;
 
             var id = pin.ClassId.ToString();
             var car = await _viewModel.CarDataStore.GetCarAsync(id);
-            await Navigation.PushPopupAsync(new CarInfoPopup
-            {
-                BindingContext = car
-            });
+            await Navigation
+                .PushPopupAsync(new CarInfoPopup { BindingContext = car });
         }
 
         private async void ToolbarFilterCarsClicked(object sender, EventArgs e)

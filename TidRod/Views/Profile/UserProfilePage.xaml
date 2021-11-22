@@ -1,13 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:profile="clr-namespace:TidRod.ViewModels.Profile" x:DataType="profile:UserProfileViewModel"
-             x:Class="TidRod.Views.Profile.UserProfilePage">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:profile="clr-namespace:TidRod.ViewModels.Profile" x:DataType="profile:UserProfileViewModel" x:Class="TidRod.Views.Profile.UserProfilePage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarSettingClicked" 
-                     >
+        <ToolbarItem Clicked="ToolbarSettingClicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="Material"
-                Glyph="&#xe8b8;" />
+                <FontImageSource FontFamily="Material" Glyph="&#xe8b8;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

@@ -39,7 +39,7 @@ namespace TidRod.ViewModels
             }
         }
 
-        public async void LoadCarId(string itemId)
+        public void LoadCarId(string itemId)
         {
             // try
             // {

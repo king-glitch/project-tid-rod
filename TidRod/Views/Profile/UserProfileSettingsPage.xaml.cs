@@ -12,7 +12,6 @@ namespace TidRod.Views.Profile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserProfileSettingsPage : ContentPage
     {
-
         private UserProfileSettingsViewModel _viewModel;
 
         public UserProfileSettingsPage()

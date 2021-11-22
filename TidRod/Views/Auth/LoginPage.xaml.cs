@@ -20,8 +20,5 @@ namespace TidRod.Views.Auth
             InitializeComponent();
             BindingContext = _baseView = new LoginViewModel();
         }
-
-
-
     }
 }

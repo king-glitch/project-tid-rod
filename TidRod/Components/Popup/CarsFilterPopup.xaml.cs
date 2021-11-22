@@ -1,6 +1,6 @@
-﻿using Rg.Plugins.Popup.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Rg.Plugins.Popup.Extensions;
 using TidRod.Models;
 using TidRod.Services.Interface;
 using TidRod.ViewModels.Profile;
@@ -13,7 +13,9 @@ namespace TidRod.Components.Popup
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CarsFilterPopup : Rg.Plugins.Popup.Pages.PopupPage
     {
-        private ICarDataStore<Car> CarDataStore => DependencyService.Get<ICarDataStore<Car>>();
+        private ICarDataStore<Car> CarDataStore =>
+            DependencyService.Get<ICarDataStore<Car>>();
+
         public CarsFilterPopup()
         {
             InitializeComponent();
@@ -24,12 +26,8 @@ namespace TidRod.Components.Popup
 
         private void InitializePicker()
         {
-            GearPicker.ItemsSource = new List<string>
-            {
-                "Automatic",
-                "Manual",
-                "Both"
-            };
+            GearPicker.ItemsSource =
+                new List<string> { "Automatic", "Manual", "Both" };
         }
 
         private async void ButtonClicked(object sender, EventArgs e)
@@ -37,10 +35,9 @@ namespace TidRod.Components.Popup
             await Navigation.PopPopupAsync();
         }
 
-        private async void FilterChangedValue(object sender, ValueChangedEventArgs e)
+        private void FilterChangedValue(object sender, ValueChangedEventArgs e)
         {
             this.FilterCars();
-
         }
 
         private void GearPickerSelectedIndexChanged(object sender, EventArgs e)
@@ -51,40 +48,47 @@ namespace TidRod.Components.Popup
         private async void FilterCars()
         {
             // Price modifier
-
-            int price = (int)PriceRangeSlider.Value;
+            int price = (int) PriceRangeSlider.Value;
 
             PriceModifierLabel.Text = $"100 THB - {price} THB / day";
 
             // obomether modifier
-
-            int obemeter = (int)ObometerRangeSlider.Value;
+            int obemeter = (int) ObometerRangeSlider.Value;
 
             ObometerModifierLabel.Text = $"100 - {obemeter} / miles";
 
             // Filter Button
-
             FilterResultButton.IsEnabled = false;
-
 
             List<Car> cars = (List<Car>)(await CarDataStore.GetCarsAsync());
 
-            var filtered = cars.FindAll(car =>
-            {
-                bool check = car.Price <= price && car.Obometer <= obemeter;
-                if (GearPicker.SelectedIndex >= 0)
-                {
-
-                    string gear = GearPicker.ItemsSource[GearPicker.SelectedIndex].ToString();
-                    if (gear == "Both")
+            var filtered =
+                cars
+                    .FindAll(car =>
                     {
-                        return check;
-                    }
-                    return check && car.Gear == (gear == "Automatic" ? CarTransmission.Automatic : CarTransmission.Manual);
-                }
+                        bool check =
+                            car.Price <= price && car.Obometer <= obemeter;
+                        if (GearPicker.SelectedIndex >= 0)
+                        {
+                            string gear =
+                                GearPicker
+                                    .ItemsSource[GearPicker.SelectedIndex]
+                                    .ToString();
+                            if (gear == "Both")
+                            {
+                                return check;
+                            }
+                            return check &&
+                            car.Gear ==
+                            (
+                            gear == "Automatic"
+                                ? CarTransmission.Automatic
+                                : CarTransmission.Manual
+                            );
+                        }
 
-                return check;
-            });
+                        return check;
+                    });
 
             FilterResultButton.Text = $"View {filtered.Count}+ results";
 

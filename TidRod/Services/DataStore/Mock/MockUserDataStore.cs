@@ -17,25 +17,25 @@ namespace TidRod.Services.DataStore.Mock
             users =
                 new List<User>()
                 {
-                     new User {
-                         Id = "abcd-abcd",
-                         Image = new FileImage
-                         {
-                             FileURL = AppSettings.USER_DEFAULT_AVATAR,
-                             FileName = "abcd-abcd.avatar.png"
-                         },
-                         FirstName = "Deku",
-                         LastName = "Academia",
-                         Email = "deku@academia.ua",
-                         Phone = "0990990990",
-                         Password = "Password"
-                     },
+                    new User {
+                        Id = "abcd-abcd",
+                        Image =
+                            new FileImage {
+                                FileURL = AppSettings.USER_DEFAULT_AVATAR,
+                                FileName = "abcd-abcd.avatar.png"
+                            },
+                        FirstName = "Deku",
+                        LastName = "Academia",
+                        Email = "deku@academia.ua",
+                        Phone = "0990990990",
+                        Password = "Password"
+                    }
                 };
         }
 
         public async Task<bool> AddUserAsync(User item)
         {
-            users.Add(item);
+            users.Add (item);
 
             return await Task.FromResult(true);
         }
@@ -44,9 +44,9 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldUser =
                 users.Where((User arg) => arg.Id == user.Id).FirstOrDefault();
-            users.Remove(oldUser);
-            users.Add(user);
-            
+            users.Remove (oldUser);
+            users.Add (user);
+
             if (await Task.FromResult(true))
             {
                 return user;
@@ -59,24 +59,26 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldUser =
                 users.Where((User arg) => arg.Id == id).FirstOrDefault();
-            users.Remove(oldUser);
+            users.Remove (oldUser);
 
             return await Task.FromResult(true);
         }
 
         public async Task<User> GetUserAsync(string id)
         {
-            var data = await Task.FromResult(users.FirstOrDefault(s => s.Id == id));
+            var data =
+                await Task.FromResult(users.FirstOrDefault(s => s.Id == id));
 
             if (data == null) return null;
 
             if (data.Image == null)
             {
-                data.Image = new FileImage
-                {
-                    FileURL = "https://api5.iloveimg.com/v1/download/fn17s3thq3fvcsl53yqAkm93czy2dfsd419nhm1c2zbrrh9ml1s6kpw5v2b0y7zkkwnz5w5w86rg30bpsfy88v1yndvw87tvv14nAyjr98456y0m8sbny3A4yscjcmq9t6smd5nj2w9j3sr6tA1y5gdh51rrtwfrnycfdmtp7r0lwptt7Ag1",
-                    FileName = "abcd-abcd.avatar.png"
-                };
+                data.Image =
+                    new FileImage {
+                        FileURL =
+                            "https://api5.iloveimg.com/v1/download/fn17s3thq3fvcsl53yqAkm93czy2dfsd419nhm1c2zbrrh9ml1s6kpw5v2b0y7zkkwnz5w5w86rg30bpsfy88v1yndvw87tvv14nAyjr98456y0m8sbny3A4yscjcmq9t6smd5nj2w9j3sr6tA1y5gdh51rrtwfrnycfdmtp7r0lwptt7Ag1",
+                        FileName = "abcd-abcd.avatar.png"
+                    };
                 await this.UpdateUserAsync(data);
             }
             return data;
@@ -90,9 +92,11 @@ namespace TidRod.Services.DataStore.Mock
 
         public async Task<IEnumerable<Car>> GetUserCarsAsync(string id)
         {
-            ICarDataStore<Car> CarDataStore = DependencyService.Get<ICarDataStore<Car>>();
+            ICarDataStore<Car> CarDataStore =
+                DependencyService.Get<ICarDataStore<Car>>();
             var cars = await CarDataStore.GetCarsAsync();
-            return await Task.FromResult(cars.Where(car => car.UserId == id).ToList<Car>());
+            return await Task
+                .FromResult(cars.Where(car => car.UserId == id).ToList<Car>());
         }
     }
 }

@@ -1,18 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:local="clr-namespace:TidRod.ViewModels" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="TidRod.Views.Search.SearchPage" 
-    xmlns:vm="clr-namespace:TidRod.ViewModels" xmlns:map="clr-namespace:TidRod.Components.Map"
-    Title="{Binding Title}">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:TidRod.ViewModels" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.Search.SearchPage" xmlns:vm="clr-namespace:TidRod.ViewModels" xmlns:map="clr-namespace:TidRod.Components.Map" Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarFilterCarsClicked" 
-                     >
+        <ToolbarItem Clicked="ToolbarFilterCarsClicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="Material"
-                Glyph="&#xef4f;" />
+                <FontImageSource FontFamily="Material" Glyph="&#xef4f;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -31,14 +23,7 @@
         <map:CustomMap x:Name="MainMap">
             <map:CustomMap.ItemTemplate>
                 <DataTemplate>
-                    <map:CustomPin
-                        Clicked="MapPinClicked"
-                        x:Name="MapPin"
-                        Type="Place"
-                        ClassId="{Binding ClassId}"
-                        Position="{Binding Position}" 
-                        Address="{Binding Address}" 
-                        Label="{Binding Name}" />
+                    <map:CustomPin Clicked="MapPinClicked" x:Name="MapPin" Type="Place" ClassId="{Binding ClassId}" Position="{Binding Position}" Address="{Binding Address}" Label="{Binding Name}" />
                 </DataTemplate>
             </map:CustomMap.ItemTemplate>
         </map:CustomMap>

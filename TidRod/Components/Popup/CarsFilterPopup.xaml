@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<pages:PopupPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
-    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" 
-    x:Class="TidRod.Components.Popup.CarsFilterPopup"
-    >
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" x:Class="TidRod.Components.Popup.CarsFilterPopup">
 
 
     <pages:PopupPage.Animation>
@@ -13,57 +7,25 @@
     </pages:PopupPage.Animation>
     <!--You can use any elements here which are extended from Xamarin.Forms.View-->
     <StackLayout VerticalOptions="EndAndExpand" Padding="0" HorizontalOptions="FillAndExpand">
-        <Frame 
-            CornerRadius="5" 
-            Padding="10" 
-            HorizontalOptions="FillAndExpand" 
-            HeightRequest="280"
-            >
-            <StackLayout HeightRequest="280" WidthRequest="100" >
+        <Frame CornerRadius="5" Padding="10" HorizontalOptions="FillAndExpand" HeightRequest="280">
+            <StackLayout HeightRequest="280" WidthRequest="100">
                 <Label TextColor="Black" Text="Filters" FontAttributes="Bold" FontSize="25" />
                 <StackLayout Padding="4">
                     <StackLayout Spacing="0">
                         <Label TextColor="Black" FontSize="Subtitle" FontAttributes="Bold" Text="Price" />
                         <Label x:Name="PriceModifierLabel" TextColor="Black" Text="100 THB - 100 THB / day" />
-                        <Slider
-                            x:Name="PriceRangeSlider"
-                            Maximum="10000"
-                            Minimum="100"
-                            ThumbColor="Purple"
-                            MaximumTrackColor="MediumPurple"
-                            MinimumTrackColor="Purple"
-                            ValueChanged="FilterChangedValue"
-                        />
+                        <Slider x:Name="PriceRangeSlider" Maximum="10000" Minimum="100" ThumbColor="Purple" MaximumTrackColor="MediumPurple" MinimumTrackColor="Purple" ValueChanged="FilterChangedValue" />
                     </StackLayout>
 
                     <StackLayout Spacing="0">
                         <Label TextColor="Black" FontSize="Subtitle" FontAttributes="Bold" Text="Obomether" />
-                        <Label  x:Name="ObometerModifierLabel" TextColor="Black" Text="100 - 100 / miles" />
-                        <Slider
-                            x:Name="ObometerRangeSlider"
-                            Maximum="500000"
-                            Minimum="100"
-                            ThumbColor="Purple"
-                            MaximumTrackColor="MediumPurple"
-                            MinimumTrackColor="Purple"
-                            ValueChanged="FilterChangedValue"
-                        />
+                        <Label x:Name="ObometerModifierLabel" TextColor="Black" Text="100 - 100 / miles" />
+                        <Slider x:Name="ObometerRangeSlider" Maximum="500000" Minimum="100" ThumbColor="Purple" MaximumTrackColor="MediumPurple" MinimumTrackColor="Purple" ValueChanged="FilterChangedValue" />
                     </StackLayout>
 
-                    <Picker
-                        x:Name="GearPicker"
-                        ItemDisplayBinding="{Binding .}"
-                        Title="Select Gear"
-                        SelectedIndexChanged="GearPickerSelectedIndexChanged"
-                    />
+                    <Picker x:Name="GearPicker" ItemDisplayBinding="{Binding .}" Title="Select Gear" SelectedIndexChanged="GearPickerSelectedIndexChanged" />
 
-                    <Button 
-                        x:Name="FilterResultButton" 
-                        Text="View 0 results" 
-                        IsEnabled="False"
-                        Clicked="ButtonClicked"
-                        VerticalOptions="EndAndExpand"
-                    >
+                    <Button x:Name="FilterResultButton" Text="View 0 results" IsEnabled="False" Clicked="ButtonClicked" VerticalOptions="EndAndExpand">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="1,0">
                                 <GradientStop Color="#648FFF" Offset="0.1" />

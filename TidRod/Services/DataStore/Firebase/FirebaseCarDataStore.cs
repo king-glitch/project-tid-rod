@@ -10,9 +10,11 @@ namespace TidRod.Services.DataStore.Firebase
 {
     public class FirebaseCarDataStore : ICarDataStore<Car>
     {
-        private readonly FirebaseClient firebase = new FirebaseClient(AppSettings.FIREBASE_DATABASE_URL);
+        private readonly FirebaseClient
+            firebase = new FirebaseClient(AppSettings.FIREBASE_DATABASE_URL);
 
-        private readonly string DatabaseTableName = AppSettings.FIREBASE_DATABASE_CAR_ROOT;
+        private readonly string
+            DatabaseTableName = AppSettings.FIREBASE_DATABASE_CAR_ROOT;
 
         public async Task<bool> AddCarAsync(Car car)
         {
@@ -41,16 +43,9 @@ namespace TidRod.Services.DataStore.Firebase
         public async Task<IEnumerable<Car>>
         GetCarsAsync(bool forceRefresh = false)
         {
-            //return (await firebase
-            //  .Child(DatabaseTableName)
-            //  .OnceAsync<Car>()).Select(car => new Car
-            //  {
-            //      Id = car.Object.Id,
-            //      Text = car.Object.Text,
-            //      Description = car.Object.Description,
-            //      CreateDate = car.Object.CreateDate,
-            //      ImageFiles = car.Object.ImageFiles
-            //  }).ToList();
+            return (await firebase.Child(DatabaseTableName).OnceAsync<Car>())
+                .Select(car => car.Object)
+                .ToList();
             throw new System.NotImplementedException();
         }
 

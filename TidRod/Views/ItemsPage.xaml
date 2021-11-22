@@ -1,11 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TidRod.Views.ItemsPage"
-             Title="{Binding Title}"
-             xmlns:local="clr-namespace:TidRod.ViewModels"  
-             xmlns:model="clr-namespace:TidRod.Models"  
-             x:Name="BrowseItemsPage">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.ItemsPage" Title="{Binding Title}" xmlns:local="clr-namespace:TidRod.ViewModels" xmlns:model="clr-namespace:TidRod.Models" x:Name="BrowseItemsPage">
 
     <StackLayout></StackLayout>
 </ContentPage>

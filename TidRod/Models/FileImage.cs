@@ -8,7 +8,9 @@ namespace TidRod.Models
     public class FileImage
     {
         public string FileName { get; set; }
+
         public string FileURL { get; set; }
+
         public ImageSource Image { get; set; }
     }
 }

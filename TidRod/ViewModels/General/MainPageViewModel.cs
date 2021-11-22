@@ -10,13 +10,11 @@ namespace TidRod.ViewModels.General
 {
     public class MainPageViewModel : BaseViewModel
     {
-
         public MainPageViewModel()
         {
             Title = "Main Page";
-
         }
-       
+
         public async void OnAppearing()
         {
             bool LoggedIn = false;
