@@ -10,11 +10,9 @@ namespace TidRod.Services.DataStore.Firebase
 {
     public class FirebaseCarDataStore : ICarDataStore<Car>
     {
-        private readonly FirebaseClient
-            firebase =
-                new FirebaseClient("https://tidrod-7aa6f-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        private readonly FirebaseClient firebase = new FirebaseClient(AppSettings.FIREBASE_DATABASE_URL);
 
-        private readonly string DatabaseTableName = "Cars";
+        private readonly string DatabaseTableName = AppSettings.FIREBASE_DATABASE_CAR_ROOT;
 
         public async Task<bool> AddCarAsync(Car car)
         {

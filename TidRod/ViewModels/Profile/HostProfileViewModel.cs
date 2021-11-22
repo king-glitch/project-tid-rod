@@ -95,17 +95,9 @@ namespace TidRod.ViewModels.Profile
                 Gear = car.Gear;
                 Images = car.Images;
 
+                string profileImage = string.IsNullOrEmpty(user.Image?.FileURL) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image.FileURL;
 
-                var profileImage = string.IsNullOrEmpty(user.Image) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image;
-
-                try
-                {
-                    user.Image = profileImage;
-                }
-                catch
-                {
-                    user.Image = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg";
-                }
+                user.Image.FileURL = profileImage;
 
                 try
                 {

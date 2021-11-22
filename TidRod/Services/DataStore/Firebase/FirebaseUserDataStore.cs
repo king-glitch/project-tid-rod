@@ -10,8 +10,8 @@ namespace TidRod.Services.DataStore.Firebase
 {
     public class FirebaseUserDataStore : IUserDataStore<User>
     {
-        private readonly FirebaseClient firebase = new FirebaseClient("https://tidrod-7aa6f-default-rtdb.asia-southeast1.firebasedatabase.app/");
-        private readonly string DatabaseTableName = "Users";
+        private readonly FirebaseClient firebase = new FirebaseClient(AppSettings.FIREBASE_DATABASE_URL);
+        private readonly string DatabaseTableName = AppSettings.FIREBASE_DATABASE_USER_ROOT;
 
         public async Task<bool> AddUserAsync(User user)
         {
@@ -52,7 +52,7 @@ namespace TidRod.Services.DataStore.Firebase
             //  }).ToList();
         }
 
-        public async Task<bool> UpdateUserAsync(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
             FirebaseObject<User> toUpdatePerson = (await firebase.Child(DatabaseTableName).OnceAsync<User>()).FirstOrDefault(a => a.Object.Id == user.Id);
 
@@ -60,7 +60,10 @@ namespace TidRod.Services.DataStore.Firebase
               .Child(DatabaseTableName)
               .Child(toUpdatePerson.Key)
               .PutAsync(user);
-            return true;
+
+
+            return await this.GetUserAsync(user.Id);
+
         }
     }
 }

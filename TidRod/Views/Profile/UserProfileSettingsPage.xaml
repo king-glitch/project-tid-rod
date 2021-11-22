@@ -5,9 +5,25 @@
             <StackLayout Padding="20,0,20,30" VerticalOptions="EndAndExpand">
 
                 <StackLayout Padding="0,20">
-                    <Frame Margin="0,0,0,20" CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
-                        <Image HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding CurrentUser.Image}" />
-                    </Frame>
+                    <AbsoluteLayout HorizontalOptions="Center">
+                        <Frame Margin="0,0,0,20" CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image  x:Name="UserImagePreview" HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding Image.FileURL}" />
+                        </Frame>
+                        <AbsoluteLayout >
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ChangeUserImage}" CommandParameter="{Binding Source={x:Reference UserImagePreview}}" />
+                            </AbsoluteLayout.GestureRecognizers>
+                            <Frame HorizontalOptions="Center" HeightRequest="100" WidthRequest="100" AbsoluteLayout.LayoutBounds="25,100">
+                                <Frame.Background>
+                                    <LinearGradientBrush EndPoint="0,1">
+                                        <GradientStop Color="Transparent" Offset="0.5" />
+                                        <GradientStop Color="#FFFFFF" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                            </Frame>
+                            <Label TextColor="Black" Text="Edit" AbsoluteLayout.LayoutBounds="85,150" />
+                        </AbsoluteLayout>
+                    </AbsoluteLayout>
                     <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
                         <components:OutlinedEntry
                             PlaceholderText="Email"

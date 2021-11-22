@@ -9,7 +9,7 @@ namespace TidRod.Services.Interface
     {
         Task<bool> AddUserAsync(T item);
 
-        Task<bool> UpdateUserAsync(T item);
+        Task<T> UpdateUserAsync(T item);
 
         Task<bool> DeleteUserAsync(string id);
 

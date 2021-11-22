@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:profile="clr-namespace:TidRod.ViewModels.Profile"  x:DataType="profile:UserProfileViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:profile="clr-namespace:TidRod.ViewModels.Profile" x:DataType="profile:UserProfileViewModel"
              x:Class="TidRod.Views.Profile.UserProfilePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ToolbarSettingClicked" 
@@ -18,16 +18,16 @@
             <StackLayout Padding="0,20">
 
                 <Frame Margin="0,0,0,20" CornerRadius="100" IsClippedToBounds="True" BorderColor="#e9e9e9" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Image HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding CurrentSessionUser.Image}" />
+                    <Image HeightRequest="150" WidthRequest="150" Scale="1.5" Source="{Binding Image, Mode=TwoWay}" />
                 </Frame>
 
                 <StackLayout Margin="0,0,0,50" Spacing="1">
                     <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.FirstName}" />
+                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding FirstName, Mode=TwoWay}" />
                                 <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text=" " />
-                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.LastName}" />
+                                <Span FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding LastName, Mode=TwoWay}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -45,7 +45,7 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="+66 " />
-                                    <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.Phone}" />
+                                    <Span FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding Phone, Mode=TwoWay}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -58,7 +58,7 @@
                             <Label Text="&#xe0be;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="12,12" />
                         </AbsoluteLayout>
 
-                        <Label FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding CurrentSessionUser.Email}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                        <Label FontSize="15" FontAttributes="Bold" TextColor="Black" Text="{Binding Email, Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
                         <Label Text="&#xe89e;" FontSize="12" TextColor="Black" FontFamily="Material" HorizontalOptions="Center" VerticalOptions="Center" />
                     </StackLayout>
                 </StackLayout>

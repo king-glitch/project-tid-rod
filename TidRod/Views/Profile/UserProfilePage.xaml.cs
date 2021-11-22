@@ -18,8 +18,13 @@ namespace TidRod.Views.Profile
             InitializeComponent();
 
             BindingContext = _viewModel = new UserProfileViewModel();
-            _viewModel.UserId = App.CurrentSesstion;
             BackgroundColor = Color.White;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
         }
 
         private async void ToolbarSettingClicked(object sender, EventArgs e)

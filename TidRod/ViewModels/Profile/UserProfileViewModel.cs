@@ -9,19 +9,46 @@ namespace TidRod.ViewModels.Profile
 {
     public class UserProfileViewModel : BaseViewModel
     {
-        private string Id { get; set; }
-        private User _user;
+        private readonly string Id = App.CurrentSession;
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+        private string _phone;
+        private string _image;
         private IEnumerable<Car> _userCarList;
 
 
         public bool IsUserDataFound { get; set; }
 
-        public User CurrentSessionUser
+        public string FirstName
         {
-            get => _user;
-            set => SetProperty(ref _user, value);
+            get => _firstName;
+            set => SetProperty(ref _firstName, value);
         }
 
+        public string Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
+
+        public string LastName
+        {
+            get => _lastName;
+            set => SetProperty(ref _lastName, value);
+        }
+
+        public string Phone
+        {
+            get => _phone;
+            set => SetProperty(ref _phone, value);
+        }
+
+        public string Email
+        {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
 
         public IEnumerable<Car> UserCarList
         {
@@ -29,20 +56,12 @@ namespace TidRod.ViewModels.Profile
             set => SetProperty(ref _userCarList, value);
         }
 
-        public string UserId
+        public void OnAppearing()
         {
-            get
-            {
-                return Id;
-            }
-            set
-            {
-                Id = value;
-                LoadUserId(value);
-            }
+            this.LoadUserData();
         }
 
-        public async void LoadUserId(string userId)
+        public async void LoadUserData()
         {
             try
             {
@@ -50,7 +69,7 @@ namespace TidRod.ViewModels.Profile
                 IsUserDataFound = false;
 
                 // get user data
-                User user = await UserDataStore?.GetUserAsync(userId);
+                User user = await UserDataStore?.GetUserAsync(Id);
 
                 if (user == null)
                 {
@@ -60,28 +79,46 @@ namespace TidRod.ViewModels.Profile
 
                 IsUserDataFound = true;
 
-                var profileImage = string.IsNullOrEmpty(user.Image) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image;
+                bool IsImageNull = user?.Image?.FileURL == null || string.IsNullOrEmpty(user.Image.FileURL);
+                string profileImage = IsImageNull ? AppSettings.USER_DEFAULT_AVATAR : user.Image.FileURL;
 
                 try
                 {
-                    user.Image = profileImage;
+                    if (user.Image == null)
+                    {
+                        user.Image = new FileImage
+                        {
+                            FileName = "user.avatar.png",
+                            FileURL = AppSettings.USER_DEFAULT_AVATAR
+                        };
+                    }
+                    else
+                    {
+
+                        user.Image.FileURL = profileImage;
+                    }
 
                 }
-                catch
+                catch (Exception ex)
                 {
-                    user.Image = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg";
+                    Debug.WriteLine(ex.StackTrace);
+
                 }
 
                 try
                 {
                     user.Phone = string.Format("{0:### ### ###}", Convert.ToInt64(user.Phone));
                 }
-                catch
+                catch (Exception ex)
                 {
                     user.Phone = user.Phone;
                 }
 
-                CurrentSessionUser = user;
+                FirstName = user.FirstName;
+                LastName = user.LastName;
+                Email = user.Email;
+                Phone = user.Phone;
+                Image = user.Image.FileURL;
 
                 UserCarList = await UserDataStore.GetUserCarsAsync(user.Id);
             }

@@ -93,7 +93,7 @@ namespace TidRod.ViewModels.Auth
 
                 if (user.Password == password)
                 {
-                    App.CurrentSesstion = user.Id;
+                    App.CurrentSession = user.Id;
 
                     return true;
                 }

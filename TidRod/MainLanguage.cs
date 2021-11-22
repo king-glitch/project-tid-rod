@@ -14,9 +14,18 @@ namespace TidRod
 
         // AUTHENTICATION
         public static string AUTHENTICATION_PASSWORD_EMPTY = "Please provide a password.";
-        public static string AUTHENTICATION_PASSWORD_INCORRECTED = "Incorrected credential.";
+        public static string AUTHENTICATION_CONFIRM_PASSWORD_EMPTY = "Please provide a password.";
         public static string AUTHENTICATION_EMAIL_EMPTY = "Please provide an E-mail.";
+        public static string AUTHENTICATION_PHONE_EMPTY = "Please provide a phone.";
+        public static string AUTHENTICATION_FIRST_NAME_EMPTY = "Please provide a first name.";
+        public static string AUTHENTICATION_LAST_NAME_EMPTY = "Please provide a last name.";
+
+        public static string AUTHENTICATION_PHONE_INCORRECTED = "Wrong Phone number. please try again.";
         public static string AUTHENTICATION_EMAIL_INCORRECTED = "E-mail not found.";
+        public static string AUTHENTICATION_PASSWORD_INCORRECTED = "Incorrected credential.";
+        public static string AUTHENTICATION_PASSWORD_NOT_MATCH = "password and confirm password are not the same.";
+
+        public static string AUTHENTICATION_REGISTER_SUCCESSFULLY = "Sign up Successfully.";
 
         // PROFILE
 

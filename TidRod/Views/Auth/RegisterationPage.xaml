@@ -10,69 +10,83 @@
              Shell.ForegroundColor="Black"
              Title="Sign in">
     <ContentPage.Content>
-        <StackLayout Padding="20,0,20,30" VerticalOptions="EndAndExpand">
+        <ScrollView>
+            <StackLayout Padding="20,0,20,30" VerticalOptions="EndAndExpand">
 
-            <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
-                <components:OutlinedEntry
+                <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
+                    <components:OutlinedEntry
                     PlaceholderText="Email Address"
+                    Text="{Binding Email, Mode=TwoWay}"
+                    ErrorText="{Binding EmailError}"
                     Keyboard="Email" />
-                <components:OutlinedEntry
+                    <components:OutlinedEntry
                     PlaceholderText="First Name"
+                    Text="{Binding FirstName, Mode=TwoWay}"
+                    ErrorText="{Binding FirstNameError}"
                     Keyboard="Text" />
-                <components:OutlinedEntry
+                    <components:OutlinedEntry
                     PlaceholderText="Last Name"
+                    Text="{Binding LastName, Mode=TwoWay}"
+                    ErrorText="{Binding LastNameError}"
                     Keyboard="Text" />
-                <components:OutlinedEntry
+                    <components:OutlinedEntry
                     PlaceholderText="Phone"
+                    Text="{Binding Phone, Mode=TwoWay}"
+                    ErrorText="{Binding PhoneError}"
                     Keyboard="Telephone" />
-                <components:OutlinedEntry
+                    <components:OutlinedEntry
                     PlaceholderText="Password"
+                    Text="{Binding Password, Mode=TwoWay}"
+                    ErrorText="{Binding PasswordError}"
                     Keyboard="Text"
                     ReturnType="Next"
                     IsPassword="True" />
-                <components:OutlinedEntry
+                    <components:OutlinedEntry
                     PlaceholderText="Confirm Password"
+                    Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                    ErrorText="{Binding ConfirmPasswordError}"
                     Keyboard="Text"
                     ReturnType="Next"
                     IsPassword="True" />
-            </StackLayout>
+                </StackLayout>
 
-            <StackLayout  VerticalOptions="EndAndExpand" Spacing="20">
+                <StackLayout  VerticalOptions="EndAndExpand" Spacing="20">
 
-                <Button
+                    <Button
                     VerticalOptions="Center"
                     Text="Log in"
                     FontAttributes="Bold"
                     TextTransform="None"
                     CornerRadius="5"
                     Command="{Binding RegisterPage}">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="1,0">
-                            <GradientStop Color="#648FFF" Offset="0.1" />
-                            <GradientStop Color="#1A73E9" Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Label HorizontalOptions="Center">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#648FFF" Offset="0.1" />
+                                <GradientStop Color="#1A73E9" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Label HorizontalOptions="Center">
 
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
                                 TextColor="Black"
                                 Text="already have an account?, "
                                 FontAttributes="Bold" />
-                            <Span
+                                <Span
                                 Text=" Sign in!"
                                 TextColor="#1A73E9"
                                 FontAttributes="Bold" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
                             Command="{Binding LoginCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

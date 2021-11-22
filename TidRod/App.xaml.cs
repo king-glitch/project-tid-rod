@@ -27,7 +27,7 @@ namespace TidRod
     public partial class App : Application
     {
         public static bool IsAuthenticated = false;
-        public static string CurrentSesstion = null;
+        public static string CurrentSession = null;
         public App()
         {
             InitializeComponent();
