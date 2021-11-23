@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:host="clr-namespace:TidRod.ViewModels.Host" 
+             x:DataType="host:HostPinLocationViewModel"
+             x:Class="TidRod.Views.Host.HostPinLocationPage"
+             Shell.TabBarIsVisible="False"
+             Title="Pin Car Location"
+             >
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <maps:Map 
+                MapType="Hybrid"
+                PropertyChanged="MapPropertyChanged"
+                HasZoomEnabled="True"
+                x:Name="PositionMap"
+                 AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+                />
+
+
+            <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  x:Name="PinImage" Source="map_pin.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="50" />
+
+            <Button AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  Margin="10" VerticalOptions="EndAndExpand" Text="Submit Location" Command="{Binding SubmitPinLocationCommand}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="#1A73E9" Offset="0.1" />
+                        <GradientStop Color="#648FFF" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -15,9 +15,6 @@ namespace TidRod
         public AppShell()
         {
             InitializeComponent();
-            Routing
-                .RegisterRoute(nameof(ItemDetailPage), typeof (ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof (NewItemPage));
 
             // general
             Routing.RegisterRoute(nameof(MainPage), typeof (MainPage));
@@ -49,6 +46,9 @@ namespace TidRod
             Routing
                 .RegisterRoute(nameof(HostCarUpdatePage),
                 typeof (HostCarUpdatePage));
+            Routing
+                .RegisterRoute(nameof(HostPinLocationPage),
+                typeof(HostPinLocationPage));
         }
     }
 }

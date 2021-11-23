@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,11 +15,9 @@ using Xamarin.Forms.Maps;
 
 namespace TidRod.ViewModels.Host
 {
-    [QueryProperty(nameof(CarId), nameof(CarId))]
     [QueryProperty(nameof(PinLocation), nameof(PinLocation))]
-    public class HostCarUpdateViewModel : BaseViewModel
+    public class HostCarAddViewModel : BaseViewModel
     {
-        public string Id { get; set; }
         public string _name;
         public int _price;
         public int _obometer;
@@ -31,24 +28,13 @@ namespace TidRod.ViewModels.Host
         private string _nameError;
         private string _yourlocationLabel;
         public CarTransmission _gear;
-        public List<FileImage> _images;
+        public ObservableCollection<FileImage> _images;
         public List<string> Gears;
-        public Command UpdateHostCommand { get; }
+        public Command AddHostCommand { get; }
         public Command PinLocationCommand { get; }
         public Command ChooseImageCommand { get; }
         private readonly FSHelper helper = new FSHelper();
-        public string CarId
-        {
-            get
-            {
-                return Id;
-            }
-            set
-            {
-                Id = value;
-                LoadCarId(value);
-            }
-        }
+
 
         public string YourLocationLabel
         {
@@ -80,7 +66,7 @@ namespace TidRod.ViewModels.Host
             set => SetProperty(ref _name, value);
         }
 
-        public List<FileImage> Images
+        public ObservableCollection<FileImage> Images
         {
             get => _images;
             set => SetProperty(ref _images, value);
@@ -114,42 +100,12 @@ namespace TidRod.ViewModels.Host
             }
         }
 
-        public async void LoadCarId(string carId)
+        public HostCarAddViewModel()
         {
-            try
-            {
-                Car car = await this.CarDataStore.GetCarAsync(carId);
-                Id = car.Id;
-                PinLocation = car.PinLocation;
-                Gear = car.Gear;
-                Price = car.Price;
-                Obometer = car.Obometer;
-                Name = car.Name;
-
-                foreach (var image in car.Images)
-                {
-                    Images.Add(new FileImage
-                    {
-                        FileName = "-",
-                        FileURL = image,
-                        Image = null
-                    });
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.StackTrace);
-                Debug.WriteLine("Failed to Load Car");
-            }
-        }
-
-        public HostCarUpdateViewModel()
-        {
-            UpdateHostCommand = new Command(OnUpdate);
+            AddHostCommand = new Command(OnAddHost);
             PinLocationCommand = new Command(OnPinLocation);
             ChooseImageCommand = new Command(OnChooseImage);
-            Images = new List<FileImage>();
+            Images = new ObservableCollection<FileImage>();
             Gears = new List<string> { "Manual", "Automatic" };
         }
 
@@ -162,7 +118,7 @@ namespace TidRod.ViewModels.Host
 
         private async void SetYourLocationLabel(string value)
         {
-            string address;
+            string address = string.Empty;
             try
             {
                 // call geo code
@@ -190,7 +146,7 @@ namespace TidRod.ViewModels.Host
             YourLocationLabel = address;
         }
 
-        public async void OnUpdate()
+        public async void OnAddHost()
         {
             // reset all forms
             this.ResetForms();
@@ -244,26 +200,25 @@ namespace TidRod.ViewModels.Host
                 return;
             }
             this.IsBusy = true;
-            if (Images != Images)
+
+            Task<List<string>> TaskA = Task.Run(async () => await CheckAndSaveImage());
+            await TaskA.ContinueWith(antecedent =>
             {
-                List<string> Images = await CheckAndSaveImage();
-            }
 
+                CarDataStore.AddCarAsync(new Car()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Gear = Gear,
+                    UserId = App.CurrentSession,
+                    Name = Name,
+                    Obometer = Obometer,
+                    PinLocation = PinLocation,
+                    Price = Price,
+                    Images = antecedent.Result
+                });
 
-            await CarDataStore.AddCarAsync(new Car()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Gear = Gear,
-                UserId = App.CurrentSession,
-                Name = Name,
-                Obometer = Obometer,
-                PinLocation = PinLocation,
-                Price = Price,
-                //Images = Images.SelectMany<string>(i => i.FileURL)
-            }) ;
-
-            Shell.Current.GoToAsync("..");
-
+                Shell.Current.GoToAsync("..");
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
             this.IsBusy = false;
         }
 
@@ -307,7 +262,7 @@ namespace TidRod.ViewModels.Host
 
         public async void OnPinLocation()
         {
-            await Shell.Current.GoToAsync($"{nameof(HostPinLocationPage)}?{nameof(HostPinLocationViewModel.PinLocation)}={PinLocation}");
+            await Shell.Current.GoToAsync($"{nameof(HostPinLocationPage)}");
         }
 
         public async void OnChooseImage(object obj)
@@ -360,5 +315,6 @@ namespace TidRod.ViewModels.Host
 
             return imageAsBytes;
         }
+
     }
 }

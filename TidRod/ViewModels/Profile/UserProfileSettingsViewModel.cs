@@ -116,7 +116,6 @@ namespace TidRod.ViewModels.Profile
                     Console.WriteLine(ex.StackTrace);
                 }
 
-
             }
 
         }

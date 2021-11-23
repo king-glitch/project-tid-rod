@@ -1,8 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.Host.HostCarUpdatePage">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:components="clr-namespace:TidRod.Components.Entry" 
+    xmlns:host="clr-namespace:TidRod.ViewModels.Host" 
+    xmlns:models="clr-namespace:TidRod.Models" 
+    x:DataType="host:HostCarUpdateViewModel" 
+    x:Class="TidRod.Views.Host.HostCarUpdatePage"
+    Shell.TabBarIsVisible="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView >
+            <StackLayout Padding="10" >
+                <StackLayout Padding="0" HeightRequest="200">
+                    <CarouselView x:Name="CarouselView" HeightRequest="200" ItemsSource="{Binding Images}" IndicatorView="indicatorView">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout HorizontalOptions="CenterAndExpand" HeightRequest="200"  VerticalOptions="CenterAndExpand">
+                                    <Image Source="{Binding FileURL}"  x:DataType="models:FileImage" HeightRequest="200" Aspect="AspectFill" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                        <CarouselView.EmptyView>
+                            <StackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="Center">
+                                <Label Text="No Image" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black" />
+                            </StackLayout>
+                        </CarouselView.EmptyView>
+                    </CarouselView>
+                    <IndicatorView x:Name="indicatorView" IndicatorColor="LightGray" SelectedIndicatorColor="DarkGray" HorizontalOptions="Center" MaximumVisible="10" />
+                </StackLayout>
+                <Button Text="Choose Image" Command="{Binding ChooseImageCommand}" CommandParameter="{Binding Source={x:Reference CarouselView}}" TextColor="White" CornerRadius="5">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="#A6D6F9" Offset="0.1" />
+                            <GradientStop Color="#51B6FF" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <StackLayout Spacing="0">
+                    <components:OutlinedEntry 
+                        PlaceholderText="Car Name" 
+                        Text="{Binding Name, Mode=TwoWay}" 
+                        ErrorText="{Binding NameError}" 
+                        Keyboard="Default" />
+                    <components:OutlinedEntry 
+                        PlaceholderText="Price per Day" 
+                        Text="{Binding Price, Mode=TwoWay}" 
+                        ErrorText="{Binding PriceError}" 
+                        Keyboard="Numeric" />
+                    <components:OutlinedEntry 
+                        PlaceholderText="Obometer" 
+                        Text="{Binding Obometer, Mode=TwoWay}" 
+                        ErrorText="{Binding ObometerError}" 
+                        Keyboard="Numeric" />
+
+                </StackLayout>
+                <StackLayout>
+                    <Label TextColor="Green" FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Your Location : " />
+                                <Span Text="{Binding YourLocationLabel}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button Text="Pin Location" Command="{Binding PinLocationCommand}" TextColor="White">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#FFA132" Offset="0.1" />
+                                <GradientStop Color="#FF9533" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackLayout>
+
+                <Button Text="UPDATE HOST" IsEnabled="{Binding IsBusy}" Command="{Binding UpdateHostCommand}" VerticalOptions="EndAndExpand" TextColor="White">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="#1A73E9" Offset="0.1" />
+                            <GradientStop Color="#648FFF" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

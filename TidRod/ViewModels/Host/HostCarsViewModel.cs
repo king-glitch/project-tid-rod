@@ -109,9 +109,9 @@ namespace TidRod.ViewModels.Host
         private async void OnCarSelected(Car car)
         {
             if (car == null)
+            {
                 return;
-
-            // This will push the CarDetailPage onto the navigation stack
+            }
             await Shell.Current.GoToAsync($"{nameof(HostCarUpdatePage)}?{nameof(HostCarUpdateViewModel.CarId)}={car.Id}");
         }
     }

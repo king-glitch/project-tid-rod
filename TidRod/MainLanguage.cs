@@ -36,5 +36,12 @@ namespace TidRod
         public static string PROFILE_LAST_NAME_EMPTY = "Please provide a last name.";
         public static string PROFILE_UPDATE_SUCCESSFULLY = "Update successfully!";
 
+        public static string HOST_NAME_EMPTY = "Car name can't be empty";
+        public static string HOST_IMAGE_EMPTY = "Image must be more than 0";
+        public static string HOST_OBOMETER_EMPTY = "Obometer must be greater than 0";
+        public static string HOST_PRICE_EMPTY = "Price must be greater than 0";
+        public static string HOST_PIN_EMPTY = "Please Pin Car Location";
+
+
     }
 }
