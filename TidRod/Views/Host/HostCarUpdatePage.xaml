@@ -7,7 +7,8 @@
     xmlns:models="clr-namespace:TidRod.Models" 
     x:DataType="host:HostCarUpdateViewModel" 
     x:Class="TidRod.Views.Host.HostCarUpdatePage"
-    Shell.TabBarIsVisible="False">
+    Shell.TabBarIsVisible="False"
+    Title="Update Hosting Car">
     <ContentPage.Content>
         <ScrollView >
             <StackLayout Padding="10" >

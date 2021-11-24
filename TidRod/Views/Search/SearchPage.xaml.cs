@@ -17,60 +17,21 @@ namespace TidRod.Views.Search
 {
     public partial class SearchPage : ContentPage
     {
-        private CancellationTokenSource cts;
 
+        private CancellationTokenSource cts;
         readonly SearchViewModel _viewModel;
 
         public SearchPage()
         {
             InitializeComponent();
             BindingContext = _viewModel = new SearchViewModel();
-            InitializeMap();
+
         }
 
-        private async void InitializeMap()
+        protected async override void OnAppearing()
         {
-            // initialize
-            List<CustomPin> pins = new List<CustomPin>();
-            await this._viewModel.GetCarsAroundUserCommand();
-            var cars = _viewModel?.Cars;
-
-            // check if null
-            if (cars == null)
-            {
-                cars = new ObservableCollection<Car>();
-            }
-
-            // pin all locations
-            foreach (var car in cars)
-            {
-                // call geo code
-                Geocoder geoCoder = new Geocoder();
-
-                //split lan, long
-                var pos = car.PinLocation.Split(',');
-
-                // get position
-                Position position =
-                    new Position(float.Parse(pos[0]), float.Parse(pos[1]));
-
-                // get possible addresses
-                IEnumerable<string> possibleAddresses =
-                    await geoCoder.GetAddressesForPositionAsync(position);
-
-                // get first address
-                string address = possibleAddresses.FirstOrDefault();
-
-                // add to the pin
-                pins
-                    .Add(new CustomPin {
-                        ClassId = car.Id,
-                        Address = address,
-                        Position = position,
-                        Name = car.Name,
-                        Type = PinType.Place
-                    });
-            }
+            base.OnAppearing();
+            _viewModel.OnAppearing();
 
             // get the location
             var location = await GetCurrentLocation();
@@ -81,9 +42,6 @@ namespace TidRod.Views.Search
                     .FromCenterAndRadius(new Position(location.Latitude,
                         location.Longitude),
                     Distance.FromKilometers(5)));
-
-            // Update Map pins
-            MainMap.ItemsSource = pins;
         }
 
         private async Task<Location> GetCurrentLocation()
@@ -102,9 +60,7 @@ namespace TidRod.Views.Search
             }
             catch (PermissionException)
             {
-                await DisplayAlert("Faild",
-                "Please give location permission",
-                "OK");
+                await DisplayAlert("Faild", "Please give location permission", "OK");
             }
             catch (Exception ex)
             {
@@ -115,12 +71,11 @@ namespace TidRod.Views.Search
 
         private async void MapPinClicked(object sender, EventArgs e)
         {
-            var pin = (CustomPin) sender;
+            var pin = (CustomPin)sender;
 
             var id = pin.ClassId.ToString();
             var car = await _viewModel.CarDataStore.GetCarAsync(id);
-            await Navigation
-                .PushPopupAsync(new CarInfoPopup { BindingContext = car });
+            await Navigation.PushPopupAsync(new CarInfoPopup { BindingContext = car });
         }
 
         private async void ToolbarFilterCarsClicked(object sender, EventArgs e)

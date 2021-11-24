@@ -5,10 +5,10 @@
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation PositionIn="Bottom" PositionOut="Bottom" DurationIn="400" DurationOut="300" EasingIn="SinOut" EasingOut="SinIn" HasBackgroundAnimation="True" />
     </pages:PopupPage.Animation>
-    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+
     <StackLayout VerticalOptions="EndAndExpand" Padding="0" HorizontalOptions="FillAndExpand">
-        <Frame CornerRadius="5" Padding="10" HorizontalOptions="FillAndExpand" HeightRequest="280">
-            <StackLayout HeightRequest="280" WidthRequest="100">
+        <Frame CornerRadius="5" Padding="10" HorizontalOptions="FillAndExpand" HeightRequest="320">
+            <StackLayout HeightRequest="320" WidthRequest="100">
                 <Label TextColor="Black" Text="Filters" FontAttributes="Bold" FontSize="25" />
                 <StackLayout Padding="4">
                     <StackLayout Spacing="0">
@@ -33,6 +33,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
+                    <Button x:Name="ClearFilterResultButton" TextColor="Black" Text="Clear Filter" Clicked="FilterResultButtonClicked" VerticalOptions="EndAndExpand" BackgroundColor="Transparent" />
                 </StackLayout>
             </StackLayout>
         </Frame>

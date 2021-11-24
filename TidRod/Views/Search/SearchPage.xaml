@@ -20,7 +20,7 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <map:CustomMap x:Name="MainMap">
+        <map:CustomMap ItemsSource="{Binding Pins}" x:Name="MainMap">
             <map:CustomMap.ItemTemplate>
                 <DataTemplate>
                     <map:CustomPin Clicked="MapPinClicked" x:Name="MapPin" Type="Place" ClassId="{Binding ClassId}" Position="{Binding Position}" Address="{Binding Address}" Label="{Binding Name}" />
