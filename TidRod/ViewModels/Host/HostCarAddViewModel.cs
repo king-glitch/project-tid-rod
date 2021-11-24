@@ -29,7 +29,7 @@ namespace TidRod.ViewModels.Host
         private string _yourlocationLabel;
         public CarTransmission _gear;
         public ObservableCollection<FileImage> _images;
-        public List<string> Gears;
+        public List<string> CarGears { get; set; }
         public Command AddHostCommand { get; }
         public Command PinLocationCommand { get; }
         public Command ChooseImageCommand { get; }
@@ -106,9 +106,8 @@ namespace TidRod.ViewModels.Host
             PinLocationCommand = new Command(OnPinLocation);
             ChooseImageCommand = new Command(OnChooseImage);
             Images = new ObservableCollection<FileImage>();
-            Gears = new List<string> { "Manual", "Automatic" };
+            CarGears = new List<string> { "Automatic", "Manual" };
         }
-
         private void ResetForms()
         {
             PriceError = "";
@@ -138,7 +137,7 @@ namespace TidRod.ViewModels.Host
                 // get first address
                 address = possibleAddresses.FirstOrDefault();
             }
-            catch (Exception ex)
+            catch
             {
                 address = MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC;
 

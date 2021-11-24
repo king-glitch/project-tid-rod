@@ -11,13 +11,13 @@
     Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <ScrollView >
-            <StackLayout HeightRequest="100" Padding="10">
-                <StackLayout Padding="0" HeightRequest="100">
-                    <CarouselView x:Name="CarouselView" ItemsSource="{Binding Images}" IndicatorView="indicatorView">
+            <StackLayout Padding="10">
+                <StackLayout Padding="0" HeightRequest="200">
+                    <CarouselView x:Name="CarouselView" HeightRequest="200" ItemsSource="{Binding Images}" IndicatorView="indicatorView">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                    <Image Source="{Binding Image}" x:DataType="models:FileImage" Aspect="AspectFill" />
+                                <StackLayout HeightRequest="200" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Image Source="{Binding Image}" HeightRequest="200" x:DataType="models:FileImage" Aspect="AspectFill" />
                                 </StackLayout>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
@@ -53,7 +53,7 @@
                         Text="{Binding Obometer, Mode=TwoWay}" 
                         ErrorText="{Binding ObometerError}" 
                         Keyboard="Numeric" />
-
+                    <Picker Title="Select Gear" x:Name="CarGear" SelectedIndexChanged="SelectGearPickerSelectedIndexChanged" ItemsSource="{Binding CarGears, Mode=TwoWay}" />
                 </StackLayout>
                 <StackLayout>
                     <Label TextColor="Green" FontAttributes="Bold">

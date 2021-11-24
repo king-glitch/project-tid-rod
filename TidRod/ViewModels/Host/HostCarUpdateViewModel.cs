@@ -18,6 +18,7 @@ namespace TidRod.ViewModels.Host
 {
     [QueryProperty(nameof(CarId), nameof(CarId))]
     [QueryProperty(nameof(PinLocation), nameof(PinLocation))]
+    [QueryProperty(nameof(ReInitialize), nameof(ReInitialize))]
     public class HostCarUpdateViewModel : BaseViewModel
     {
         public string Id { get; set; }
@@ -30,9 +31,11 @@ namespace TidRod.ViewModels.Host
         private string _obometerError;
         private string _nameError;
         private string _yourlocationLabel;
+        private int _reInitialize;
         public CarTransmission _gear;
+        public int _gearInt;
         public List<FileImage> _images;
-        public List<string> Gears;
+        public List<string> CarGears { get; set; }
         public Command UpdateHostCommand { get; }
         public Command PinLocationCommand { get; }
         public Command ChooseImageCommand { get; }
@@ -46,8 +49,15 @@ namespace TidRod.ViewModels.Host
             set
             {
                 Id = value;
+
                 LoadCarId(value);
             }
+        }
+
+        public int ReInitialize
+        {
+            get => _reInitialize;
+            set => SetProperty(ref _reInitialize, value);
         }
 
         public string YourLocationLabel
@@ -104,6 +114,12 @@ namespace TidRod.ViewModels.Host
             set => SetProperty(ref _gear, value);
         }
 
+        public int GearInt
+        {
+            get => _gearInt;
+            set => SetProperty(ref _gearInt, value);
+        }
+
         public string PinLocation
         {
             get => _pinLocation;
@@ -118,17 +134,33 @@ namespace TidRod.ViewModels.Host
         {
             try
             {
+                await Task.Delay(500);
+                if (ReInitialize == 1)
+                {
+                    return;
+                }
                 Car car = await this.CarDataStore.GetCarAsync(carId);
-                Id = car.Id;
+
+                if (car == null)
+                {
+                    await Shell.Current.GoToAsync($"..");
+                    await Application.Current.MainPage.DisplayAlert(
+                    MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE,
+                    MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC, "OK"); ;
+                }
+
                 PinLocation = car.PinLocation;
                 Gear = car.Gear;
                 Price = car.Price;
                 Obometer = car.Obometer;
                 Name = car.Name;
+                GearInt = car.Gear == CarTransmission.Automatic ? 0 : 1;
+
+                var tempImages = new List<FileImage>();
 
                 foreach (var image in car.Images)
                 {
-                    Images.Add(new FileImage
+                    tempImages.Add(new FileImage
                     {
                         FileName = "-",
                         FileURL = image,
@@ -136,6 +168,7 @@ namespace TidRod.ViewModels.Host
                     });
                 }
 
+                Images = tempImages;
             }
             catch (Exception ex)
             {
@@ -150,7 +183,7 @@ namespace TidRod.ViewModels.Host
             PinLocationCommand = new Command(OnPinLocation);
             ChooseImageCommand = new Command(OnChooseImage);
             Images = new List<FileImage>();
-            Gears = new List<string> { "Manual", "Automatic" };
+            CarGears = new List<string> { "Automatic", "Manual" };
         }
 
         private void ResetForms()
@@ -182,7 +215,7 @@ namespace TidRod.ViewModels.Host
                 // get first address
                 address = possibleAddresses.FirstOrDefault();
             }
-            catch (Exception ex)
+            catch
             {
                 address = MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC;
 
@@ -243,27 +276,47 @@ namespace TidRod.ViewModels.Host
             {
                 return;
             }
+
+            // let the app be busy;
             this.IsBusy = true;
-            if (Images != Images)
+
+            // find the current car data;
+            Car car = await this.CarDataStore.GetCarAsync(Id);
+
+            // convert images data to string;
+            List<string> stringImages = Images.Select(i => i.FileURL).ToList();
+
+            // if images is not the same, then update it.
+            if (Images.Where(i => i.Image != null).Count() > 0)
             {
-                List<string> Images = await CheckAndSaveImage();
+                try
+                {
+                    car.Images = await CheckAndSaveImage();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
             }
 
+            // update the new data
 
-            await CarDataStore.AddCarAsync(new Car()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Gear = Gear,
-                UserId = App.CurrentSession,
-                Name = Name,
-                Obometer = Obometer,
-                PinLocation = PinLocation,
-                Price = Price,
-                //Images = Images.SelectMany<string>(i => i.FileURL)
-            }) ;
+            car.Gear = Gear;
+            car.Name = Name;
+            car.PinLocation = PinLocation;
+            car.Obometer = Obometer;
+            car.Price = Price;
 
-            Shell.Current.GoToAsync("..");
 
+            // push to database;
+            await CarDataStore.UpdateCarAsync(car);
+
+
+            // go back to previous page
+            await Shell.Current.GoToAsync("..");
+
+
+            // let the app be free.
             this.IsBusy = false;
         }
 
@@ -274,7 +327,11 @@ namespace TidRod.ViewModels.Host
             {
                 foreach (var _file in Images)
                 {
-                    URLString.Add(await SaveFileToServer(_file));
+                    if (_file.Image != null)
+                    {
+                        URLString.Add(await SaveFileToServer(_file));
+
+                    }
                 }
             }
             return URLString;
@@ -283,6 +340,7 @@ namespace TidRod.ViewModels.Host
         private async Task<string> SaveFileToServer(FileImage _file)
         {
             string _uriFile = "";
+
             var imageAsBytes = ImageSourceToBytes(_file.Image);
             if (imageAsBytes != null)
             {
@@ -307,22 +365,37 @@ namespace TidRod.ViewModels.Host
 
         public async void OnPinLocation()
         {
-            await Shell.Current.GoToAsync($"{nameof(HostPinLocationPage)}?{nameof(HostPinLocationViewModel.PinLocation)}={PinLocation}");
+            await Shell.Current.GoToAsync($"{nameof(HostPinLocationPage)}?{nameof(HostPinLocationViewModel.PinLocation)}={PinLocation}&{nameof(HostPinLocationViewModel.CarId)}={CarId}");
         }
 
         public async void OnChooseImage(object obj)
         {
-            IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
-            {
-                FileTypes = FilePickerFileType.Images,
-                PickerTitle = "Pick Image(s)"
-            });
-
-            foreach (var image in images)
+            try
             {
 
-                if (image != null)
+                Images = new List<FileImage>();
+
+                IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
                 {
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = "Pick Image(s)"
+                });
+
+                Console.WriteLine(images.Count());
+
+
+                if (images == null || images.Count() == 0)
+                {
+                    return;
+                }
+
+
+                foreach (var image in images)
+                {
+                    if (image == null)
+                    {
+                        continue;
+                    }
 
                     Stream stream = await image.OpenReadAsync();
 
@@ -337,11 +410,16 @@ namespace TidRod.ViewModels.Host
 
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
 
             try
             {
                 var target = (CarouselView)obj;
                 target.ItemsSource = Images;
+
             }
             catch (Exception ex)
             {

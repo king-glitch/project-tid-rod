@@ -52,6 +52,12 @@
                         Text="{Binding Obometer, Mode=TwoWay}" 
                         ErrorText="{Binding ObometerError}" 
                         Keyboard="Numeric" />
+                    <Picker 
+                        Title="Select Gear" 
+                        x:Name="CarGear" 
+                        SelectedIndex="{Binding GearInt, Mode=TwoWay}" 
+                        SelectedIndexChanged="SelectGearPickerSelectedIndexChanged" 
+                        ItemsSource="{Binding CarGears}" />
 
                 </StackLayout>
                 <StackLayout>
