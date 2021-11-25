@@ -17,38 +17,22 @@ namespace TidRod
             InitializeComponent();
 
             // general
-            Routing.RegisterRoute(nameof(MainPage), typeof (MainPage));
-            Routing
-                .RegisterRoute(nameof(SplashScreenPage),
-                typeof (SplashScreenPage));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 
             // authentication
-            Routing.RegisterRoute(nameof(LoginPage), typeof (LoginPage));
-            Routing
-                .RegisterRoute(nameof(RegisterationPage),
-                typeof (RegisterationPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterationPage), typeof(RegisterationPage));
 
             // profile
-            Routing
-                .RegisterRoute(nameof(HostProfilePage),
-                typeof (HostProfilePage));
-            Routing
-                .RegisterRoute(nameof(UserProfilePage),
-                typeof (UserProfilePage));
-            Routing
-                .RegisterRoute(nameof(UserProfileSettingsPage),
-                typeof (UserProfileSettingsPage));
+            Routing.RegisterRoute(nameof(HostProfilePage), typeof(HostProfilePage));
+            Routing.RegisterRoute(nameof(UserProfilePage), typeof(UserProfilePage));
+            Routing.RegisterRoute(nameof(UserProfileSettingsPage), typeof(UserProfileSettingsPage));
 
             // host
-            Routing.RegisterRoute(nameof(HostCarsPage), typeof (HostCarsPage));
-            Routing
-                .RegisterRoute(nameof(HostCarAddPage), typeof (HostCarAddPage));
-            Routing
-                .RegisterRoute(nameof(HostCarUpdatePage),
-                typeof (HostCarUpdatePage));
-            Routing
-                .RegisterRoute(nameof(HostPinLocationPage),
-                typeof(HostPinLocationPage));
+            Routing.RegisterRoute(nameof(HostCarsPage), typeof(HostCarsPage));
+            Routing.RegisterRoute(nameof(HostCarAddPage), typeof(HostCarAddPage));
+            Routing.RegisterRoute(nameof(HostCarUpdatePage), typeof(HostCarUpdatePage));
+            Routing.RegisterRoute(nameof(HostPinLocationPage), typeof(HostPinLocationPage));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TidRod.Droid
             Label = "TidRod",
             Icon = "@mipmap/icon",
             Theme = "@style/MainTheme",
-            MainLauncher = true,
+            MainLauncher = false,
             ConfigurationChanges =
                 ConfigChanges.ScreenSize |
                 ConfigChanges.Orientation |
@@ -20,8 +20,7 @@ namespace TidRod.Droid
                 ConfigChanges.SmallestScreenSize)
     ]
     public class
-    MainActivity
-    : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,7 +39,7 @@ namespace TidRod.Droid
             [GeneratedEnum] Android.Content.PM.Permission[] grantResults
         )
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult (
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(
                 requestCode,
                 permissions,
                 grantResults

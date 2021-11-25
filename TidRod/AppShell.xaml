@@ -36,9 +36,4 @@
         <ShellContent Title="Host" Icon="cloud_icon.png" Route="HostPage" ContentTemplate="{DataTemplate host:HostCarsPage}" />
         <ShellContent Title="Profile" Icon="user_icon.png" Route="ProfilePage" ContentTemplate="{DataTemplate profile:UserProfilePage}" />
     </TabBar>
-
-    <!--
-        If you would like to navigate to this content you can do so by calling
-        await Shell.Current.GoToAsync("//LoginPage");
-    -->
 </Shell>

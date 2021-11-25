@@ -5,7 +5,7 @@
             <Image Source="main_page_background.jpg" Scale="1.2" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" />
 
             <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
-                <Image Source="logo.png" Scale="0.8" Margin="0,80,0,0" VerticalOptions="StartAndExpand" />
+                <Image Source="logo.png" Scale="0.8" WidthRequest="250" HeightRequest="250" Margin="0,80,0,0" VerticalOptions="StartAndExpand" />
                 <StackLayout VerticalOptions="EndAndExpand" Spacing="20" Margin="0,40" Padding="10,0">
                     <Button FontFamily="Roboto" Clicked="GotoRegisterationPage" Text="Sign up" FontAttributes="Bold" CornerRadius="5" TextTransform="None">
                         <Button.Background>

@@ -117,14 +117,14 @@ namespace TidRod.ViewModels.Host
 
         private async void SetYourLocationLabel(string value)
         {
-            string address = string.Empty;
+            string address;
             try
             {
                 // call geo code
                 Geocoder geoCoder = new Geocoder();
 
                 //split lan, long
-                var pos = value.Split(',');
+                var pos = value?.Split(',');
 
                 // get position
                 Position position =
@@ -132,7 +132,7 @@ namespace TidRod.ViewModels.Host
 
                 // get possible addresses
                 IEnumerable<string> possibleAddresses =
-                    await geoCoder.GetAddressesForPositionAsync(position);
+                    await geoCoder?.GetAddressesForPositionAsync(position);
 
                 // get first address
                 address = possibleAddresses.FirstOrDefault();
@@ -201,23 +201,8 @@ namespace TidRod.ViewModels.Host
             this.IsBusy = true;
 
             Task<List<string>> TaskA = Task.Run(async () => await CheckAndSaveImage());
-            await TaskA.ContinueWith(antecedent =>
-            {
 
-                CarDataStore.AddCarAsync(new Car()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Gear = Gear,
-                    UserId = App.CurrentSession,
-                    Name = Name,
-                    Obometer = Obometer,
-                    PinLocation = PinLocation,
-                    Price = Price,
-                    Images = antecedent.Result
-                });
-
-                Shell.Current.GoToAsync("..");
-            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+            await TaskA?.ContinueWith(antecedent => { _ = CarDataStore.AddCarAsync(new Car() { Id = Guid.NewGuid().ToString(), Gear = Gear, UserId = App.CurrentSession, Name = Name, Obometer = Obometer, PinLocation = PinLocation, Price = Price, Images = antecedent.Result }); Shell.Current.GoToAsync(".."); }, TaskContinuationOptions.OnlyOnRanToCompletion);
             this.IsBusy = false;
         }
 
@@ -228,7 +213,7 @@ namespace TidRod.ViewModels.Host
             {
                 foreach (var _file in Images)
                 {
-                    URLString.Add(await SaveFileToServer(_file));
+                    URLString?.Add(await SaveFileToServer(_file));
                 }
             }
             return URLString;
@@ -255,7 +240,7 @@ namespace TidRod.ViewModels.Host
             Task<Stream> task = streamImageSource.Stream(cancellationToken);
             Stream stream = task.Result;
             byte[] bytesAvailable = new byte[stream.Length];
-            stream.Read(bytesAvailable, 0, bytesAvailable.Length);
+            _ = stream.Read(bytesAvailable, 0, bytesAvailable.Length);
             return bytesAvailable;
         }
 
@@ -266,32 +251,45 @@ namespace TidRod.ViewModels.Host
 
         public async void OnChooseImage(object obj)
         {
-            IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
+            try
             {
-                FileTypes = FilePickerFileType.Images,
-                PickerTitle = "Pick Image(s)"
-            });
+                if (Images == null)
+                {
+                    Images = new ObservableCollection<FileImage>();
+                }
 
-            foreach (var image in images)
-            {
+                IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = "Pick Image(s)"
+                });
 
-                if (image != null)
+                if (images == null || images?.Count() == 0)
+                {
+                    return;
+                }
+
+                foreach (var image in images)
                 {
 
-                    Stream stream = await image.OpenReadAsync();
+                    if (image == null)
+                    {
+                        continue;
+                    }
+
+
+                    Stream stream = await image?.OpenReadAsync();
 
                     byte[] _imageByte = StreamToByteArray(stream);
 
-                    Images.Add(new FileImage
-                    {
-                        FileName = image.FileName,
-                        FileURL = "-",
-                        Image = ImageSource.FromStream(() => new MemoryStream(_imageByte))
-                    });
+                    Images?.Add(new FileImage { FileName = image.FileName, FileURL = "-", Image = ImageSource.FromStream(() => new MemoryStream(_imageByte)) });
 
                 }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
             }
-
+             
             try
             {
                 var target = (CarouselView)obj;
@@ -308,7 +306,7 @@ namespace TidRod.ViewModels.Host
             byte[] imageAsBytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                source.CopyTo(memoryStream);
+                source?.CopyTo(memoryStream);
                 imageAsBytes = memoryStream.ToArray();
             }
 

@@ -6,4 +6,13 @@
 		<item name="colorAccent">#686ADC</item>
 		<item name="android:statusBarColor">#0F1347</item>
 	</style>
+
+	<style name="Theme.Splash" parent="MainTheme.Base">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowActionBar">false</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:statusBarColor">#000000</item>
+		<item name="android:windowBackground">@drawable/bg_color</item>
+	</style>
 </resources>
