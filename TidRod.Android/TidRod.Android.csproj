@@ -141,10 +141,13 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ef9565b13404d3a2dfb1dfefa766f552.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionTidRodAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionTidRodAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionTidRodAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionTidRodAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

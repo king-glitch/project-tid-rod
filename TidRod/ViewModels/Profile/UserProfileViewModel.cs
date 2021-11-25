@@ -114,8 +114,8 @@ namespace TidRod.ViewModels.Profile
                     user.Phone = user.Phone;
                 }
 
-                FirstName = user.FirstName;
-                LastName = user.LastName;
+                FirstName = char.ToUpper(user.FirstName[0]) + user.FirstName.Substring(1);
+                LastName = char.ToUpper(user.LastName[0]) + user.LastName.Substring(1);
                 Email = user.Email;
                 Phone = user.Phone;
                 Image = user.Image.FileURL;

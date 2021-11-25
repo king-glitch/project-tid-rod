@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using TidRod.Models;
+using TidRod.Utils;
 using TidRod.Views;
 using TidRod.Views.Auth;
 using TidRod.Views.General;
@@ -123,7 +124,7 @@ namespace TidRod.ViewModels.Auth
                 EmailError = MainLanguage.AUTHENTICATION_EMAIL_EMPTY;
                 IsError = true;
             }
-            else if (!this.IsValidEmail(Email))
+            else if (!TidRodUtilitiles.IsValidEmail(Email))
             {
                 // show invalid error;
                 EmailError = MainLanguage.PROFILE_EMAIL_INVALID;
@@ -158,7 +159,7 @@ namespace TidRod.ViewModels.Auth
                 PhoneError = MainLanguage.AUTHENTICATION_PHONE_EMPTY;
                 IsError = true;
             }
-            else if (!this.IsValidPhone(Phone))
+            else if (!TidRodUtilitiles.IsValidPhone(Phone))
             {
                 // show invalid error;
                 PhoneError = MainLanguage.AUTHENTICATION_PHONE_INCORRECTED;
@@ -211,37 +212,6 @@ namespace TidRod.ViewModels.Auth
                     MainLanguage.AUTHENTICATION_REGISTER_SUCCESSFULLY, "yeah");
         }
 
-        private bool IsValidEmail(string email)
-        {
-            if (email.Trim().EndsWith("."))
-            {
-                return false;
-            }
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool IsValidPhone(string phone)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(Phone))
-                    return false;
-                var r = new Regex(@"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$");
-                return r.IsMatch(Phone);
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
     }
 }

@@ -30,11 +30,11 @@ namespace TidRod
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<MockUserDataStore>();
-            DependencyService.Register<MockCarDataStore>();
+            //DependencyService.Register<MockUserDataStore>();
+            //DependencyService.Register<MockCarDataStore>();
 
-            // DependencyService.Register<ICarDataStore<Car>, FirebaseCarDataStore>();
-            // DependencyService.Register<IUserDataStore<User>, FirebaseUserDataStore>();
+            DependencyService.Register<ICarDataStore<Car>, FirebaseCarDataStore>();
+            DependencyService.Register<IUserDataStore<User>, FirebaseUserDataStore>();
             MainPage = new AppShell();
         }
 

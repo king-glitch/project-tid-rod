@@ -6,8 +6,9 @@ namespace TidRod
 {
     public class AppSettings
     {
-        public static string FIREBASE_STORAGE_URL = "realtimedatabasedemo-a7c6f.appspot.com";
+        public static string FIREBASE_STORAGE_URL = "tidrod-7aa6f.appspot.com";
         public static string FIREBASE_STORAGE_ROOT = "user_avatar";
+        public static string FIREBASE_STORAGE_ROOT_CAR = "car_images";
         public static string FIREBASE_DATABASE_URL = "https://tidrod-7aa6f-default-rtdb.asia-southeast1.firebasedatabase.app/";
         public static string FIREBASE_DATABASE_USER_ROOT = "users";
         public static string FIREBASE_DATABASE_CAR_ROOT = "cars";

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Helper;
+using TidRod.Utils;
 using TidRod.Views.Host;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -39,7 +40,6 @@ namespace TidRod.ViewModels.Host
         public Command UpdateHostCommand { get; }
         public Command PinLocationCommand { get; }
         public Command ChooseImageCommand { get; }
-        private readonly FSHelper helper = new FSHelper();
         public string CarId
         {
             get
@@ -323,45 +323,24 @@ namespace TidRod.ViewModels.Host
         private async Task<List<string>> CheckAndSaveImage()
         {
             List<string> URLString = new List<string>();
-            if (Images?.Count > 0)
+            if (Images?.Count == 0)
             {
-                foreach (var _file in Images)
-                {
-                    if (_file.Image != null)
-                    {
-                        URLString.Add(await SaveFileToServer(_file));
-
-                    }
-                }
+                return null;
             }
+
+            foreach (var _file in Images)
+            {
+                if (_file.Image == null)
+                {
+                    continue;
+                }
+
+                URLString.Add(await TidRodUtilitiles.SaveFileToServer(_file, AppSettings.FIREBASE_STORAGE_ROOT_CAR));
+            }
+
             return URLString;
         }
 
-        private async Task<string> SaveFileToServer(FileImage _file)
-        {
-            string _uriFile = "";
-
-            var imageAsBytes = ImageSourceToBytes(_file.Image);
-            if (imageAsBytes != null)
-            {
-                using (var StreamF = new MemoryStream(imageAsBytes))
-                {
-                    _uriFile = await helper.UploadFile(StreamF, _file.FileName);
-                }
-            }
-            return _uriFile;
-        }
-
-        public byte[] ImageSourceToBytes(ImageSource imageSource)
-        {
-            StreamImageSource streamImageSource = (StreamImageSource)imageSource;
-            var cancellationToken = CancellationToken.None;
-            Task<Stream> task = streamImageSource.Stream(cancellationToken);
-            Stream stream = task.Result;
-            byte[] bytesAvailable = new byte[stream.Length];
-            stream.Read(bytesAvailable, 0, bytesAvailable.Length);
-            return bytesAvailable;
-        }
 
         public async void OnPinLocation()
         {
@@ -381,9 +360,6 @@ namespace TidRod.ViewModels.Host
                     PickerTitle = "Pick Image(s)"
                 });
 
-                Console.WriteLine(images.Count());
-
-
                 if (images == null || images.Count() == 0)
                 {
                     return;
@@ -399,7 +375,7 @@ namespace TidRod.ViewModels.Host
 
                     Stream stream = await image.OpenReadAsync();
 
-                    byte[] _imageByte = StreamToByteArray(stream);
+                    byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
 
                     Images.Add(new FileImage
                     {
@@ -426,17 +402,6 @@ namespace TidRod.ViewModels.Host
                 Console.WriteLine(ex.StackTrace);
             }
 
-        }
-        private byte[] StreamToByteArray(Stream source)
-        {
-            byte[] imageAsBytes;
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                source.CopyTo(memoryStream);
-                imageAsBytes = memoryStream.ToArray();
-            }
-
-            return imageAsBytes;
         }
     }
 }

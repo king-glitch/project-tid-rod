@@ -5,19 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:lottie_fileName="car_animation.json"
-            app:lottie_autoPlay="true"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="car_animation.json"
+        app:lottie_autoPlay="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0.0dp"
+        android:layout_marginBottom="0.0dp"
+        android:layout_marginRight="0.0dp" />
 
-        <TextView
-            android:id="@+id/title_text_view"
-            android:text="TidRod"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
+    <TextView
+        android:id="@+id/title_text_view"
+        android:text="TidRod"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="150.0dp"
+        android:layout_marginBottom="0.0dp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:textSize="50px"
+        android:textColor="#ff000000" />
 
 </RelativeLayout>

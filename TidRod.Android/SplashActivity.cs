@@ -4,6 +4,8 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using Com.Airbnb.Lottie;
+using System;
+using System.Threading.Tasks;
 
 namespace TidRod.Droid
 {
@@ -28,7 +30,6 @@ namespace TidRod.Droid
 
         public void OnAnimationRepeat(Animator animation)
         {
-            
         }
 
         public void OnAnimationStart(Animator animation)
@@ -43,7 +44,8 @@ namespace TidRod.Droid
 
             var animation = FindViewById<LottieAnimationView>(Resource.Id.animation_view);
             animation.AddAnimatorListener(this);
-            
+
+
         }
 
         

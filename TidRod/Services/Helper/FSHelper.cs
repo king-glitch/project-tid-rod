@@ -28,6 +28,15 @@ namespace TidRod.Services.Helper
             return imageUrl;
         }
 
+        public async Task<string> UploadFile(Stream fileStream, string fileName, string root)
+        {
+            var imageUrl = await firebaseStorage
+                .Child(root)
+                .Child(fileName)
+                .PutAsync(fileStream);
+            return imageUrl;
+        }
+
         public async Task<string> GetFile(string fileName)
         {
             return await firebaseStorage

@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Helper;
+using TidRod.Utils;
 using TidRod.Views.Host;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -198,6 +199,7 @@ namespace TidRod.ViewModels.Host
             {
                 return;
             }
+
             this.IsBusy = true;
 
             Task<List<string>> TaskA = Task.Run(async () => await CheckAndSaveImage());
@@ -213,36 +215,12 @@ namespace TidRod.ViewModels.Host
             {
                 foreach (var _file in Images)
                 {
-                    URLString?.Add(await SaveFileToServer(_file));
+                    URLString?.Add(await TidRodUtilitiles.SaveFileToServer(_file, AppSettings.FIREBASE_STORAGE_ROOT_CAR));
                 }
             }
             return URLString;
         }
-
-        private async Task<string> SaveFileToServer(FileImage _file)
-        {
-            string _uriFile = "";
-            var imageAsBytes = ImageSourceToBytes(_file.Image);
-            if (imageAsBytes != null)
-            {
-                using (var StreamF = new MemoryStream(imageAsBytes))
-                {
-                    _uriFile = await helper.UploadFile(StreamF, _file.FileName);
-                }
-            }
-            return _uriFile;
-        }
-
-        public byte[] ImageSourceToBytes(ImageSource imageSource)
-        {
-            StreamImageSource streamImageSource = (StreamImageSource)imageSource;
-            var cancellationToken = CancellationToken.None;
-            Task<Stream> task = streamImageSource.Stream(cancellationToken);
-            Stream stream = task.Result;
-            byte[] bytesAvailable = new byte[stream.Length];
-            _ = stream.Read(bytesAvailable, 0, bytesAvailable.Length);
-            return bytesAvailable;
-        }
+        
 
         public async void OnPinLocation()
         {
@@ -280,16 +258,18 @@ namespace TidRod.ViewModels.Host
 
                     Stream stream = await image?.OpenReadAsync();
 
-                    byte[] _imageByte = StreamToByteArray(stream);
+                    byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
 
                     Images?.Add(new FileImage { FileName = image.FileName, FileURL = "-", Image = ImageSource.FromStream(() => new MemoryStream(_imageByte)) });
 
                 }
-            } catch (Exception ex)
+            }
+
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
             }
-             
+
             try
             {
                 var target = (CarouselView)obj;
@@ -301,17 +281,7 @@ namespace TidRod.ViewModels.Host
             }
 
         }
-        private byte[] StreamToByteArray(Stream source)
-        {
-            byte[] imageAsBytes;
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                source?.CopyTo(memoryStream);
-                imageAsBytes = memoryStream.ToArray();
-            }
-
-            return imageAsBytes;
-        }
+        
 
     }
 }

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Helper;
+using TidRod.Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -98,7 +99,7 @@ namespace TidRod.ViewModels.Profile
             {
                 Stream stream = await image.OpenReadAsync();
 
-                byte[] _imageByte = StreamToByteArray(stream);
+                byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
                 Image = new FileImage
                 {
                     FileName = image.FileName,
@@ -124,47 +125,18 @@ namespace TidRod.ViewModels.Profile
         {
             if (image != null)
             {
-                return await SaveFileToServer(image);
+                try
+                {
+                    return await TidRodUtilitiles.SaveFileToServer(image);
+
+                } catch (Exception ex)
+                {
+                    Console.Write(ex.StackTrace);
+                }
             }
             return null;
         }
 
-        private async Task<string> SaveFileToServer(FileImage _file)
-        {
-            string _uriFile = "";
-            var imageAsBytes = ImageSourceToBytes(_file.Image);
-            if (imageAsBytes != null)
-            {
-                using (var StreamF = new MemoryStream(imageAsBytes))
-                {
-                    _uriFile = await this.fSHelper.UploadFile(StreamF, _file.FileName);
-                }
-            }
-            return _uriFile;
-        }
-
-        public byte[] ImageSourceToBytes(ImageSource imageSource)
-        {
-            StreamImageSource streamImageSource = (StreamImageSource)imageSource;
-            var cancellationToken = CancellationToken.None;
-            Task<Stream> task = streamImageSource.Stream(cancellationToken);
-            Stream stream = task.Result;
-            byte[] bytesAvailable = new byte[stream.Length];
-            stream.Read(bytesAvailable, 0, bytesAvailable.Length);
-            return bytesAvailable;
-        }
-
-        private byte[] StreamToByteArray(Stream source)
-        {
-            byte[] imageAsBytes;
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                source.CopyTo(memoryStream);
-                imageAsBytes = memoryStream.ToArray();
-            }
-
-            return imageAsBytes;
-        }
 
         public async void OnAppearing()
         {
@@ -203,7 +175,7 @@ namespace TidRod.ViewModels.Profile
                 IsError = true;
             }
             else if (
-                  Email != user.Email && !this.IsValidEmail(Email))
+                  Email != user.Email && !TidRodUtilitiles.IsValidEmail(Email))
             {
                 // show invalid error;
                 EmailError = MainLanguage.PROFILE_EMAIL_INVALID;
@@ -235,14 +207,12 @@ namespace TidRod.ViewModels.Profile
                 IsError = true;
             }
 
-
             // check all errors if presist;
 
             if (IsError)
             {
                 return;
             }
-
 
             // try to update;
             try
@@ -260,41 +230,23 @@ namespace TidRod.ViewModels.Profile
                 {
                     Image.FileURL = await CheckAndSaveImage(Image);
                     user.Image = Image;
+                    user.Image.Image = null;
                 }
 
                 CurrentUser = await this.UserDataStore.UpdateUserAsync(user);
-                await Application.Current.MainPage.DisplayAlert(
-                        MainLanguage.GENERAL_SUCCESSFULLY_TITLE,
-                        MainLanguage.PROFILE_UPDATE_SUCCESSFULLY, "yeah");
+                await Application.Current.MainPage.DisplayAlert( MainLanguage.GENERAL_SUCCESSFULLY_TITLE, MainLanguage.PROFILE_UPDATE_SUCCESSFULLY, "yeah");
                 await Shell.Current.GoToAsync("..");
                 return;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
 
             }
 
             // something went wrong;
             await Application.Current.MainPage.DisplayAlert(MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE, MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC, "Fuck");
             return;
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            if (email.Trim().EndsWith("."))
-            {
-                return false;
-            }
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
         }
     }
 }

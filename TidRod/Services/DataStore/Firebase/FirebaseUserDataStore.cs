@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
 using TidRod.Models;
 using TidRod.Services.Interface;
+using Xamarin.Forms;
 
 namespace TidRod.Services.DataStore.Firebase
 {
@@ -40,25 +42,19 @@ namespace TidRod.Services.DataStore.Firebase
             return item.FirstOrDefault(a => a.Id == id);
         }
 
-        public Task<IEnumerable<Car>> GetUserCarsAsync(string id)
+        public async Task<IEnumerable<Car>> GetUserCarsAsync(string id)
         {
-            throw new System.NotImplementedException();
+            ICarDataStore<Car> CarDataStore = DependencyService.Get<ICarDataStore<Car>>();
+            var cars = await CarDataStore.GetCarsAsync();
+            return await Task
+                .FromResult(cars.Where(car => car.UserId == id).ToList<Car>());
         }
 
-        public async Task<IEnumerable<User>>
-        GetUsersAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<User>> GetUsersAsync(bool forceRefresh = false)
         {
-            throw new System.NotImplementedException();
-            //return (await firebase
-            //  .Child(DatabaseTableName)
-            //  .OnceAsync<User>()).Select(user => new User
-            //  {
-            //      Id = user.Object.Id,
-            //      Text = user.Object.Text,
-            //      Description = user.Object.Description,
-            //      CreateDate = user.Object.CreateDate,
-            //      ImageFiles = user.Object.ImageFiles
-            //  }).ToList();
+            return (await firebase
+              .Child(DatabaseTableName)
+              .OnceAsync<User>()).Select(user => user.Object).ToList();
         }
 
         public async Task<User> UpdateUserAsync(User user)
