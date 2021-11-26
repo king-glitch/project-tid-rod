@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TidRod.ViewModels.Host;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -44,7 +40,7 @@ namespace TidRod.Views.Host
         private void SwipeItemSwipeEnded(object sender, SwipeEndedEventArgs e)
         {
             SwipeView Swipe = sender as SwipeView;
-            SwipeViews.Add (Swipe);
+            SwipeViews.Add(Swipe);
         }
     }
 }

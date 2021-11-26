@@ -1,6 +1,5 @@
 ﻿using TidRod.Models;
 using TidRod.Services.DataStore.Firebase;
-using TidRod.Services.DataStore.Mock;
 using TidRod.Services.Interface;
 using Xamarin.Forms;
 
@@ -30,11 +29,13 @@ namespace TidRod
         public App()
         {
             InitializeComponent();
+
             //DependencyService.Register<MockUserDataStore>();
             //DependencyService.Register<MockCarDataStore>();
-
-            DependencyService.Register<ICarDataStore<Car>, FirebaseCarDataStore>();
-            DependencyService.Register<IUserDataStore<User>, FirebaseUserDataStore>();
+            DependencyService
+                .Register<ICarDataStore<Car>, FirebaseCarDataStore>();
+            DependencyService
+                .Register<IUserDataStore<User>, FirebaseUserDataStore>();
             MainPage = new AppShell();
         }
 

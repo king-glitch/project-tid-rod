@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using TidRod.Models;
 using TidRod.Utils;
-using TidRod.Views;
 using TidRod.Views.Auth;
 using TidRod.Views.General;
 using Xamarin.Forms;
@@ -115,15 +111,19 @@ namespace TidRod.ViewModels.Auth
 
         private async void OnRegisterClicked(object obj)
         {
+            // reset previous forms;
             this.ResetForms();
 
             bool IsError = false;
+
+            // check if email is empty;
 
             if (string.IsNullOrEmpty(Email))
             {
                 EmailError = MainLanguage.AUTHENTICATION_EMAIL_EMPTY;
                 IsError = true;
             }
+            // check if email is valid;
             else if (!TidRodUtilitiles.IsValidEmail(Email))
             {
                 // show invalid error;
@@ -132,6 +132,8 @@ namespace TidRod.ViewModels.Auth
             }
             else
             {
+
+                // check if email is unique;
                 var users = await this.UserDataStore.GetUsersAsync();
 
                 if (users.ToList().Where(u => u.Email.ToLower() == Email.ToLower()).Count() > 0)
@@ -165,12 +167,26 @@ namespace TidRod.ViewModels.Auth
                 PhoneError = MainLanguage.AUTHENTICATION_PHONE_INCORRECTED;
                 IsError = true;
             }
+            else
+            {
+                // check if the phone number is already registered;
+                var users = await this.UserDataStore.GetUsersAsync();
+                if (users.ToList().Where(u => u.Phone.ToLower() == Phone.ToLower()).Count() > 0)
+                {
+                    // show already exist phone;
+                    PhoneError = MainLanguage.AUTHENTICATION_PHONE_EXISTS;
+                    IsError = true;
+                }
+            }
 
+            // check if first name is empty;
             if (string.IsNullOrEmpty(FirstName))
             {
                 FirstNameError = MainLanguage.AUTHENTICATION_FIRST_NAME_EMPTY;
                 IsError = true;
             }
+
+            // check if last name is empty;
 
             if (string.IsNullOrEmpty(LastName))
             {
@@ -178,10 +194,14 @@ namespace TidRod.ViewModels.Auth
                 IsError = true;
             }
 
+            // if the errors presist return;
+
             if (IsError)
             {
                 return;
             }
+
+            // check if password are the same
 
             if (ConfirmPassword != Password)
             {
@@ -190,10 +210,14 @@ namespace TidRod.ViewModels.Auth
                 IsError = true;
             }
 
+            // if the errors presist return;
+
             if (IsError)
             {
                 return;
             }
+
+            // add user info to the database.
 
             await this.UserDataStore.AddUserAsync(new User
             {
@@ -205,6 +229,7 @@ namespace TidRod.ViewModels.Auth
                 Phone = Phone
             });
 
+            // go to the main page;
 
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             await Application.Current.MainPage.DisplayAlert(
@@ -212,6 +237,6 @@ namespace TidRod.ViewModels.Auth
                     MainLanguage.AUTHENTICATION_REGISTER_SUCCESSFULLY, "yeah");
         }
 
-        
+
     }
 }

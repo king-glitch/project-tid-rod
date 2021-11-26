@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using TidRod.Views;
-using TidRod.Views.Search;
+﻿using TidRod.Views.Search;
 using Xamarin.Forms;
 
 namespace TidRod.ViewModels.General

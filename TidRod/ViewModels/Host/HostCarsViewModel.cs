@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Views.Host;
@@ -52,8 +50,12 @@ namespace TidRod.ViewModels.Host
 
             try
             {
+                // clear current cars;
                 Cars.Clear();
+                // get all user cars
                 var cars = await this.UserDataStore.GetUserCarsAsync(App.CurrentSession);
+
+                // add all cars to the collection;
                 foreach (Car car in cars)
                 {
                     Cars.Add(car);
@@ -65,6 +67,7 @@ namespace TidRod.ViewModels.Host
             }
             finally
             {
+                // release the busy task;
                 IsBusy = false;
             }
         }
@@ -87,15 +90,18 @@ namespace TidRod.ViewModels.Host
 
         private async void OnAddCar(object obj)
         {
+            // goto add car page;
             await Shell.Current.GoToAsync(nameof(HostCarAddPage));
         }
 
         private async void OnCarSelected(Car car)
         {
+            // check if the selected car is valid;
             if (car == null)
             {
                 return;
             }
+            // goto update car page;
             await Shell.Current.GoToAsync($"{nameof(HostCarUpdatePage)}?{nameof(HostCarUpdateViewModel.CarId)}={car.Id}");
         }
     }

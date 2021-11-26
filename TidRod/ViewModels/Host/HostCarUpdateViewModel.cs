@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
-using TidRod.Services.Helper;
 using TidRod.Utils;
 using TidRod.Views.Host;
 using Xamarin.Essentials;
@@ -134,20 +130,29 @@ namespace TidRod.ViewModels.Host
         {
             try
             {
+                // delay because some task are not done; (just to make sure);
                 await Task.Delay(500);
+
+                // check if shoud reinitialize;
                 if (ReInitialize == 1)
                 {
                     return;
                 }
+
+                // get the car infomation;
                 Car car = await this.CarDataStore.GetCarAsync(carId);
 
+                // check if car is valid;
                 if (car == null)
                 {
+                    // if not then show the error message;
                     await Shell.Current.GoToAsync($"..");
                     await Application.Current.MainPage.DisplayAlert(
                     MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE,
                     MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC, "OK"); ;
                 }
+
+                // save the info in variable, to show to the user;
 
                 PinLocation = car.PinLocation;
                 Gear = car.Gear;
@@ -156,8 +161,10 @@ namespace TidRod.ViewModels.Host
                 Name = car.Name;
                 GearInt = car.Gear == CarTransmission.Automatic ? 0 : 1;
 
+                // temp images;
                 var tempImages = new List<FileImage>();
 
+                // save all images in temp images;
                 foreach (var image in car.Images)
                 {
                     tempImages.Add(new FileImage
@@ -167,7 +174,7 @@ namespace TidRod.ViewModels.Host
                         Image = null
                     });
                 }
-
+                // then save the temp images to the main variable;
                 Images = tempImages;
             }
             catch (Exception ex)
@@ -217,6 +224,12 @@ namespace TidRod.ViewModels.Host
             }
             catch
             {
+                // show the error
+                // this errors mostly presist on the phone internet
+                // try to reinitialize the phone internet;
+                // this error are the phone problem, not mine;
+
+                // error message (grfc something)
                 address = MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC;
 
             }
@@ -352,30 +365,41 @@ namespace TidRod.ViewModels.Host
             try
             {
 
+
+                // if images variable is null, then initialize the Images collection;
+
                 Images = new List<FileImage>();
+                // select the image(s)
 
                 IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
                 {
                     FileTypes = FilePickerFileType.Images,
                     PickerTitle = "Pick Image(s)"
                 });
+                // check if image are selected;
 
                 if (images == null || images.Count() == 0)
                 {
                     return;
                 }
 
+                // run all images;
 
                 foreach (var image in images)
                 {
+                    // check if image are correct;
+
                     if (image == null)
                     {
                         continue;
                     }
+                    // then start the steam the image in to bytes;
 
                     Stream stream = await image.OpenReadAsync();
+                    // convert stream into byte array;
 
                     byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
+                    // add image to the collection;
 
                     Images.Add(new FileImage
                     {
@@ -393,6 +417,11 @@ namespace TidRod.ViewModels.Host
 
             try
             {
+                // show the images to the user;
+                // this doesn't work;
+
+                // the image are in different formats;
+                // I don't know how to change this;
                 var target = (CarouselView)obj;
                 target.ItemsSource = Images;
 

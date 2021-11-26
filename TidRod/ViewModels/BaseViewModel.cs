@@ -57,12 +57,12 @@ namespace TidRod.ViewModels
 
             backingStore = value;
             onChanged?.Invoke();
-            OnPropertyChanged (propertyName);
+            OnPropertyChanged(propertyName);
             return true;
         }
 
 
-#region INotifyPropertyChanged
+        #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -77,6 +77,6 @@ namespace TidRod.ViewModels
         }
 
 
-#endregion INotifyPropertyChanged
+        #endregion INotifyPropertyChanged
     }
 }

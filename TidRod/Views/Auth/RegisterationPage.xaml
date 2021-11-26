@@ -1,5 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.Auth.RegisterationPage" Shell.FlyoutBehavior="Disabled" xmlns:components="clr-namespace:TidRod.Components.Entry" xmlns:viewmodels="clr-namespace:TidRod.ViewModels.Auth" x:DataType="viewmodels:RegisterationViewModel" Shell.NavBarIsVisible="True" Shell.TitleColor="Black" Shell.ForegroundColor="Black" Title="Sign in">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.Auth.RegisterationPage" Shell.FlyoutBehavior="Disabled" xmlns:components="clr-namespace:TidRod.Components.Entry" xmlns:viewmodels="clr-namespace:TidRod.ViewModels.Auth"
+    x:DataType="viewmodels:RegisterationViewModel" Shell.NavBarIsVisible="True" Shell.TitleColor="Black" Shell.ForegroundColor="Black" Title="Sign in">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="20,0,20,30" VerticalOptions="EndAndExpand">

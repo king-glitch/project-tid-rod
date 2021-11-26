@@ -29,11 +29,13 @@ namespace TidRod.Views.General
 
         private async void GotoLoginPage(object sender, EventArgs e)
         {
+            // go to login page;
             await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
         }
 
         private async void GotoRegisterationPage(object sender, EventArgs e)
         {
+            // goto registration page;
             await Shell.Current.GoToAsync($"{nameof(RegisterationPage)}");
         }
     }

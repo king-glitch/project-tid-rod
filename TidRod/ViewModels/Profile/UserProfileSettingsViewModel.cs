@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Helper;
@@ -129,7 +126,8 @@ namespace TidRod.ViewModels.Profile
                 {
                     return await TidRodUtilitiles.SaveFileToServer(image);
 
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.Write(ex.StackTrace);
                 }
@@ -234,7 +232,7 @@ namespace TidRod.ViewModels.Profile
                 }
 
                 CurrentUser = await this.UserDataStore.UpdateUserAsync(user);
-                await Application.Current.MainPage.DisplayAlert( MainLanguage.GENERAL_SUCCESSFULLY_TITLE, MainLanguage.PROFILE_UPDATE_SUCCESSFULLY, "yeah");
+                await Application.Current.MainPage.DisplayAlert(MainLanguage.GENERAL_SUCCESSFULLY_TITLE, MainLanguage.PROFILE_UPDATE_SUCCESSFULLY, "yeah");
                 await Shell.Current.GoToAsync("..");
                 return;
             }

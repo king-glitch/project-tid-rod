@@ -1,23 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:components="clr-namespace:TidRod.Components.Entry" 
-    xmlns:host="clr-namespace:TidRod.ViewModels.Host" 
-    xmlns:models="clr-namespace:TidRod.Models" 
-    x:DataType="host:HostCarUpdateViewModel" 
-    x:Class="TidRod.Views.Host.HostCarUpdatePage"
-    Shell.TabBarIsVisible="False"
-    Title="Update Hosting Car">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:components="clr-namespace:TidRod.Components.Entry" xmlns:host="clr-namespace:TidRod.ViewModels.Host" xmlns:models="clr-namespace:TidRod.Models" x:DataType="host:HostCarUpdateViewModel" x:Class="TidRod.Views.Host.HostCarUpdatePage" Shell.TabBarIsVisible="False" Title="Update Hosting Car">
     <ContentPage.Content>
-        <ScrollView >
-            <StackLayout Padding="10" >
+        <ScrollView>
+            <StackLayout Padding="10">
                 <StackLayout Padding="0" HeightRequest="200">
                     <CarouselView x:Name="CarouselView" HeightRequest="200" ItemsSource="{Binding Images}" IndicatorView="indicatorView">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout HorizontalOptions="CenterAndExpand" HeightRequest="200"  VerticalOptions="CenterAndExpand">
-                                    <Image Source="{Binding FileURL}"  x:DataType="models:FileImage" HeightRequest="200" Aspect="AspectFill" />
+                                <StackLayout HorizontalOptions="CenterAndExpand" HeightRequest="200" VerticalOptions="CenterAndExpand">
+                                    <Image Source="{Binding FileURL}" x:DataType="models:FileImage" HeightRequest="200" Aspect="AspectFill" />
                                 </StackLayout>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
@@ -38,27 +29,10 @@
                     </Button.Background>
                 </Button>
                 <StackLayout Spacing="0">
-                    <components:OutlinedEntry 
-                        PlaceholderText="Car Name" 
-                        Text="{Binding Name, Mode=TwoWay}" 
-                        ErrorText="{Binding NameError}" 
-                        Keyboard="Default" />
-                    <components:OutlinedEntry 
-                        PlaceholderText="Price per Day" 
-                        Text="{Binding Price, Mode=TwoWay}" 
-                        ErrorText="{Binding PriceError}" 
-                        Keyboard="Numeric" />
-                    <components:OutlinedEntry 
-                        PlaceholderText="Obometer" 
-                        Text="{Binding Obometer, Mode=TwoWay}" 
-                        ErrorText="{Binding ObometerError}" 
-                        Keyboard="Numeric" />
-                    <Picker 
-                        Title="Select Gear" 
-                        x:Name="CarGear" 
-                        SelectedIndex="{Binding GearInt, Mode=TwoWay}" 
-                        SelectedIndexChanged="SelectGearPickerSelectedIndexChanged" 
-                        ItemsSource="{Binding CarGears}" />
+                    <components:OutlinedEntry PlaceholderText="Car Name" Text="{Binding Name, Mode=TwoWay}" ErrorText="{Binding NameError}" Keyboard="Default" />
+                    <components:OutlinedEntry PlaceholderText="Price per Day" Text="{Binding Price, Mode=TwoWay}" ErrorText="{Binding PriceError}" Keyboard="Numeric" />
+                    <components:OutlinedEntry PlaceholderText="Obometer" Text="{Binding Obometer, Mode=TwoWay}" ErrorText="{Binding ObometerError}" Keyboard="Numeric" />
+                    <Picker Title="Select Gear" x:Name="CarGear" SelectedIndex="{Binding GearInt, Mode=TwoWay}" SelectedIndexChanged="SelectGearPickerSelectedIndexChanged" ItemsSource="{Binding CarGears}" />
 
                 </StackLayout>
                 <StackLayout>

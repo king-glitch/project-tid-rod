@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.Services.Helper;
@@ -160,12 +158,14 @@ namespace TidRod.ViewModels.Host
             // error validations
             bool IsError = false;
 
+            // check if price are correct;
             if (Price <= 0)
             {
                 PriceError = MainLanguage.HOST_PRICE_EMPTY;
                 IsError = true;
             }
 
+            // check if obometer are correct;
 
             if (Obometer <= 0)
             {
@@ -173,11 +173,15 @@ namespace TidRod.ViewModels.Host
                 IsError = true;
             }
 
+            // check if name are empty;
+
             if (string.IsNullOrEmpty(Name))
             {
                 NameError = MainLanguage.HOST_NAME_EMPTY;
                 IsError = true;
             }
+
+            // if image is exists;
 
             if (Images.Count == 0)
             {
@@ -186,6 +190,8 @@ namespace TidRod.ViewModels.Host
                     MainLanguage.HOST_IMAGE_EMPTY, "OK"); ;
                 IsError = true;
             }
+
+            // if pin are pinned;
 
             if (string.IsNullOrEmpty(PinLocation))
             {
@@ -201,29 +207,36 @@ namespace TidRod.ViewModels.Host
             }
 
             this.IsBusy = true;
-
+            // save the image to the database;
             Task<List<string>> TaskA = Task.Run(async () => await CheckAndSaveImage());
-
+            // save the car info to the database;
             await TaskA?.ContinueWith(antecedent => { _ = CarDataStore.AddCarAsync(new Car() { Id = Guid.NewGuid().ToString(), Gear = Gear, UserId = App.CurrentSession, Name = Name, Obometer = Obometer, PinLocation = PinLocation, Price = Price, Images = antecedent.Result }); Shell.Current.GoToAsync(".."); }, TaskContinuationOptions.OnlyOnRanToCompletion);
+            // release the busy task;
             this.IsBusy = false;
         }
 
         private async Task<List<string>> CheckAndSaveImage()
         {
+            // create new urls;
             List<string> URLString = new List<string>();
+
+            // check if images are exist;
             if (Images?.Count > 0)
             {
+                // run all images;
                 foreach (var _file in Images)
                 {
+                    // add it the the list
                     URLString?.Add(await TidRodUtilitiles.SaveFileToServer(_file, AppSettings.FIREBASE_STORAGE_ROOT_CAR));
                 }
             }
+            // return all images;
             return URLString;
         }
-        
 
         public async void OnPinLocation()
         {
+            // go to pin page;
             await Shell.Current.GoToAsync($"{nameof(HostPinLocationPage)}");
         }
 
@@ -231,10 +244,14 @@ namespace TidRod.ViewModels.Host
         {
             try
             {
+
+                // if images variable is null, then initialize the Images collection;
                 if (Images == null)
                 {
                     Images = new ObservableCollection<FileImage>();
                 }
+
+                // select the image(s)
 
                 IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
                 {
@@ -242,24 +259,33 @@ namespace TidRod.ViewModels.Host
                     PickerTitle = "Pick Image(s)"
                 });
 
+                // check if image are selected;
+
                 if (images == null || images?.Count() == 0)
                 {
                     return;
                 }
 
+                // run all images;
+
                 foreach (var image in images)
                 {
+
+                    // check if image are correct;
 
                     if (image == null)
                     {
                         continue;
                     }
 
+                    // then start the steam the image in to bytes;
 
                     Stream stream = await image?.OpenReadAsync();
 
+                    // convert stream into byte array;
                     byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
 
+                    // add image to the collection;
                     Images?.Add(new FileImage { FileName = image.FileName, FileURL = "-", Image = ImageSource.FromStream(() => new MemoryStream(_imageByte)) });
 
                 }
@@ -272,6 +298,8 @@ namespace TidRod.ViewModels.Host
 
             try
             {
+
+                // show the new image to the user;
                 var target = (CarouselView)obj;
                 target.ItemsSource = Images;
             }
@@ -281,7 +309,7 @@ namespace TidRod.ViewModels.Host
             }
 
         }
-        
+
 
     }
 }

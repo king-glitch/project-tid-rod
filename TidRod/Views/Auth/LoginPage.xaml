@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:viewmodels="clr-namespace:TidRod.ViewModels.Auth" x:DataType="viewmodels:LoginViewModel" xmlns:components="clr-namespace:TidRod.Components.Entry" x:Class="TidRod.Views.Auth.LoginPage" Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="True" Shell.TitleColor="Black" Shell.ForegroundColor="Black" Title="Log in">
 
     <ContentPage.Content>
@@ -8,7 +8,6 @@
             <StackLayout HeightRequest="450" VerticalOptions="StartAndExpand" Spacing="5">
                 <components:OutlinedEntry PlaceholderText="Email Address" Keyboard="Email" x:Name="EmailEntry" Text="{Binding Email, Mode=TwoWay}" ErrorText="{Binding EmailError}" />
                 <components:OutlinedEntry PlaceholderText="Password" Keyboard="Text" ReturnType="Next" x:Name="PasswordEntry" Text="{Binding Password, Mode=TwoWay}" ErrorText="{Binding PasswordError}" IsPassword="True" />
-
             </StackLayout>
 
             <StackLayout VerticalOptions="EndAndExpand" Spacing="20">

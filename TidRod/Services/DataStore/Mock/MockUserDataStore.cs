@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +34,7 @@ namespace TidRod.Services.DataStore.Mock
 
         public async Task<bool> AddUserAsync(User item)
         {
-            users.Add (item);
+            users.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -44,8 +43,8 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldUser =
                 users.Where((User arg) => arg.Id == user.Id).FirstOrDefault();
-            users.Remove (oldUser);
-            users.Add (user);
+            users.Remove(oldUser);
+            users.Add(user);
 
             if (await Task.FromResult(true))
             {
@@ -59,7 +58,7 @@ namespace TidRod.Services.DataStore.Mock
         {
             var oldUser =
                 users.Where((User arg) => arg.Id == id).FirstOrDefault();
-            users.Remove (oldUser);
+            users.Remove(oldUser);
 
             return await Task.FromResult(true);
         }
@@ -74,7 +73,8 @@ namespace TidRod.Services.DataStore.Mock
             if (data.Image == null)
             {
                 data.Image =
-                    new FileImage {
+                    new FileImage
+                    {
                         FileURL =
                             "https://api5.iloveimg.com/v1/download/fn17s3thq3fvcsl53yqAkm93czy2dfsd419nhm1c2zbrrh9ml1s6kpw5v2b0y7zkkwnz5w5w86rg30bpsfy88v1yndvw87tvv14nAyjr98456y0m8sbny3A4yscjcmq9t6smd5nj2w9j3sr6tA1y5gdh51rrtwfrnycfdmtp7r0lwptt7Ag1",
                         FileName = "abcd-abcd.avatar.png"

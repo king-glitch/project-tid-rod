@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TidRod.Models;
 using TidRod.ViewModels.Host;
 using Xamarin.Forms;
@@ -14,6 +10,7 @@ namespace TidRod.Views.Host
     public partial class HostCarUpdatePage : ContentPage
     {
         private HostCarUpdateViewModel _viewModel;
+
         public HostCarUpdatePage()
         {
             InitializeComponent();
@@ -21,13 +18,19 @@ namespace TidRod.Views.Host
             BindingContext = _viewModel = new HostCarUpdateViewModel();
         }
 
-        private void SelectGearPickerSelectedIndexChanged(object sender, EventArgs e)
+        private void SelectGearPickerSelectedIndexChanged(
+            object sender,
+            EventArgs e
+        )
         {
-            if (CarGear.SelectedIndex != -1)
+            // check if car is selected;
+            if (CarGear.SelectedIndex >= 0)
             {
-                var value = CarGear.ItemsSource[CarGear.SelectedIndex].ToString();
-                _viewModel.Gear = (CarTransmission)(value == "Automatic" ? 0 : 1);
-
+                // transform word to car transmission enum;
+                var value =
+                    CarGear.ItemsSource[CarGear.SelectedIndex].ToString();
+                _viewModel.Gear =
+                    (CarTransmission)(value == "Automatic" ? 0 : 1);
             }
         }
     }

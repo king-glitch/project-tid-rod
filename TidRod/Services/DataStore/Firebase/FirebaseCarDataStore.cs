@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firebase.Database;
-using Firebase.Database.Query;
 using TidRod.Models;
 using TidRod.Services.Interface;
 

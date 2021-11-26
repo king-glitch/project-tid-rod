@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
 using TidRod.Components.Map;
 using TidRod.Components.Popup;
-using TidRod.Models;
 using TidRod.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -17,18 +13,17 @@ namespace TidRod.Views.Search
 {
     public partial class SearchPage : ContentPage
     {
-
         private CancellationTokenSource cts;
+
         readonly SearchViewModel _viewModel;
 
         public SearchPage()
         {
             InitializeComponent();
             BindingContext = _viewModel = new SearchViewModel();
-
         }
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
@@ -48,6 +43,7 @@ namespace TidRod.Views.Search
         {
             try
             {
+                // get user current location;
                 GeolocationRequest request =
                     new GeolocationRequest(GeolocationAccuracy.Medium,
                         TimeSpan.FromSeconds(10));
@@ -60,7 +56,9 @@ namespace TidRod.Views.Search
             }
             catch (PermissionException)
             {
-                await DisplayAlert("Faild", "Please give location permission", "OK");
+                await DisplayAlert("Faild",
+                "Please give location permission",
+                "OK");
             }
             catch (Exception ex)
             {
@@ -71,15 +69,17 @@ namespace TidRod.Views.Search
 
         private async void MapPinClicked(object sender, EventArgs e)
         {
-            var pin = (CustomPin)sender;
+            var pin = (CustomPin) sender;
 
             var id = pin.ClassId.ToString();
             var car = await _viewModel.CarDataStore.GetCarAsync(id);
-            await Navigation.PushPopupAsync(new CarInfoPopup { BindingContext = car });
+            await Navigation
+                .PushPopupAsync(new CarInfoPopup { BindingContext = car });
         }
 
         private async void ToolbarFilterCarsClicked(object sender, EventArgs e)
         {
+            // send the filter up;
             await Navigation.PushPopupAsync(new CarsFilterPopup());
         }
     }

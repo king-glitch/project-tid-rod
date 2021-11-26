@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Rg.Plugins.Popup.Animations.Base;
+﻿using Rg.Plugins.Popup.Animations.Base;
 using Rg.Plugins.Popup.Pages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace TidRod.Animations
@@ -21,7 +21,7 @@ namespace TidRod.Animations
         {
             base.Preparing(content, page);
 
-            HidePage (page);
+            HidePage(page);
 
             if (content == null) return;
 
@@ -32,7 +32,7 @@ namespace TidRod.Animations
         {
             base.Disposing(content, page);
 
-            ShowPage (page);
+            ShowPage(page);
 
             if (content == null) return;
 
@@ -59,7 +59,7 @@ namespace TidRod.Animations
             }
 
 
-            ShowPage (page);
+            ShowPage(page);
 
             await Task.WhenAll(taskList);
         }

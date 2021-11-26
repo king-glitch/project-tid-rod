@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.Linq;
 using TidRod.Models;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace TidRod.ViewModels.Profile
 {
@@ -85,7 +84,7 @@ namespace TidRod.ViewModels.Profile
 
                 if (user == null)
                 {
-                    Console.WriteLine("NO user ");
+                    Console.WriteLine("No user ");
                     return;
                 }
 
@@ -95,6 +94,7 @@ namespace TidRod.ViewModels.Profile
                 Gear = car.Gear;
                 Images = car.Images;
 
+                // if user does not have any image, then use the default one;
                 string profileImage = string.IsNullOrEmpty(user.Image?.FileURL) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image.FileURL;
 
                 user.Image.FileURL = profileImage;

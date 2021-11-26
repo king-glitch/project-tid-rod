@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TidRod.Models;
-using TidRod.Views;
 using TidRod.Views.Auth;
 using TidRod.Views.General;
 using TidRod.Views.Search;
@@ -64,39 +62,50 @@ namespace TidRod.ViewModels.Auth
             this.ResetForms();
             List<User> users = (await this.UserDataStore.GetUsersAsync(true)).ToList();
 
+            // check if email is empty;
             if (string.IsNullOrEmpty(email))
             {
                 EmailError = MainLanguage.AUTHENTICATION_EMAIL_EMPTY;
             }
+
+            // check if password is empty;
 
             if (string.IsNullOrEmpty(password))
             {
                 PasswordError = MainLanguage.AUTHENTICATION_PASSWORD_EMPTY;
             }
 
+            // check if both email and password are empty;
+
             if (!string.IsNullOrWhiteSpace(EmailError) || !string.IsNullOrEmpty(PasswordError))
             {
                 return false;
             }
 
+
             try
             {
-
+                // find the email that user input;
                 var user = users.Find(u => u?.Email?.ToLower() == email?.ToLower());
 
+                // if email not found then return;
                 if (user == null)
                 {
                     EmailError = MainLanguage.AUTHENTICATION_EMAIL_INCORRECTED;
                     return false;
                 }
 
+                // if email were found then check if password is correct;
 
                 if (user.Password == password)
                 {
+                    // if password is correct then log user in;
                     App.CurrentSession = user.Id;
 
                     return true;
                 }
+
+                // if password is not correct then return;
 
                 PasswordError = MainLanguage.AUTHENTICATION_PASSWORD_INCORRECTED;
                 return false;
@@ -106,6 +115,8 @@ namespace TidRod.ViewModels.Auth
                 Console.WriteLine(ex.Message);
 
             }
+
+            // if something wrong then return error;
             await Application.Current.MainPage.DisplayAlert(MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE, MainLanguage.GENERAL_SOMETHING_WENT_WRONG_DESC, "Fuck");
             return false;
         }
@@ -118,8 +129,10 @@ namespace TidRod.ViewModels.Auth
 
             if (logged)
             {
-                await Shell.Current.GoToAsync($"..");
 
+                // goto previous page;
+                await Shell.Current.GoToAsync($"..");
+                // goto main page;
                 await Shell.Current.GoToAsync($"///{nameof(SearchPage)}");
             }
 
@@ -129,7 +142,7 @@ namespace TidRod.ViewModels.Auth
 
         private async void OnRegisterClicked(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+            // goto signup page;
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}/{nameof(RegisterationPage)}");
         }
 

@@ -1,16 +1,14 @@
 ﻿using Firebase.Storage;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TidRod.Services.Helper
 {
     public class FSHelper
     {
-        private FirebaseStorage firebaseStorage =
-            new FirebaseStorage(AppSettings.FIREBASE_STORAGE_URL);
+        private FirebaseStorage
+            firebaseStorage =
+                new FirebaseStorage(AppSettings.FIREBASE_STORAGE_URL);
 
         public string RootName { get; set; }
 
@@ -21,19 +19,22 @@ namespace TidRod.Services.Helper
 
         public async Task<string> UploadFile(Stream fileStream, string fileName)
         {
-            var imageUrl = await firebaseStorage
-                .Child(RootName)
-                .Child(fileName)
-                .PutAsync(fileStream);
+            var imageUrl =
+                await firebaseStorage
+                    .Child(RootName)
+                    .Child(fileName)
+                    .PutAsync(fileStream);
             return imageUrl;
         }
 
-        public async Task<string> UploadFile(Stream fileStream, string fileName, string root)
+        public async Task<string>
+        UploadFile(Stream fileStream, string fileName, string root)
         {
-            var imageUrl = await firebaseStorage
-                .Child(root)
-                .Child(fileName)
-                .PutAsync(fileStream);
+            var imageUrl =
+                await firebaseStorage
+                    .Child(root)
+                    .Child(fileName)
+                    .PutAsync(fileStream);
             return imageUrl;
         }
 
@@ -47,10 +48,7 @@ namespace TidRod.Services.Helper
 
         public async Task DeleteFile(string fileName)
         {
-            await firebaseStorage
-                 .Child(RootName)
-                 .Child(fileName)
-                 .DeleteAsync();
+            await firebaseStorage.Child(RootName).Child(fileName).DeleteAsync();
         }
     }
 }

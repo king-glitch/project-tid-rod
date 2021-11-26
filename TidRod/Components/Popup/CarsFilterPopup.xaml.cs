@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Extensions;
+using System;
 using System.Collections.Generic;
-using Rg.Plugins.Popup.Extensions;
 using TidRod.Models;
 using TidRod.Services.Interface;
 using TidRod.ViewModels;
-using TidRod.ViewModels.Profile;
-using TidRod.Views.Profile;
 using TidRod.Views.Search;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

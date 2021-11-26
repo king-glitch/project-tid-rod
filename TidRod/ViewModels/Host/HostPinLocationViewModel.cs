@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace TidRod.ViewModels.Host
 {
@@ -34,8 +31,12 @@ namespace TidRod.ViewModels.Host
 
         private async void OnSubmitPinLocation()
         {
+            // organize car image;
             var id = string.IsNullOrEmpty(CarId) ? "" : $"&{nameof(CarId)}={CarId}&ReInitialize=1";
+            // pin location;
             var pinLocation = string.IsNullOrEmpty(PinLocation) ? "" : $"?{nameof(PinLocation)}={PinLocation}";
+
+            // send back to the previous page;
             await Shell.Current.GoToAsync($"..{pinLocation}{id}");
         }
     }

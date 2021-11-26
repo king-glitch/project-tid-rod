@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firebase.Database;
-using Firebase.Database.Query;
 using TidRod.Models;
 using TidRod.Services.Interface;
 using Xamarin.Forms;
@@ -44,17 +43,19 @@ namespace TidRod.Services.DataStore.Firebase
 
         public async Task<IEnumerable<Car>> GetUserCarsAsync(string id)
         {
-            ICarDataStore<Car> CarDataStore = DependencyService.Get<ICarDataStore<Car>>();
+            ICarDataStore<Car> CarDataStore =
+                DependencyService.Get<ICarDataStore<Car>>();
             var cars = await CarDataStore.GetCarsAsync();
             return await Task
                 .FromResult(cars.Where(car => car.UserId == id).ToList<Car>());
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<User>>
+        GetUsersAsync(bool forceRefresh = false)
         {
-            return (await firebase
-              .Child(DatabaseTableName)
-              .OnceAsync<User>()).Select(user => user.Object).ToList();
+            return (await firebase.Child(DatabaseTableName).OnceAsync<User>())
+                .Select(user => user.Object)
+                .ToList();
         }
 
         public async Task<User> UpdateUserAsync(User user)

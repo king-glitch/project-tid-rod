@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TidRod.Components.Map;
 using TidRod.Models;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -71,11 +68,12 @@ namespace TidRod.ViewModels
         {
             IsBusy = true;
             InitializeMap();
+            // reset all filters;
             Gear = "Both";
             Obometer = -1;
             Price = -1;
             await GetCarsAroundUserCommand();
-           
+
         }
 
         private async void InitializeMap()
@@ -101,28 +99,37 @@ namespace TidRod.ViewModels
                 cars
                     .FindAll(car =>
                     {
-
+                        // if price is in filter;
                         if (Price > 0)
                         {
                             check = check && car.Price <= Price;
                         }
+
+                        // if obometer is in filter;
 
                         if (Obometer > 0)
                         {
                             check = check && car.Obometer <= Obometer;
                         }
 
+                        // if gear are both, then just return;
+
                         if (Gear == "Both")
                         {
                             return check;
                         }
 
+                        // then check if gear are correct;
+
                         if (!string.IsNullOrEmpty(Gear))
                         {
+                            // return the car type;
                             return check && car.Gear == (Gear == "Automatic"
                                 ? CarTransmission.Automatic
                                 : CarTransmission.Manual);
                         }
+
+                        // then just return the car;
 
                         return check;
                     });
@@ -176,8 +183,12 @@ namespace TidRod.ViewModels
 
             try
             {
+                // clear the current cars;
                 Cars.Clear();
+                // get all cars
                 var cars = await CarDataStore.GetCarsAsync(true);
+
+                // add all cars to the variable;
                 foreach (var car in cars)
                 {
                     Cars.Add(car);
@@ -189,6 +200,7 @@ namespace TidRod.ViewModels
             }
             finally
             {
+                // release the lock;
                 IsBusy = false;
             }
         }

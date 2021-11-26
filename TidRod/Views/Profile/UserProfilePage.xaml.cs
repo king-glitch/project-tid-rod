@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TidRod.ViewModels.Profile;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,6 +26,7 @@ namespace TidRod.Views.Profile
 
         private async void ToolbarSettingClicked(object sender, EventArgs e)
         {
+            // go to user profile settings page;
             await Shell.Current.GoToAsync($"{nameof(UserProfileSettingsPage)}");
         }
     }
