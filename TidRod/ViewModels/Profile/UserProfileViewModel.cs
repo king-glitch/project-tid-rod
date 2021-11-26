@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TidRod.Models;
+using TidRod.Views.General;
+using Xamarin.Forms;
 
 namespace TidRod.ViewModels.Profile
 {
@@ -16,6 +18,8 @@ namespace TidRod.ViewModels.Profile
         private string _phone;
         private string _image;
         private IEnumerable<Car> _userCarList;
+        public Command UserLogoutCommand { get; }
+
 
 
         public bool IsUserDataFound { get; set; }
@@ -54,6 +58,18 @@ namespace TidRod.ViewModels.Profile
         {
             get => _userCarList;
             set => SetProperty(ref _userCarList, value);
+        }
+
+        public UserProfileViewModel()
+        {
+            UserLogoutCommand = new Command(OnUserLogout);
+        }
+
+        private async void OnUserLogout()
+        {
+            App.CurrentSession = null;
+
+            await Shell.Current.GoToAsync($"///{nameof(MainPage)}/");
         }
 
         public void OnAppearing()

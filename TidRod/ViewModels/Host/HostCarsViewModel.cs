@@ -28,7 +28,6 @@ namespace TidRod.ViewModels.Host
 
             CarTapped = new Command<Car>(OnCarSelected);
             AddCarCommand = new Command(OnAddCar);
-            UpdateTapped = new Command<Car>(UpdateCar);
             DeleteTapped = new Command<Car>(DeleteCar);
         }
 
@@ -47,21 +46,6 @@ namespace TidRod.ViewModels.Host
             }
         }
 
-        private async void UpdateCar(Car obj)
-        {
-            if (obj == null)
-            {
-                return;
-            }
-
-            obj.Name += "[Edit] " + obj.Name;
-
-            await Application.Current.MainPage.DisplayAlert("Update Car", obj.Name, "OK");
-
-            await this.CarDataStore.UpdateCarAsync(obj);
-            await ExecuteLoadCarsCommand();
-        }
-
         private async Task ExecuteLoadCarsCommand()
         {
             IsBusy = true;
@@ -69,7 +53,7 @@ namespace TidRod.ViewModels.Host
             try
             {
                 Cars.Clear();
-                var cars = await this.CarDataStore.GetCarsAsync(true);
+                var cars = await this.UserDataStore.GetUserCarsAsync(App.CurrentSession);
                 foreach (Car car in cars)
                 {
                     Cars.Add(car);

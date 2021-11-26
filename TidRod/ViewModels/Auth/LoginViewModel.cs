@@ -118,7 +118,9 @@ namespace TidRod.ViewModels.Auth
 
             if (logged)
             {
-                await Shell.Current.GoToAsync($"//{nameof(SearchPage)}");
+                await Shell.Current.GoToAsync($"..");
+
+                await Shell.Current.GoToAsync($"///{nameof(SearchPage)}");
             }
 
             return;

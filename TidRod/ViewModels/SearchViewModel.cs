@@ -71,7 +71,11 @@ namespace TidRod.ViewModels
         {
             IsBusy = true;
             InitializeMap();
+            Gear = "Both";
+            Obometer = -1;
+            Price = -1;
             await GetCarsAroundUserCommand();
+           
         }
 
         private async void InitializeMap()
@@ -93,7 +97,6 @@ namespace TidRod.ViewModels
 
             try
             {
-                Console.WriteLine($"{Price}, {Obometer}, {Gear}");
                 cars =
                 cars
                     .FindAll(car =>

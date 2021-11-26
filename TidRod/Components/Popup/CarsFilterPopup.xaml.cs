@@ -34,16 +34,7 @@ namespace TidRod.Components.Popup
 
         private async void ButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PopPopupAsync();
-            try
-            {
-                await Shell.Current.GoToAsync($"//{nameof(SearchPage)}?{nameof(SearchViewModel.Price)}={(int)PriceRangeSlider.Value}&{nameof(SearchViewModel.Gear)}={GearPicker.ItemsSource[GearPicker.SelectedIndex]}&{nameof(SearchViewModel.Obometer)}={(int)ObometerRangeSlider.Value}");
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
+            PopAndSearch();
         }
 
         private void FilterChangedValue(object sender, ValueChangedEventArgs e)
@@ -108,11 +99,25 @@ namespace TidRod.Components.Popup
 
         private void FilterResultButtonClicked(object sender, EventArgs e)
         {
-            PriceRangeSlider.Value = 0;
-            ObometerRangeSlider.Value = 0;
+            PriceRangeSlider.Value = -1;
+            ObometerRangeSlider.Value = -1;
             GearPicker.SelectedIndex = -1;
-            FilterResultButton.Text = $"View 0 results";
             this.FilterCars();
+            PopAndSearch();
+        }
+
+        private async void PopAndSearch()
+        {
+            await Navigation.PopPopupAsync();
+            try
+            {
+                await Shell.Current.GoToAsync($"//{nameof(SearchPage)}?{nameof(SearchViewModel.Price)}={(int)PriceRangeSlider.Value}&{nameof(SearchViewModel.Gear)}={(GearPicker.SelectedIndex == -1 ? "Both" : GearPicker.ItemsSource[GearPicker.SelectedIndex])}&{nameof(SearchViewModel.Obometer)}={(int)ObometerRangeSlider.Value}");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
         }
     }
 }
