@@ -32,7 +32,7 @@ namespace TidRod.Components.Popup
                 new List<string> { "Automatic", "Manual", "Both" };
         }
 
-        private async void ButtonClicked(object sender, EventArgs e)
+        private void ButtonClicked(object sender, EventArgs e)
         {
             PopAndSearch();
         }
