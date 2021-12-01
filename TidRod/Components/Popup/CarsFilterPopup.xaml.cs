@@ -50,12 +50,12 @@ namespace TidRod.Components.Popup
             // Price modifier
             int price = (int)PriceRangeSlider.Value;
 
-            PriceModifierLabel.Text = $"100 THB - {price} THB / day";
+            PriceModifierLabel.Text = $"100 THB - {(price >= 10000 ? "10000+" : price.ToString())} THB / day";
 
             // obomether modifier
             int obemeter = (int)ObometerRangeSlider.Value;
 
-            ObometerModifierLabel.Text = $"100 - {obemeter} / miles";
+            ObometerModifierLabel.Text = $"0 - {(obemeter >= 500000 ? "500000+" : obemeter.ToString())} / miles";
 
             // Filter Button
             FilterResultButton.IsEnabled = false;
@@ -66,8 +66,20 @@ namespace TidRod.Components.Popup
                 cars
                     .FindAll(car =>
                     {
-                        bool check =
-                            car.Price <= price && car.Obometer <= obemeter;
+                        bool check = true;
+
+                        if (price > 0)
+                        {
+                            check = check && price >= 10000 ? car.Price <= 100000 : car.Price <= price;
+                        }
+
+                        // if obometer is in filter;
+
+                        if (obemeter > 0)
+                        {
+                            check = check && obemeter >= 500000 ? car.Obometer <= 2000000 : car.Obometer <= obemeter;
+                        }
+
                         if (GearPicker.SelectedIndex >= 0)
                         {
                             string gear =
@@ -97,20 +109,16 @@ namespace TidRod.Components.Popup
 
         private void FilterResultButtonClicked(object sender, EventArgs e)
         {
-            PriceRangeSlider.Value = -1;
-            ObometerRangeSlider.Value = -1;
-            GearPicker.SelectedIndex = -1;
             this.FilterCars();
-            PopAndSearch();
+            PopAndSearch(true);
         }
 
-        private async void PopAndSearch()
+        private async void PopAndSearch(bool clear = false)
         {
             await Navigation.PopPopupAsync();
             try
             {
-                await Shell.Current.GoToAsync($"//{nameof(SearchPage)}?{nameof(SearchViewModel.Price)}={(int)PriceRangeSlider.Value}&{nameof(SearchViewModel.Gear)}={(GearPicker.SelectedIndex == -1 ? "Both" : GearPicker.ItemsSource[GearPicker.SelectedIndex])}&{nameof(SearchViewModel.Obometer)}={(int)ObometerRangeSlider.Value}");
-
+                await Shell.Current.GoToAsync($"//{nameof(SearchPage)}?{nameof(SearchViewModel.Price)}={(clear ? 0 : (int)PriceRangeSlider.Value)}&{nameof(SearchViewModel.Gear)}={(GearPicker.SelectedIndex == -1 ? "Both" : GearPicker.ItemsSource[GearPicker.SelectedIndex])}&{nameof(SearchViewModel.Obometer)}={(clear ? 0 : (int)ObometerRangeSlider.Value)}");
             }
             catch (Exception ex)
             {

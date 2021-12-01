@@ -90,26 +90,24 @@ namespace TidRod.ViewModels
                 cars = new List<Car>();
             }
 
-
-            bool check = true;
-
             try
             {
                 cars =
                 cars
                     .FindAll(car =>
                     {
+                        bool check = true;
                         // if price is in filter;
                         if (Price > 0)
                         {
-                            check = check && car.Price <= Price;
+                            check = check && Price >= 10000 ? car.Price <= 100000 : car.Price <= Price;
                         }
 
                         // if obometer is in filter;
 
                         if (Obometer > 0)
                         {
-                            check = check && car.Obometer <= Obometer;
+                            check = check && Obometer >= 500000 ? car.Obometer <= 2000000 : car.Obometer <= Obometer;
                         }
 
                         // if gear are both, then just return;

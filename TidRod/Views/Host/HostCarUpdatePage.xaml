@@ -8,7 +8,7 @@
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout HorizontalOptions="CenterAndExpand" HeightRequest="200" VerticalOptions="CenterAndExpand">
-                                    <Image Source="{Binding FileURL}" x:DataType="models:FileImage" HeightRequest="200" Aspect="AspectFill" />
+                                    <Image Source="{Binding Image}" x:DataType="models:FileImage" HeightRequest="200" Aspect="AspectFill" />
                                 </StackLayout>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>

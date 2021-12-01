@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TidRod.Views.General.MainPage" Shell.NavBarIsVisible="False" Shell.FlyoutBehavior="Disabled">
     <ContentPage.Content>
         <RelativeLayout HeightRequest="100" WidthRequest="100">
-            <Image Source="ef9565b13404d3a2dfb1dfefa766f552.jpg" Scale="1.2" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" />
+            <Image Source="main_page_background.jpg" Scale="1.2" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" />
 
             <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
                 <Image Source="logo.png" Scale="0.8" WidthRequest="200" HeightRequest="200" Margin="0,80,0,0" VerticalOptions="StartAndExpand" />

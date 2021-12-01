@@ -286,7 +286,11 @@ namespace TidRod.ViewModels.Host
                     byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
 
                     // add image to the collection;
-                    Images?.Add(new FileImage { FileName = image.FileName, FileURL = "-", Image = ImageSource.FromStream(() => new MemoryStream(_imageByte)) });
+                    Images?.Add(new FileImage { 
+                        FileName = image.FileName, 
+                        FileURL = "-", 
+                        Image = ImageSource.FromStream(() => new MemoryStream(_imageByte)) 
+                    });
 
                 }
             }

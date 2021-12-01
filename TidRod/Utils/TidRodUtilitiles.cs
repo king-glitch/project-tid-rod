@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -70,6 +71,24 @@ namespace TidRod.Utils
             }
 
             return imageAsBytes;
+        }
+
+        public static byte[] DownloadImageToByteArray(string url)
+        {
+            try
+            {
+                using (var webClient = new WebClient())
+                {
+                    // download file
+                    return webClient.DownloadData(url);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return null;
         }
 
         public static bool IsValidEmail(string email)

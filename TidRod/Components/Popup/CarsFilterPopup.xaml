@@ -19,8 +19,8 @@
 
                     <StackLayout Spacing="0">
                         <Label TextColor="Black" FontSize="Subtitle" FontAttributes="Bold" Text="Obomether" />
-                        <Label x:Name="ObometerModifierLabel" TextColor="Black" Text="100 - 100 / miles" />
-                        <Slider x:Name="ObometerRangeSlider" Maximum="500000" Minimum="100" ThumbColor="Purple" MaximumTrackColor="MediumPurple" MinimumTrackColor="Purple" ValueChanged="FilterChangedValue" />
+                        <Label x:Name="ObometerModifierLabel" TextColor="Black" Text="0 - 0 / miles" />
+                        <Slider x:Name="ObometerRangeSlider" Maximum="500000" Minimum="0" ThumbColor="Purple" MaximumTrackColor="MediumPurple" MinimumTrackColor="Purple" ValueChanged="FilterChangedValue" />
                     </StackLayout>
 
                     <Picker x:Name="GearPicker" ItemDisplayBinding="{Binding .}" Title="Select Gear" SelectedIndexChanged="GearPickerSelectedIndexChanged" />

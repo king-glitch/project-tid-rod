@@ -94,6 +94,11 @@ namespace TidRod.ViewModels.Profile
                 Gear = car.Gear;
                 Images = car.Images;
 
+                if (user.Image == null)
+                {
+                    user.Image = new FileImage();
+                }
+
                 // if user does not have any image, then use the default one;
                 string profileImage = string.IsNullOrEmpty(user.Image?.FileURL) ? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" : user.Image.FileURL;
 
@@ -101,7 +106,7 @@ namespace TidRod.ViewModels.Profile
 
                 try
                 {
-                    user.Phone = string.Format("{0:### ### ###}", Convert.ToInt64(user.Phone));
+                    user.Phone = string.Format("{0:## ### ####}", Convert.ToInt64(user.Phone));
                 }
                 catch
                 {

@@ -6,7 +6,7 @@ namespace TidRod.Services.Helper
 {
     public class FSHelper
     {
-        private FirebaseStorage
+        private readonly FirebaseStorage
             firebaseStorage =
                 new FirebaseStorage(AppSettings.FIREBASE_STORAGE_URL);
 

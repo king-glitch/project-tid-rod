@@ -171,7 +171,8 @@ namespace TidRod.ViewModels.Host
                     {
                         FileName = "-",
                         FileURL = image,
-                        Image = null
+                        // download realtime image
+                        Image = ImageSource.FromStream(() => new MemoryStream(TidRodUtilitiles.DownloadImageToByteArray(image)))
                     });
                 }
                 // then save the temp images to the main variable;
@@ -271,17 +272,13 @@ namespace TidRod.ViewModels.Host
 
             if (Images.Count == 0)
             {
-                await Application.Current.MainPage.DisplayAlert(
-                    MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE,
-                    MainLanguage.HOST_IMAGE_EMPTY, "OK"); ;
+                await Application.Current.MainPage.DisplayAlert(MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE, MainLanguage.HOST_IMAGE_EMPTY, "OK"); ;
                 IsError = true;
             }
 
             if (string.IsNullOrEmpty(PinLocation))
             {
-                await Application.Current.MainPage.DisplayAlert(
-                    MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE,
-                    MainLanguage.HOST_PIN_EMPTY, "OK"); ;
+                await Application.Current.MainPage.DisplayAlert(MainLanguage.GENERAL_SOMETHING_WENT_WRONG_TITLE, MainLanguage.HOST_PIN_EMPTY, "OK"); ;
                 IsError = true;
             }
 
@@ -292,7 +289,6 @@ namespace TidRod.ViewModels.Host
 
             // let the app be busy;
             this.IsBusy = true;
-
             // find the current car data;
             Car car = await this.CarDataStore.GetCarAsync(Id);
 
@@ -368,7 +364,7 @@ namespace TidRod.ViewModels.Host
 
                 // if images variable is null, then initialize the Images collection;
 
-                Images = new List<FileImage>();
+                var tempImages = new List<FileImage>();
                 // select the image(s)
 
                 IEnumerable<FileResult> images = await FilePicker.PickMultipleAsync(new PickOptions
@@ -401,7 +397,7 @@ namespace TidRod.ViewModels.Host
                     byte[] _imageByte = TidRodUtilitiles.StreamToByteArray(stream);
                     // add image to the collection;
 
-                    Images.Add(new FileImage
+                    tempImages.Add(new FileImage
                     {
                         FileName = image.FileName,
                         FileURL = "-",
@@ -409,6 +405,7 @@ namespace TidRod.ViewModels.Host
                     });
 
                 }
+                Images = tempImages;
             }
             catch (Exception ex)
             {

@@ -121,7 +121,7 @@ namespace TidRod.ViewModels.Profile
 
                 try
                 {
-                    user.Phone = string.Format("{0:### ### ###}", Convert.ToInt64(user.Phone));
+                    user.Phone = string.Format("{0:## ### ####}", Convert.ToInt64(user.Phone));
                 }
                 catch
                 {
